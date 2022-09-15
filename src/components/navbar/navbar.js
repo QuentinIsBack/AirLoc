@@ -1,10 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import { UserContext } from '../../context/UserContext'
 
 import LOGOWHITE from '../../assets/logo.svg'
 
 import { IoChevronDown } from 'react-icons/io5'
 
 export default function Component(props) { 
+    const {modalSign, setModalSign} = useContext(UserContext)
+
     return (
         <> 
             <div className='sticky w-full'>
@@ -42,8 +45,8 @@ export default function Component(props) {
                                 </button>   
                             </div> 
                             <ul tabIndex="0" className="p-2 mt-4 shadow-dropdown menu dropdown-content bg-base-100 rounded-box w-52 text-black">
-                                <li><a className='font-medium'>Inscription</a></li>
-                                <li><a className='font-medium'>Connexion</a></li>
+                                <li><a onClick={() => setModalSign(true)} className='font-medium'>Inscription</a></li>
+                                <li><a onClick={() => setModalSign(true)} className='font-medium'>Connexion</a></li>
                                 <div className='py-2'><div className='border-t'></div></div>
                                 <li><a className='font-normal'>Louer mon logement</a></li>
                                 <li><a className='font-normal'>Trouver un logement</a></li>
