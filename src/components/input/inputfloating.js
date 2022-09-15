@@ -1,11 +1,17 @@
 import React, { useState } from "react";
 
+const themes = {
+    "default": "outline-1",
+    "group": "outline-0",
+}
+
 export const InputFloating = ({
 
     id,
     type,
     name,
     placeholder,
+    theme,
     onChange,
 
 }) => {
@@ -13,7 +19,7 @@ export const InputFloating = ({
 
     return (
         <>
-            <a className="relative group block h-3rem w-full outline outline-1 hover:outline-2 rounded-md">
+            <a className={`relative group block h-3rem w-full outline ${themes[theme]} hover:outline-2 rounded-md`}>
                 <div 
                     className={`absolute mt-3 ml-3 transition-all duration-600 ${value.length == 0 ? "group-hover:-translate-y-2 group-hover:text-sm text-base" : "-translate-y-2 text-sm"} font-normal text-gray-700`}>
                     {name}
@@ -33,6 +39,6 @@ export const InputFloating = ({
 }
 
 InputFloating.defaultProps = {
-
+    theme: "default",
 };
   

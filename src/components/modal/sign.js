@@ -5,8 +5,19 @@ import { UserContext } from '../../context/UserContext'
 import { IoPhonePortraitOutline, IoLogoGoogle } from 'react-icons/io5'
 
 import {InputFloating} from '../../components/input/inputfloating'
+import { GroupInput } from '../input/groupinput'
+
+
+import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
+import { db } from "../../firebase.config";
+
+
 export default function SignModal() {
-    const {modalSign, setModalSign} = useContext(UserContext)
+
+    const {signUp, modalSign, setModalSign} = useContext(UserContext)
+    const [status, setStatus] = useState({
+      connexionError: "Aucunes erreurs",
+    });
 
     function closeModal() {
       setModalSign(false)
@@ -21,9 +32,64 @@ export default function SignModal() {
       password: "",
     });
 
-    const confirm = () => {
-      console.log(data.email)
-      console.log(data.password)
+    const createProfile = async (email) => {
+      const dbRef = doc(db, "users");
+      try {
+        const data = {
+          name: "Raja Tamil",
+          country: "Canada"
+       };
+        addDoc(dbRef, data)
+          .then(docRef => {
+            console.log("Document has been added successfully");
+          })
+          .catch(error => {
+            console.log(error);
+          })
+      } catch(error) {
+          console.log(error)
+      }
+  }
+
+    const confirm = async () => {
+
+      const email = data.email
+      const password = data.password
+      const confirmPassword = data.password
+
+
+      if(password === confirmPassword){
+        if(password.length < 6){
+          console.log("petit "+ password.length )
+        } else {
+          console.log("CAN CREATE")
+          try {
+              const cred = await signUp(
+                email,
+                password,
+              )
+              createProfile(email)
+              console.log(cred)
+              closeModal()
+              
+          } catch (err) { 
+
+            if(err.code === "auth/email-already-in-use"){
+              console.log("existe déjà")
+              setStatus({...status, connexionError: "Existe déjà"})
+            }
+
+            if(err.code === "auth/invalid-email"){
+              console.log("email invalide")
+              setStatus({...status, connexionError: "Mail invalid"})
+            }
+
+          }
+        }
+
+      } else{
+          console.log("non")
+      }
     }
 
   return (
@@ -54,14 +120,25 @@ export default function SignModal() {
 
 
                     <div className='space-y-2'>
-                      <InputFloating id={'email'} type={'email'} name={'Adresse e-mail'} onChange={(e) => setData( {...data, email: e.target.value } )} placeholder={'Adresse e-mail'} />
-                      <InputFloating id={'password'} type={'password'} name={'Mot de passe'} onChange={(e) => setData( {...data, password: e.target.value } )} placeholder={'Mot de passe'} />
-                    
-                    <div>
-                    <button onClick={confirm} className='mt-6 relative flex items-center rounded-md outline outline-1 hover:outline-2 w-full h-3rem text-white text-sm font-semibold bg-pink-600'>
-                        <div className='absolute inset-x-0'>Continuer</div>
-                      </button>
-                    </div>
+                      <div>
+
+                      <div className=''>
+
+                      <div className='py-2'>
+                        {status.connexionError}
+                      </div>
+                      <GroupInput>
+                        <InputFloating theme='group' id={'email'} type={'email'} name={'Adresse e-mail'} onChange={(e) => setData( {...data, email: e.target.value } )} placeholder={'Adresse e-mail'} />
+                        <div className='border-b border-gray-500 w-full' />
+                        <InputFloating theme='group' id={'password'} type={'password'} name={'Mot de passe'} onChange={(e) => setData( {...data, password: e.target.value } )} placeholder={'Mot de passe'} />
+                      </GroupInput>
+
+                      </div>
+
+                      <button onClick={confirm} className='mt-6 relative flex items-center rounded-md outline outline-1 hover:outline-2 w-full h-3rem text-white text-sm font-semibold bg-pink-600'>
+                          <div className='absolute inset-x-0'>Continuer</div>
+                        </button>
+                      </div>
 
                     </div>
 
