@@ -1,6 +1,6 @@
 import React from 'react';  
 
-import NavBar from '../components/navbar/navbar'
+import NavBar from '../components/navbar/navbar-home'
 import Footer from '../components/footer/footer'
 
 export default function Page() {

@@ -5,13 +5,13 @@ import { getAuth } from 'firebase/auth'
 
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  measurementId: "G-KEPTN9EV7K"
+  apiKey: "AIzaSyCyNOmBSCOdyISW1nJqe58j2fHALCYtNoc",
+  authDomain: "airloc-95e1d.firebaseapp.com",
+  databaseURL: "https://airloc-95e1d-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "airloc-95e1d",
+  storageBucket: "airloc-95e1d.appspot.com",
+  messagingSenderId: "763743522492",
+  appId: "1:763743522492:web:68a9aac6aa9c32faeb4ab9"
 }; 
  
 // Initialize Firebase 

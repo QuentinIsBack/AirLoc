@@ -19,17 +19,12 @@ export default function Component(props) {
                         <div className='hidden lg:block xl:block 2xl:block'>
                             <button className="h-full">
                                 <div className='text-night rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
-                                    Aujourd'hui
+                                    Programme
                                 </div>
                             </button> 
                             <button className="h-full">
                                 <div className='text-night rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
-                                    Messages
-                                </div>
-                            </button> 
-                            <button className="h-full">
-                                <div className='text-night rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
-                                    Calendrier
+                                    Études
                                 </div>
                             </button> 
                             <button className="h-full">
@@ -37,23 +32,6 @@ export default function Component(props) {
                                     Informations
                                 </div>
                             </button> 
-                            <div className="dropdown dropdown-end">
-                                <div tabIndex="0">
-                                    <button className="h-full">
-                                        <div className='inline-flex items-center text-night rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
-                                            Menu <IoChevronDown className='ml-1 mt-0.5' />
-                                        </div>
-                                    </button> 
-                                </div> 
-                                <ul tabIndex="0" className="p-2 mt-4 shadow-dropdown menu dropdown-content bg-base-100 rounded-box w-52 text-black">
-                                    <li><a onClick={() => setModalSign(true)} className='font-medium'>Inscription</a></li>
-                                    <li><a onClick={() => setModalSign(true)} className='font-medium'>Connexion</a></li>
-                                    <div className='py-2'><div className='border-t'></div></div>
-                                    <li><a className='font-normal'>Louer mon logement</a></li>
-                                    <li><a className='font-normal'>Trouver un logement</a></li>
-                                    <li><a className='font-normal'>Aide</a></li>
-                                </ul>
-                            </div>
                         </div>
 
                     </div>
