@@ -8,13 +8,14 @@ import {InputFloating} from '../../components/input/inputfloating'
 import { GroupInput } from '../input/groupinput'
 
 
-import { getFirestore, collection, addDoc, doc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase.config";
+import { SignInMethod } from 'firebase/auth'
 
 
 export default function SignModal() {
 
-    const {signUp, modalSign, setModalSign} = useContext(UserContext)
+    const {signUp, signIn,modalSign, setModalSign} = useContext(UserContext)
     const [status, setStatus] = useState({
       connexionError: "Aucunes erreurs",
     });
@@ -32,23 +33,8 @@ export default function SignModal() {
       password: "",
     });
 
-    const createProfile = async (email) => {
-      const dbRef = doc(db, "users");
-      try {
-        const data = {
-          name: "Raja Tamil",
-          country: "Canada"
-       };
-        addDoc(dbRef, data)
-          .then(docRef => {
-            console.log("Document has been added successfully");
-          })
-          .catch(error => {
-            console.log(error);
-          })
-      } catch(error) {
-          console.log(error)
-      }
+    const createProfile = () => {
+
   }
 
     const confirm = async () => {
@@ -68,15 +54,29 @@ export default function SignModal() {
                 email,
                 password,
               )
-              createProfile(email)
-              console.log(cred)
+              console.log(cred.user.uid)
+
+              await setDoc(doc(db, "users", cred.user.uid), {
+                email: email,
+              });
+
               closeModal()
-              
+              setStatus({...status, connexionError: "REGISTER"})
           } catch (err) { 
 
             if(err.code === "auth/email-already-in-use"){
-              console.log("existe déjà")
-              setStatus({...status, connexionError: "Existe déjà"})
+              try {
+                const cred = await signIn(
+                  email,
+                  password,
+                )
+                closeModal()
+                setStatus({...status, connexionError: "CONNECTE"})
+              } catch (err) { 
+                console.log("existe déjà")
+                setStatus({...status, connexionError: "ERROR"})
+              }
+
             }
 
             if(err.code === "auth/invalid-email"){
@@ -91,6 +91,7 @@ export default function SignModal() {
           console.log("non")
       }
     }
+
 
   return (
     <>
