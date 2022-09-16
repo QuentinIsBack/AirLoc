@@ -27,7 +27,7 @@ export default function Component(props) {
                         <div className="dropdown dropdown-end">
                             <div tabIndex="0">
                                 <button className="h-full">
-                                    <div className='inline-flex items-center text-night outline outline-1 outline-gray-200 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
+                                    <div className='inline-flex items-center text-night/80 outline outline-1 outline-gray-200 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
                                         Mon compte <IoChevronDown className='ml-1 mt-0.5' />
                                     </div>
                                 </button>   
@@ -71,27 +71,28 @@ function GetCenter(){
         return (
             <>
                 <button onClick={() => navigate("../hosting")} className="h-full">
-                    <div className='text-night rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
+                    <div className='text-night/80 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
                         Aujourd'hui
                     </div>
                 </button> 
                 <button className="h-full">
-                    <div className='text-night rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
+                    <div className='text-night/80 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
                         Messages
                     </div>
                 </button> 
                 <button className="h-full">
-                    <div className='text-night rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
+                    <div className='text-night/80 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
                         Calendrier
+
+                    </div> 
+                </button> 
+                <button className="h-full">
+                    <div className='text-night/80 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
+                        Informations <span><div className="ml-1 badge badge-error">Nouveauté</div></span>
                     </div>
                 </button> 
                 <button className="h-full">
-                    <div className='text-night rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
-                        Informations
-                    </div>
-                </button> 
-                <button className="h-full">
-                    <div className='inline-flex items-center text-night rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
+                    <div className='inline-flex items-center text-night/80 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
                         Menu <IoChevronDown className='ml-1 mt-0.5' />
                     </div>
                 </button> 
