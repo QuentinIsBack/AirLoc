@@ -119,7 +119,7 @@ export default function Component(props) {
 
             <div className='fixed bottom-0 left-0 right-0 z-40'>
                 <div className='border-t'></div>
-                <div className={`bg-gray-100 flex justify-between h-3rem items-center ${props.padding}`}>
+                <div className={`bg-gray-100 flex justify-between h-3rem items-center px-10 sm:px-10 md:px-36 lg:px-36 xl:px-36 2xl:px-36`}>
                     <div className='hidden lg:block xl:block 2xl:block w-fit sm:w-fit md:w-fit lg:w-full xl:w-fit 2xl:w-fit'>
                         <div className='grid grid-flow-col gap-2'>
                             <button className='text-darkgray font-normal text-sm'>© 2022 Airloc, Inc.</button>
@@ -132,7 +132,7 @@ export default function Component(props) {
                             <span>·</span>
                             <button className='text-darkgray font-normal text-sm hover:underline'>Infos sur l'entreprise</button>
                         </div>
-                    </div>
+                    </div> 
 
                     <div className='grid grid-flow-col gap-2 w-full sm:w-full md:w-full lg:w-fit xl:w-fit 2xl:w-fit'>
                         <button className='text-darkgray font-semibold text-sm px-1.5 hover:text-black hover:rounded-lg hidden 2xl:block'>Français (FR)</button>

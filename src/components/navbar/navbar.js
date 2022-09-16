@@ -15,7 +15,7 @@ export default function Component(props) {
         <> 
             <div className='sticky w-full'>
                 <div className={`flex items-center justify-between border-b h-4rem bg-white`}>
-                    <div className="absolute z-10 inset-y-0 left-36 flex items-center">
+                    <div className="absolute z-10 inset-y-0 left-5 sm:left-36 md:left-36 lg:left-36 xl:left-36 2xl:left-36 flex items-center">
                         <a href='.'><img width={25} src={LOGOWHITE} /></a>
                     </div> 
                     <div className="absolute inset-x-0 inset-y-0 flex justify-center items-center">
@@ -23,7 +23,7 @@ export default function Component(props) {
                             {GetCenter()}
                         </div>
                     </div>
-                    <div className="absolute z-10 inset-y-0 right-36 flex items-center">
+                    <div className="absolute z-10 inset-y-0 right-5 sm:right-36 md:right-36 lg:right-36 xl:right-36 2xl:right-36 flex items-center">
                         <div className="dropdown dropdown-end">
                             <div tabIndex="0">
                                 <button className="h-full">
@@ -130,7 +130,7 @@ function GetDropdown() {
         return (
             <>
                         <li><a onClick={() => navigate("../account")} className='font-medium text-sm'>Profile</a></li> 
-                        <li><a className='font-medium text-sm'>Compte</a></li> 
+                        <li><a onClick={() => navigate("../account-settings")} className='font-medium text-sm'>Compte</a></li> 
                         <li><a className='font-medium text-sm'>Obtenir de l'aide</a></li> 
                             <div className='py-2'><div className='border-t'></div></div>
                         <li><a className='font-normal text-sm'>Français (FR)</a></li> 
