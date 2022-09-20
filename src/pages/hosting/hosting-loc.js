@@ -11,11 +11,22 @@ import { UserContext } from '../../context/UserContext';
 // Icons
 import { FaHouseUser, FaFolder } from 'react-icons/fa';
 import { Button } from '../../components/button/button';
+import { BsClipboardCheck } from "react-icons/bs";
+import { HiOutlineX } from "react-icons/hi";
 
 export default function Page() {
     const padding = `px-80`;
 
     const { User, setModal } = useContext(UserContext)
+
+
+    const nextStepBoard = [
+        {
+            icon: <BsClipboardCheck size={30} />,
+            title: "Trouver un logement",
+            description: "Découvrez des logements disponible dans la ville de votre choix, correspondant à votre dossier.",
+            button: "Accéder aux logements disponible"
+        }];
 
     return (
         <>  
@@ -79,24 +90,64 @@ export default function Page() {
                 </div>
             </div>
 
-            <div className={`${padding} py-14 space-y-3`}>
-                <div className='text-3xl font-semibold text-night text-left'>Vos dossiers</div>
+            <div className={`${padding} pb-10 space-y-3`}>
+                <div className='flex justify-between items-center'>
+                    <div className='text-3xl font-semibold text-night text-left'>Vos dossiers</div>
+                    <a href='#' className='text-md hover:bg-gray-100/80 rounded-lg px-4 py-2 font-semibold text-night text-left underline'>Tous mes dossiers</a>
+                </div>
+                <div className='flex space-x-3'>
+                    <button className='px-4 py-2 rounded-full border text-sm hover:border-black hover:bg-gray-100/80 text-night font-medium hover:text-black'>
+                        Dossier en cours (0)
+                    </button>
+                    <button className='px-4 py-2 rounded-full border text-sm hover:border-black hover:bg-gray-100/80 text-night font-medium hover:text-black'>
+                        Dossier en cours (0)
+                    </button>
+                </div>
+                <div className='pt-4'>
+                    <div className='bg-gray-100/70 rounded-2xl h-15rem'>
+                        <div className='flex flex-col justify-center items-center h-full'>
+                            <BsClipboardCheck size='35' />
+                            <div className='px-56 text-center pt-5'>
+                                <p className='mx-72 font-normal text-sm'>Vous n'avez aucuns logements en ce moment.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
 
+            <div className={`${padding} pb-10  py-8 space-y-3 bg-gray-100/70`}>
+                <div className='flex justify-between items-center'>
+                    <div className='text-3xl font-semibold text-night text-left'>Prochaines étapes</div>
+                </div>
+                <div className='pt-4'>
+                    <div className='flex space-x-5 h-fit'>
+                        {nextStepBoard.map(o => 
+                            <div key={Math.random().toString(36).substr(2, 9)} className='bg-white border border-gray-300 rounded-xl w-fit'>
+                                <div className='p-4'>
+                                    <div className='flex justify-between'>
+                                        <div className='p-0.5'>
+                                            {o.icon}
+                                        </div>
+                                        <div className='p-0.5 hover:bg-gray-100 rounded-lg'>
+                                            <HiOutlineX size={30} />
+                                        </div>
+                                    </div>
+                                    <div className="mt-3 font-semibold text-md mb-1">{o.title}</div>
+                                    <div className="font-normal text-gray-900 text-md w-64">{o.description}</div>
+                                    <button className='border border-black rounded-lg mt-4 py-1.5 px-4 hover:bg-gray-100'>
+                                        <div className='text-sm font-base font-semibold'>{o.button}</div>
+                                    </button>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                </div>
 
-            <div className={`${padding} py-20`}>
-                <div className='text-5xl font-semibold text-night text-left'>Bonjour, {User.email ? User.email : undefined}</div>
-                <div className='text-2xl font-semibold text-night text-left'>Nom: {User.lastname ? User.lastname : undefined}</div>
-                <div className='text-2xl font-semibold text-night text-left'>Prénom: {User.firstname ? User.firstname : undefined}</div>
-                <div className='text-2xl font-semibold text-night text-left'>Inscription: {User.registered ? User.registered : undefined}</div>
-                <div className='text-2xl font-semibold text-night text-left'>Sexe: {User.sex ? User.sex : undefined}</div>
-                <div className='text-2xl font-semibold text-night text-left'>Bio: {User.bio ? User.bio : undefined}</div>
             </div>
 
-
-            <Footer />
+            <Footer formatage={'sticky'} />
         </>
     )
 } 

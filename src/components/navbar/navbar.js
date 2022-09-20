@@ -25,7 +25,7 @@ export default function Component(props) {
         <> 
             <div className='sticky w-full'>
                 <div className={`flex items-center justify-between border-b h-4rem bg-white`}>
-                    <div className="absolute z-10 inset-y-0 left-5 sm:left-36 md:left-36 lg:left-36 xl:left-36 2xl:left-36 flex items-center">
+                    <div className={`absolute z-10 inset-y-0 left-36 sm:left-36 md:left-36 lg:left-36 xl:left-36 2xl:left-36 flex items-center`}>
                         <a href='.'><img width={25} src={LOGOWHITE} /></a>
                     </div> 
                     <div className="absolute inset-x-0 inset-y-0 flex justify-center items-center">
@@ -87,7 +87,7 @@ function GetCenter(){
                         </div>
                     </button> 
                 </NavLink>
-                <NavLink to="../messages" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
+                <NavLink to="./messages" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
                     <button className="h-full">
                         <div className={`rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100`}>
                             Messages
@@ -134,9 +134,12 @@ function GetCenter(){
 
 function GetDropdown() {
 
-    const navigate = useNavigate();
-    const {setModalSign, currentUser} = useContext(UserContext)
+    const [modalSignIn, setModalSignIn] = useState(false);
+    const [modalSignUp, setModalSignUp] = useState(false);
 
+    const navigate = useNavigate();
+    const {currentUser, User} = useContext(UserContext)
+    
     const logout = async () => {
         try {
             await signOut(auth)
@@ -149,48 +152,32 @@ function GetDropdown() {
     if (!currentUser) {
         return(
             <>
-                {DropdownOffline()}
+                <ModalSignUp show={modalSignUp} close={() => setModalSignUp(false)} />
+                <ModalSignIn show={modalSignIn} close={() => setModalSignIn(false)} />
+                <li><a onClick={() => setModalSignUp(true)} className='font-medium text-sm'>Inscription</a></li>
+                <li><a onClick={() => setModalSignIn(true)} className='font-medium text-sm'>Connexion</a></li>
+                <div className='py-2'><div className='border-t'></div></div>
+                <li><a className='font-normal text-sm'>Louer mon logement</a></li>
+                <li><a className='font-normal text-sm'>Trouver un logement</a></li>
+                <li><a className='font-normal text-sm'>Aide</a></li>
             </>
         )
     } else {
         return (
             <>
-                        <li><a onClick={() => navigate("../account")} className='font-medium text-sm'>Profile</a></li> 
-                        <li><a onClick={() => navigate("../account-settings")} className='font-medium text-sm'>Compte</a></li> 
-                        <li><a className='font-medium text-sm'>Obtenir de l'aide</a></li> 
-                            <div className='py-2'><div className='border-t'></div></div>
-                        <li><a className='font-normal text-sm'>Français (FR)</a></li> 
-                        <li><a className='font-normal text-sm'>€ EUR</a></li> 
-                            <div className='py-2'><div className='border-t'></div></div>
-                        <li><a className='font-normal text-sm'>Parrainer un hôte</a></li>
-                        <li><a onClick={logout} className='font-normal text-sm'>Déconnexion</a></li>
+                <li><a onClick={() => navigate("../account")} className='font-medium text-sm'>Profile</a></li> 
+                <li><a onClick={() => navigate("../account-settings")} className='font-medium text-sm'>Compte</a></li> 
+                <li><a className='font-medium text-sm'>Obtenir de l'aide</a></li> 
+                {User.power >= 1000 ? <li><a className='bg-slate-800 font-medium text-sm hover:bg-indigo-800'><span className='text-white'>Administration</span></a></li> : undefined}
+                    <div className='py-2'><div className='border-t'></div></div>
+                <li><a className='font-normal text-sm'>Français (FR)</a></li> 
+                <li><a className='font-normal text-sm'>€ EUR</a></li> 
+                    <div className='py-2'><div className='border-t'></div></div>
+                <li><a className='font-normal text-sm'>Parrainer un hôte</a></li>
+                <li><a onClick={logout} className='font-normal text-sm'>Déconnexion</a></li>
             </>
         )
     }
-}
-
-const DropdownOffline = () => {
-
-    const {setModalSign} = useContext(UserContext)
-
-    const navigate = useNavigate();
-
-    const [modalSignIn, setModalSignIn] = useState(false);
-    const [modalSignUp, setModalSignUp] = useState(false);
-
-    return (
-        <>
-            <ModalSignUp show={modalSignUp} close={() => setModalSignUp(false)} />
-            <ModalSignIn show={modalSignIn} close={() => setModalSignIn(false)} />
-            <li><a onClick={() => setModalSignUp(true)} className='font-medium text-sm'>Inscription</a></li>
-            <li><a onClick={() => setModalSignIn(true)} className='font-medium text-sm'>Connexion</a></li>
-            <div className='py-2'><div className='border-t'></div></div>
-            <li><a className='font-normal text-sm'>Louer mon logement</a></li>
-            <li><a className='font-normal text-sm'>Trouver un logement</a></li>
-            <li><a className='font-normal text-sm'>Aide</a></li>
-                        
-        </>
-    )
 }
 
 const ModalSignUp = ({show, close}) => {

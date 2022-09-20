@@ -29,8 +29,15 @@ export default function Page() {
                                 
                                 {/* Profil */}
                                 <div className='self-center'>
-                                    <button>
-                                        <img className='rounded-full' width={115} src={User.urlprofile ? User.urlprofile : undefined} />
+                                    <button className='overflow-hidden'>
+                                        <img style={{
+                                            width: 150,
+                                            height: 150,
+                                            borderRadius: '50%',
+                                            overflow: 'hidden',
+                                            borderWidth: 3,
+                                            }}
+                                            src={User.urlprofile ? User.urlprofile : "https://mir-s3-cdn-cf.behance.net/project_modules/fs/0e42df111843393.6009650446d8d.png"} />
                                     </button>
                                 </div>
 
