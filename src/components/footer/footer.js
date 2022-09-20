@@ -117,7 +117,7 @@ export default function Component(props) {
                 </Dialog>
             </Transition.Root>
 
-            <div className='bottom-0 left-0 right-0 z-40'>
+            <div className='fixed bottom-0 left-0 right-0 z-40'>
                 <div className='border-t'></div>
                 <div className={`bg-gray-100 flex justify-between h-3rem items-center px-10 sm:px-10 md:px-36 lg:px-36 xl:px-36 2xl:px-36`}>
                     <div className='hidden lg:block xl:block 2xl:block w-fit sm:w-fit md:w-fit lg:w-full xl:w-fit 2xl:w-fit'>

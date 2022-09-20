@@ -1,10 +1,14 @@
 import React, { useContext } from 'react';  
 import { useNavigate } from 'react-router-dom';
 
+// Components
 import NavBar from '../components/navbar/navbar'
 import Footer from '../components/footer/footer'
+
+// Firebase
 import { UserContext } from '../context/UserContext';
 
+// Icons
 import { FaRegAddressCard, FaShieldAlt, FaEuroSign, FaRegBell, FaUnlock, FaGlobeEurope, FaPlane, FaTools, FaRegCreditCard } from "react-icons/fa";
 
 export default function Page() {
@@ -74,12 +78,12 @@ export default function Page() {
         <>  
             <NavBar />
 
-            <div className={`px-20 sm:px-40 md:px-40 lg:px-40 xl:px-20 2xl:px-96 mx-10 mt-20 my-10`}>
+            <div className={`px-20 sm:px-40 md:px-40 lg:px-40 xl:px-60 2xl:px-96 mx-10 mt-20 my-10`}>
                 <div className='text-3xl font-semibold'>Compte,</div>
                 <div className='pt-2 text-lg font-normal'><span className='font-semibold'>{User.firstname ? User.firstname : undefined} {User.lastname ? User.lastname : undefined},</span> {User.email ? User.email : undefined} <span>·</span> <span><button onClick={() => navigate('../account')} className='font-semibold underline'>Aller au profil</button></span></div>
             </div>
 
-            <div className={`px-20 sm:px-40 md:px-40 lg:px-40 xl:px-20 2xl:px-96 mx-10 mb-20`}>
+            <div className={`px-20 sm:px-40 md:px-40 lg:px-40 xl:px-60 2xl:px-96 mx-10 mb-20`}>
                 <div class="grid grid-cols-3 gap-4">
                 {settings.map((o) => (
                     <button onClick={() => navigate('.'+o.url)} className='shadow-lg rounded-xl h-40 w-full p-4 flex flex-col justify-between hover:bg-stone-100/50'>

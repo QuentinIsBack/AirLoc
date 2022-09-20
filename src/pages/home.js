@@ -1,10 +1,10 @@
 import React from 'react';  
 
+// Components
 import NavBar from '../components/navbar/navbar'
 import Footer from '../components/footer/footer'
 
 export default function Page() {
-    const padding = `px-60`;
 
     return (
         <>  

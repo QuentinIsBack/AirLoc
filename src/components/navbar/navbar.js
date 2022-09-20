@@ -1,4 +1,6 @@
 import React, {useContext} from 'react';
+import { NavLink } from 'react-router-dom';
+
 import { UserContext } from '../../context/UserContext'
 
 import LOGOWHITE from '../../assets/logo.svg'
@@ -70,32 +72,52 @@ function GetCenter(){
     } else {
         return (
             <>
-                <button onClick={() => navigate("../hosting")} className="h-full">
-                    <div className='text-night/80 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
-                        Aujourd'hui
-                    </div>
-                </button> 
-                <button className="h-full">
-                    <div className='text-night/80 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
-                        Messages
-                    </div>
-                </button> 
-                <button className="h-full">
-                    <div className='text-night/80 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
-                        Calendrier
-
+                <NavLink to="../hosting" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
+                    <button className="h-full">
+                        <div className={`rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100`}>
+                            Aujourd'hui
+                        </div>
+                    </button> 
+                </NavLink>
+                <NavLink to="../messages" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
+                    <button className="h-full">
+                        <div className={`rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100`}>
+                            Messages
+                        </div>
+                    </button> 
+                </NavLink>
+                <NavLink to="../calendar" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
+                    <button className="h-full">
+                        <div className={`rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100`}>
+                            Calendrier
+                        </div>
+                    </button> 
+                </NavLink>
+                <NavLink to="../informations" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
+                    <button className="h-full">
+                        <div className={`rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100`}>
+                            Informations  <span><div className="ml-1 badge badge-error">Nouveauté</div></span>
+                        </div>
+                    </button> 
+                </NavLink>
+                <div className="dropdown dropdown-end">
+                    <div tabIndex="0">
+                        <button className="h-full">
+                            <div className='inline-flex items-center text-night/80 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
+                                Menu <IoChevronDown className='ml-1 mt-0.5' />
+                            </div>
+                        </button> 
                     </div> 
-                </button> 
-                <button className="h-full">
-                    <div className='text-night/80 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
-                        Informations <span><div className="ml-1 badge badge-error">Nouveauté</div></span>
-                    </div>
-                </button> 
-                <button className="h-full">
-                    <div className='inline-flex items-center text-night/80 rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
-                        Menu <IoChevronDown className='ml-1 mt-0.5' />
-                    </div>
-                </button> 
+                    <ul tabIndex="0" className="p-2 mt-4 shadow-dropdown menu dropdown-content bg-base-100 rounded-box w-52 text-black">
+                        <li><a className='font-medium text-sm'>Annonces</a></li>
+                        <li><a className='font-medium text-sm'>Réservations</a></li>
+                        <li><a onClick={() => navigate('../mondossier')} className='font-medium text-sm'>Mon dossier locataire</a></li>
+                        <div className='py-2'><div className='border-t'></div></div>
+                        <li><a className='font-normal text-sm'>Guides</a></li>
+                        <li><a className='font-normal text-sm'>Historique des transactions</a></li>
+                        <li><a className='font-normal text-sm'>Forum de la communauté</a></li>
+                    </ul>
+                </div>
             </>
         )
     }

@@ -1,9 +1,13 @@
 import React, { useContext } from 'react';  
 
+// Components
 import NavBar from '../components/navbar/navbar'
 import Footer from '../components/footer/footer'
+
+// Firebase
 import { UserContext } from '../context/UserContext';
 
+// Icons
 import { RiHome2Fill, RiCheckFill, RiStarLine, RiStarFill, RiShieldLine, RiShieldCheckLine, RiCloseFill } from "react-icons/ri";
 
 export default function Page() {

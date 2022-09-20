@@ -7,7 +7,7 @@ import { IoPhonePortraitOutline, IoLogoGoogle } from 'react-icons/io5'
 import {InputFloating} from '../../components/input/inputfloating'
 import { GroupInput } from '../input/groupinput'
 
-
+//
 import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase.config";
 import { SignInMethod } from 'firebase/auth'

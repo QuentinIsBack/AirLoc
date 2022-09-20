@@ -38,10 +38,11 @@ export function UserContextProvider(props){
     }, [])
 
     const [modalSign, setModalSign] = useState(false)
+    const [modal, setModal] = useState(true)
 
 
     return (
-        <UserContext.Provider value={{modalSign, setModalSign, signUp, signIn, currentUser, User}}>
+        <UserContext.Provider value={{modalSign, setModalSign, modal, setModal, signUp, signIn, currentUser, User}}>
             {!loadingData && props.children}
         </UserContext.Provider>
     )

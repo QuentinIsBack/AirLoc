@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';  
 
-import NavBar from '../components/navbar/navbar'
-import Footer from '../components/footer/footer'
-import { UserContext } from '../context/UserContext';
+import NavBar from '../../components/navbar/navbar'
+import Footer from '../../components/footer/footer'
+import { UserContext } from '../../context/UserContext';
 import { FaHouseUser } from 'react-icons/fa';
 
 export default function Page() {

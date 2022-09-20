@@ -15,6 +15,7 @@ module.exports = {
         '6rem': '6rem',
         '7rem': '7rem',
         '10rem': '10rem',
+        '15rem': '15rem',
         '20rem': '20rem',
         '25rem': '25rem',
         '30rem': '30rem',
@@ -58,6 +59,58 @@ module.exports = {
         'h2': ['22px'],
         'h3': ['16px'],
       },
+      animation: {
+        showin: 'showin 1s',
+        showout: 'showout 1s'
+      },
+      keyframes: {
+        showin: {
+          '0%': {
+            transform: 'translateY(10px)',
+            opacity: 0
+          },
+          '100%': {
+            transform: 'translateY(0)',
+            opacity: 1
+          },
+        },        
+        showout: {
+          '0%': {
+            transform: 'translateY(0)',
+            opacity: 1
+          },
+          '100%': {
+            transform: 'translateY(10px)',
+            opacity: 0
+          },
+        }
+      },
+      animation: {
+        showin: 'showin 1s',
+        showout: 'showout 1s'
+      },
+      keyframes: {
+        showin: {
+          '0%': {
+            transform: 'translateY(10px)',
+            opacity: 0
+          },
+          '100%': {
+            transform: 'translateY(0)',
+            opacity: 1
+          },
+        },        
+        showout: {
+          '0%': {
+            transform: 'translateY(0)',
+            opacity: 1
+          },
+          '100%': {
+            transform: 'translateY(10px)',
+            opacity: 0
+          },
+        }
+      }
     },
   },
   plugins: [
