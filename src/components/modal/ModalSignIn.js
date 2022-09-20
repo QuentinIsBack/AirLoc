@@ -4,7 +4,7 @@ import { UserContext } from '../../context/UserContext'
 
 import { IoPhonePortraitOutline, IoLogoGoogle } from 'react-icons/io5'
 
-import {InputFloating} from '../../components/input/inputfloating'
+import {InputFloating} from '../input/inputfloating'
 import { GroupInput } from '../input/groupinput'
 
 //
@@ -13,7 +13,7 @@ import { db } from "../../firebase.config";
 import { SignInMethod } from 'firebase/auth'
 
 
-export default function SignModal() {
+export default function SignInModal() {
 
     const {signUp, signIn,modalSign, setModalSign} = useContext(UserContext)
     const [status, setStatus] = useState({

@@ -1,7 +1,8 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { UserContext } from '../../context/UserContext'
+import {ModalTest} from '../modal/ModalTest'
 
 import LOGOWHITE from '../../assets/logo.svg'
 
@@ -9,6 +10,13 @@ import { IoChevronDown } from 'react-icons/io5'
 import { db, auth} from "../../firebase.config"
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { Button } from '../button/button';
+import { InputFloating } from '../input/inputfloating';
+import { GroupInput } from '../input/groupinput'
+
+//
+import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { SignInMethod } from 'firebase/auth'
 
 export default function Component(props) { 
     const {modalSign, setModalSign} = useContext(UserContext)
@@ -125,9 +133,9 @@ function GetCenter(){
 }
 
 function GetDropdown() {
+
     const navigate = useNavigate();
-    const {currentUser} = useContext(UserContext)
-    const {modalSign, setModalSign} = useContext(UserContext)
+    const {setModalSign, currentUser} = useContext(UserContext)
 
     const logout = async () => {
         try {
@@ -139,14 +147,9 @@ function GetDropdown() {
     }
 
     if (!currentUser) {
-        return (
+        return(
             <>
-                        <li><a onClick={() => setModalSign(true)} className='font-medium text-sm'>Inscription</a></li>
-                        <li><a onClick={() => setModalSign(true)} className='font-medium text-sm'>Connexion</a></li>
-                        <div className='py-2'><div className='border-t'></div></div>
-                        <li><a className='font-normal text-sm'>Louer mon logement</a></li>
-                        <li><a className='font-normal text-sm'>Trouver un logement</a></li>
-                        <li><a className='font-normal text-sm'>Aide</a></li>
+                {DropdownOffline()}
             </>
         )
     } else {
@@ -164,5 +167,172 @@ function GetDropdown() {
             </>
         )
     }
+}
 
+const DropdownOffline = () => {
+
+    const {setModalSign} = useContext(UserContext)
+
+    const navigate = useNavigate();
+
+    const [modalSignIn, setModalSignIn] = useState(false);
+    const [modalSignUp, setModalSignUp] = useState(false);
+
+    return (
+        <>
+            <ModalSignUp show={modalSignUp} close={() => setModalSignUp(false)} />
+            <ModalSignIn show={modalSignIn} close={() => setModalSignIn(false)} />
+            <li><a onClick={() => setModalSignUp(true)} className='font-medium text-sm'>Inscription</a></li>
+            <li><a onClick={() => setModalSignIn(true)} className='font-medium text-sm'>Connexion</a></li>
+            <div className='py-2'><div className='border-t'></div></div>
+            <li><a className='font-normal text-sm'>Louer mon logement</a></li>
+            <li><a className='font-normal text-sm'>Trouver un logement</a></li>
+            <li><a className='font-normal text-sm'>Aide</a></li>
+                        
+        </>
+    )
+}
+
+const ModalSignUp = ({show, close}) => {
+
+    const [emailValid, setEmailValid] = useState('');
+    const [passwordValid, setPasswordValid] = useState('');
+    const [data, setData] = useState({
+        firstname: "",
+        lastname: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+    });
+    const {signUp} = useContext(UserContext)
+
+    const navigate = useNavigate();
+
+    const confirmForm = async () => {
+
+        if(data.password === data.confirmPassword){
+            if(data.password.length < 6){
+                setPasswordValid('Le mot de passe indiqué dois faire plus de 6 characters.')
+            } else {
+
+                try {
+                    const cred = await signUp(
+                      data.email,
+                      data.password,
+                    )
+      
+                    await setDoc(doc(db, "users", cred.user.uid), {
+                        firstname: data.firstname,
+                        lastname: data.lastname,
+                        email: data.email,
+                    });
+      
+                    navigate('../hosting')
+                } catch (err) { 
+                  if(err.code === "auth/email-already-in-use"){
+                    setEmailValid("L'adresse email renseigné est déjà uttilisé.")
+                  }
+                  if(err.code === "auth/invalid-email"){
+                    setEmailValid("L'adresse email renseigné est invalid.")
+                  }
+                }
+                
+            }
+        } else{
+            setPasswordValid('Les mots de passes doivent être identique.')
+        }
+    }
+
+    return (
+        <>
+            <ModalTest show={show} close={close}>
+                <div className='h-5rem bg-cover' style={{backgroundImage: `url("https://mir-s3-cdn-cf.behance.net/project_modules/fs/35098564507519.5ad4edb4b9537.jpg")`}} />
+                    <div className='border-b' />
+                <div className="p-5">
+                    <div className='text-3xl font-semibold text-night text-left'>Création d'un profil</div>
+                    <div className='pt-2 text-md font-normal text-gray-500 text-left'>Pour commencer à rechercher et candidater à des logements, dites nous en plus sur vous.</div>
+                    
+                    <div className='pt-6 flex flex-row space-x-5 pb-5'>
+                        <InputFloating id={'lastname'} onChange={(e) => setData( {...data, lastname: e.target.value } )} type={'text'} name={'Nom'} placeholder={'Entrez votre nom'} />
+                        <InputFloating id={'firstname'} onChange={(e) => setData( {...data, firstname: e.target.value } )} type={'text'} name={'Prénom'} placeholder={'Entrez votre Prénom'} />
+                    </div>
+
+                    <div className='pb-5'>
+                        <InputFloating color={emailValid.length == 0 ? "black" : "red"} id={'email'} onChange={(e) => setData( {...data, email: e.target.value } )} type={'email'} name={'Adresse email'} placeholder={'Entrez votre adresse email'} />
+                        <div className={`${emailValid.length == 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{emailValid}</div>
+                    </div>
+
+                    <GroupInput color={passwordValid.length == 0 ? "black" : "red"}>
+                        <InputFloating color={passwordValid.length == 0 ? "black" : "red"} theme={'group'} id={'password'} onChange={(e) => setData( {...data, password: e.target.value } )} type={'password'} name={'Mot de passe'} placeholder={'Entrez votre mot de passe'} />
+                            <div className={`border-b ${passwordValid.length == 0 ? "border-black" : "border-red-500"} w-full`} />
+                        <InputFloating color={passwordValid.length == 0 ? "black" : "red"} theme={'group'} id={'confirmPassword'} onChange={(e) => setData( {...data, confirmPassword: e.target.value } )} type={'password'} name={'Confirmation'} placeholder={'Confirmez votre mot de passe'} />
+                    </GroupInput>
+                    <div className={`${passwordValid.length == 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{passwordValid}</div>
+
+                    <div className='pt-8 flex justify-start'>
+                        <Button onClick={confirmForm} theme={'black'}>Continuer</Button>
+                    </div>
+                </div>
+            </ModalTest>
+        </>
+    )
+}
+const ModalSignIn = ({show, close}) => {
+
+    const [emailValid, setEmailValid] = useState('');
+    const [passwordValid, setPasswordValid] = useState('');
+    const [data, setData] = useState({
+        email: "",
+        password: "",
+    });
+    const {signIn} = useContext(UserContext)
+
+    const navigate = useNavigate();
+
+    const confirmForm = async () => {
+
+            if(data.password.length < 6){
+                setPasswordValid('Le mot de passe indiqué dois faire plus de 6 characters.')
+            } else {
+
+                try {
+                    const cred = await signIn(
+                      data.email,
+                      data.password,
+                    )
+                    navigate('../hosting')
+                  } catch (err) { 
+                    setEmailValid("Le mot de passe ou l'adresse email n'est pas valide.")
+                }
+                
+            }
+
+    }
+
+    return (
+        <>
+            <ModalTest show={show} close={close}>
+                <div className='h-5rem bg-cover' style={{backgroundImage: `url("https://mir-s3-cdn-cf.behance.net/project_modules/fs/35098564507519.5ad4edb4b9537.jpg")`}} />
+                    <div className='border-b' />
+                <div className="p-5">
+                    <div className='text-3xl font-semibold text-night text-left'>Connexion au profil</div>
+                    <div className='pt-2 text-md font-normal text-gray-500 text-left'>Pour commencer à rechercher et candidater à des logements, connectez-vous.</div>
+
+                    <div className='pt-6 pb-5'>
+                        <InputFloating color={emailValid.length == 0 ? "black" : "red"} id={'email'} onChange={(e) => setData( {...data, email: e.target.value } )} type={'email'} name={'Adresse email'} placeholder={'Entrez votre adresse email'} />
+                        <div className={`${emailValid.length == 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{emailValid}</div>
+                    </div>
+
+                    <GroupInput color={passwordValid.length == 0 ? "black" : "red"}>
+                        <InputFloating color={passwordValid.length == 0 ? "black" : "red"} theme={'group'} id={'password'} onChange={(e) => setData( {...data, password: e.target.value } )} type={'password'} name={'Mot de passe'} placeholder={'Entrez votre mot de passe'} />
+                    </GroupInput>
+                    <div className={`${passwordValid.length == 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{passwordValid}</div>
+
+                    <div className='pt-8 flex justify-start'>
+                        <Button onClick={confirmForm} theme={'black'}>Continuer</Button>
+                    </div>
+                </div>
+            </ModalTest>
+        </>
+    )
 }
