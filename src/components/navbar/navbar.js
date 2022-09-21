@@ -23,7 +23,7 @@ export default function Component(props) {
 
     return (
         <> 
-            <div className='sticky w-full'>
+            <div className='sticky w-full z-10'>
                 <div className={`flex items-center justify-between border-b h-4rem bg-white`}>
                     <div className={`absolute z-10 inset-y-0 left-36 sm:left-36 md:left-36 lg:left-36 xl:left-36 2xl:left-36 flex items-center`}>
                         <a href='.'><img width={25} src={LOGOWHITE} /></a>
@@ -119,7 +119,7 @@ function GetCenter(){
                     <ul tabIndex="0" className="p-2 mt-4 shadow-dropdown menu dropdown-content bg-base-100 rounded-box w-52 text-black">
                         <li><a className='font-medium text-sm'>Annonces</a></li>
                         <li><a className='font-medium text-sm'>Réservations</a></li>
-                        <li><a onClick={() => navigate('../mondossier')} className='font-medium text-sm'>Mon dossier locataire</a></li>
+                        <li><a onClick={() => navigate('./folder')} className='font-medium text-sm'>Mon dossier locataire</a></li>
                         <div className='py-2'><div className='border-t'></div></div>
                         <li><a className='font-normal text-sm'>Guides</a></li>
                         <li><a className='font-normal text-sm'>Historique des transactions</a></li>

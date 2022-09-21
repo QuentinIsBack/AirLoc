@@ -75,7 +75,7 @@ function Body() {
         </>
     )
 } 
-
+ 
 const DiscoverMessages = ({show, close}) => {
 
     return (

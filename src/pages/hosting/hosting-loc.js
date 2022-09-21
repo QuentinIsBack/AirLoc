@@ -149,5 +149,5 @@ export default function Page() {
 
             <Footer formatage={'sticky'} />
         </>
-    )
+    ) 
 } 
