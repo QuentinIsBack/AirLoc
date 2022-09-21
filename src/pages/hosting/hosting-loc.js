@@ -38,7 +38,7 @@ export default function Page() {
                         <div className='text-3xl font-semibold text-night text-left'>Tableau de bord</div>
                         <div className='pt-2 text-md font-normal text-gray-500 text-left'>Vous voici sur votre espace locataire, vous y trouverez tout ce que vous avez besoins pour trouver le logement de vos rêves.</div>
                         <div className='pt-8 flex justify-start'>
-                            <Button onClick={()=>setModal(false)} theme={'black'}>Commencer</Button>
+                            <Button additionnal={'outline-none'} onClick={()=>setModal(false)} theme={'black'}>Commencer</Button>
                         </div>
                     </div>
                 </Modal>

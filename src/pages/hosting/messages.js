@@ -81,7 +81,7 @@ const DiscoverMessages = ({show, close}) => {
     return (
         <>
             <ModalTest show={show} close={close}>
-                <div className='h-5rem bg-cover' style={{backgroundImage: `url("https://mir-s3-cdn-cf.behance.net/project_modules/fs/35098564507519.5ad4edb4b9537.jpg")`}} />
+                <div className='h-10rem bg-cover' style={{backgroundImage: `url("https://mir-s3-cdn-cf.behance.net/project_modules/fs/35098564507519.5ad4edb4b9537.jpg")`}} />
                     <div className='border-b' />
                 <div className="p-5">
                     <div className='text-3xl font-semibold text-night text-left'>Messagerie Sécurisé</div>

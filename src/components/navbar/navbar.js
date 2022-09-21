@@ -80,28 +80,28 @@ function GetCenter(){
     } else {
         return (
             <>
-                <NavLink to="../hosting" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
+                <NavLink to="../hosting/" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
                     <button className="h-full">
                         <div className={`rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100`}>
                             Aujourd'hui
                         </div>
                     </button> 
                 </NavLink>
-                <NavLink to="./messages" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
+                <NavLink to="../hosting/messages" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
                     <button className="h-full">
                         <div className={`rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100`}>
                             Messages
                         </div>
                     </button> 
                 </NavLink>
-                <NavLink to="../calendar" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
+                <NavLink to="../calendar/" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
                     <button className="h-full">
                         <div className={`rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100`}>
                             Calendrier
                         </div>
                     </button> 
                 </NavLink>
-                <NavLink to="../informations" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
+                <NavLink to="../informations/" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
                     <button className="h-full">
                         <div className={`rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100`}>
                             Informations  <span><div className="ml-1 badge badge-error">Nouveauté</div></span>
