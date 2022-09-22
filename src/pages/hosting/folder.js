@@ -5,9 +5,38 @@ import NavBar from '../../components/navbar/navbar'
 import Footer from '../../components/footer/footer'
 
 import { FaHouseUser, FaFolder } from 'react-icons/fa';
+import {FiBook} from 'react-icons/fi'
+import {IoBriefcaseOutline, IoEyeOffOutline, IoBusinessOutline, IoPersonOutline, IoFootstepsOutline} from 'react-icons/io5'
 
 export default function Page() {
     const padding = `px-80`;
+
+    const situation = [
+        {
+            name: "Étudiant",
+            icon: <FiBook strokeWidth={1.5} size={30}  />,
+        },
+        {
+            name: "Salarié",
+            icon: <IoBriefcaseOutline strokeWidth={1.5} size={30}  />
+        },
+        {
+            name: "Fonctionnaire",
+            icon: <IoBusinessOutline strokeWidth={1.5} size={30}  />
+        },
+        {
+            name: "Indépendant",
+            icon: <IoPersonOutline strokeWidth={1.5} size={30}  />
+        },
+        {
+            name: "Retraité",
+            icon: <IoFootstepsOutline strokeWidth={1.5} size={30}  />
+        },
+        {
+            name: "Sans emploi",
+            icon: <IoEyeOffOutline strokeWidth={1.5} size={30}  />
+        }
+    ]
 
     return (
         <>  
@@ -43,7 +72,29 @@ export default function Page() {
                 </div>
             </div>
 
-            <Footer />
+            <div className={`${padding} py-14 space-y-3`}>
+                <div className='text-3xl font-semibold text-night text-left'>Ma situation</div>
+                <div className='text-md font-normal text-gray-500 text-left'>Vous êtes sur le point de devenir un locataire formidable. Voici comment commencer.</div>
+                <div className='pt-4 grid grid-cols-3 grid-cols- gap-5 mr-80'>
+                    {situation.map((sit) => (
+                        <>
+                            <div className="flex flex-col justify-center items-center w-full py-2 font-medium text-lg rounded-lg border-gray bg-white cursor-pointer border-gray border focus:outline-none hover:bg-gray-100/50 hover:border-black">
+                                <div>
+                                    {sit.icon}
+                                </div>
+                                <div className='pt-2'>
+                                    {sit.name}
+                                </div>
+                            </div>
+                        </>
+                    ))}
+                </div>
+                
+
+
+            </div>
+
+            <Footer formatage={'sticky'} />
         </>
     )
 } 
