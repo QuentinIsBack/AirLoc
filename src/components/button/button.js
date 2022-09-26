@@ -4,6 +4,12 @@ const themes = {
     black: {
         default: "rounded-md bg-stone-900 hover:bg-black text-white text-md",
     },
+    red: {
+        default: "rounded-md bg-red-500 hover:bg-red-700 text-white text-md",
+    },
+    green: {
+        default: "rounded-md bg-green-600 hover:bg-green-700 text-white text-md",
+    },
     white: {
         default: "rounded-md bg-white hover:bg-light-gray text-insane-gray text-md",
     },

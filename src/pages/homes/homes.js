@@ -107,7 +107,7 @@ export default function Page() {
                             </span>
                         : undefined}
                         {/* Equipments */}
-                        {home.equipments && home.equipments.size > 0 ?
+                        {(home.equipments && home.equipments.size > 0) ?
                             <span>
                                 <Contener title={"Ce que propose ce logement"}>
                                     <div> 
