@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 import { UserContext } from '../../context/UserContext'
 import {ModalTest} from '../modal/ModalTest'
@@ -94,14 +94,14 @@ function GetCenter(){
                         </div>
                     </button> 
                 </NavLink>
-                <NavLink to="../calendar/" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
+                <NavLink to="../hosting/calendar/" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
                     <button className="h-full">
                         <div className={`rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100`}>
                             Calendrier
                         </div>
                     </button> 
                 </NavLink>
-                <NavLink to="../informations/" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
+                <NavLink to="../hosting/informations/" className={({ isActive }) => (isActive ? "text-black" : "text-night/80 ")}>
                     <button className="h-full">
                         <div className={`rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100`}>
                             Informations  <span><div className="ml-1 badge badge-error">Nouveauté</div></span>
@@ -117,9 +117,9 @@ function GetCenter(){
                         </button> 
                     </div> 
                     <ul tabIndex="0" className="p-2 mt-4 shadow-dropdown menu dropdown-content bg-base-100 rounded-box w-52 text-black">
-                        <li><a className='font-medium text-sm'>Annonces</a></li>
+                        <li><Link to={"../hosting/announces"}><a className='font-medium text-sm'>Annonces</a></Link></li>
                         <li><a className='font-medium text-sm'>Réservations</a></li>
-                        <li><a onClick={() => navigate('./folder')} className='font-medium text-sm'>Mon dossier locataire</a></li>
+                        <li><a onClick={() => navigate('../hosting/folder')} className='font-medium text-sm'>Mon dossier locataire</a></li>
                         <div className='py-2'><div className='border-t'></div></div>
                         <li><a className='font-normal text-sm'>Guides</a></li>
                         <li><a className='font-normal text-sm'>Historique des transactions</a></li>

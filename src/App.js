@@ -8,6 +8,7 @@ import Home from './pages/home';
 import Homes from './pages/homes/homes';
 import Hosting from './pages/hosting/hosting-loc';
 import HostingMessages from './pages/hosting/messages';
+import HostingAnnounces from './pages/hosting/announces';
 import HostingFolder from './pages/hosting/folder';
 import Account from './pages/account';
 import AccountSettings from './pages/account-settings';
@@ -26,6 +27,7 @@ function App() {
           <Route exact path="/hosting" element={<Hosting />} />
           <Route exact path="/hosting/messages" element={<HostingMessages />} />
           <Route exact path="/hosting/folder" element={<HostingFolder />} />
+          <Route exact path="/hosting/announces" element={<HostingAnnounces />} />
           <Route exact path="/account" element={<Account />} />
           <Route exact path="/account-settings" element={<AccountSettings />} />
           <Route exact path="/account-settings/personnal-informations" element={<AccountSettingsPersonnalInformations />} />
