@@ -13,6 +13,9 @@ const themes = {
     white: {
         default: "rounded-md bg-white hover:bg-light-gray text-insane-gray text-md",
     },
+    'white-outline': {
+        default: "rounded-md bg-white border border-night hover:bg-gray-100/80 text-night text-md",
+    },
     cyan: {
         default: "rounded-md bg-cyan-600 hover:bg-cyan-600/90 text-white text-md",
     },

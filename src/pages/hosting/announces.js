@@ -41,16 +41,19 @@ function Body() {
                         <div className='text-md font-normal text-gray-500 text-left'>Afin que votre future baileur puisse mieux vous connaitre et sélectionné votre profil, vous devez ajouter votre situation.</div>
                         
                         <div className='pt-2 w-full flex space-x-2'>
-                            <button className='flex items-center px-4 py-2 border-2 font-medium text-night hover:text-black rounded-full hover:border-black hover:bg-gray-50'>
+                            <button className='px-4 py-2 rounded-full border text-sm hover:border-black hover:bg-gray-100/80 text-night font-medium hover:text-black'>
                                 Filtres
                             </button>
-                            <button className='flex items-center px-4 py-2 border-2 font-medium text-night hover:text-black rounded-full hover:border-black hover:bg-gray-50'>
+                            <button className='flex items-center px-4 py-2 rounded-full border text-sm hover:border-black hover:bg-gray-100/80 text-night font-medium hover:text-black'>
                                 Filtres
                                 <IoFilter className='ml-1 mt-0.5' />
                             </button>
+                            <button className='px-4 py-2 rounded-full border text-sm hover:border-black hover:bg-gray-100/80 text-night font-medium hover:text-black'>
+                                Dossier en cours (0)
+                            </button>
                         </div>
                         
-                        <input className='mt-4 border-2 hover:border-black px-4 py-2 rounded-full w-full' placeholder={"Entrez l'identifiant ou le nom du logement"} />
+                        <input className='mt-4 border hover:border-black text-sm px-4 py-2 text-night rounded-full w-full outline-none focus:border-black' placeholder={"Entrez l'identifiant ou le nom du logement"} />
                     </div>
 
                 </div>

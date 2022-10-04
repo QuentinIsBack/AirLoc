@@ -6,6 +6,7 @@ import SignModal from "./components/modal/ModalSignIn";
 
 import Home from './pages/home';
 import Homes from './pages/homes/homes';
+import Search from './pages/search';
 import Hosting from './pages/hosting/hosting-loc';
 import HostingMessages from './pages/hosting/messages';
 import HostingAnnounces from './pages/hosting/announces';
@@ -25,6 +26,7 @@ function App() {
         <Route element={<AuthenticatedRoute />}>
           <Route exact path="/homes/:id" element={<Homes />} />
           <Route exact path="/hosting" element={<Hosting />} />
+          <Route exact path="/search" element={<Search />} />
           <Route exact path="/hosting/messages" element={<HostingMessages />} />
           <Route exact path="/hosting/folder" element={<HostingFolder />} />
           <Route exact path="/hosting/announces" element={<HostingAnnounces />} />
