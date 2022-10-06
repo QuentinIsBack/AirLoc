@@ -11,7 +11,7 @@ import { doc, getDoc, getDocs, onSnapshot, collection } from "firebase/firestore
 import { UserContext } from '../context/UserContext';
 
 // Icons
-import { RiHome2Fill, RiCheckFill, RiStarLine, RiStarFill, RiShieldLine, RiShieldCheckLine, RiCloseFill } from "react-icons/ri";
+import { IoFilter, IoChevronBack } from "react-icons/io5";
 import { Button } from '../components/button/button';
 
 import Map, { GeolocateControl, Marker, Popup } from "react-map-gl";
@@ -60,16 +60,117 @@ export default function Page() {
 
                 <div className={'flex-grow grid grid-cols-12'}>
                     {/* Left Side */}
-                    <div className={'col-span-3'}>
-                        <div className={'border-r w-full h-full overflow-y-auto p-6'}>
-                            <div className={'flex flex-col items-center'}>            
-                                <div className='text-lg font-semibold text-night text-center antialiased'>Vous n'avez pas de messages non lus</div>
-                                <div className='text-md font-normal text-gray-500 text-center leading-tight w-96 antialiased'>Lorsque vous réservez un voyage ou une expérience, les messages de votre hôte s'affichent ici.</div>
-                                <Button theme={'white-outline'} additionnal={'mt-4'}>Explorez Airloc</Button>
+                    <div className={'col-span-4'}>
+                        <div className={'border-r w-full h-full overflow-y-auto p-6 overflow-hidden'}>
+                            <div className={'flex flex-row items-center justify-between'}>            
+                                <div>
+                                    <div className='text-base font-semibold text-night text-start antialiased'>{home.length} logements</div>
+                                    <div className='text-xs font-normal text-stone-500 text-start antialiased'>Classements des résultats</div>
+                                </div>
+                                <Button additionnal={'flex items-center'} theme={'white-outline'} type={'small'}><IoFilter /><div className='ml-2 text-sm font-semibold'>Filtres</div></Button>
                             </div>
-                            <div className={'pt-5 flex flex-col space-y-6'}>
+                            <div className={'pt-6 grid grid-cols-2 gap-5'}>
                                 {home.map(o => 
-                                    <div className='border-2 border-transparent hover:border-black rounded-2xl bg-stone-100 w-full h-44 grid grid-cols-2 gap-10 overflow-hidden p-4'>
+                                    <a onClick={() => navigate('../homes/'+o.id)}  className={'cursor-pointer z-50 bg-white overflow-hidden w-full'}>
+                                        <div className='h-56 w-full bg-cover rounded-xl' style={{backgroundImage: `url(${o.pic1})`}} />
+                                        <div className='py-4 w-full flex flex-col space-y-0.25'>
+                                            <div className='flex flex-row items-center justify-between antialiased truncate'>
+                                                <div className='text-sm font-medium text-black antialiased truncate mr-2'>
+                                                    {o.name}
+                                                </div>
+                                                <div className='text-sm font-normal text-black antialiased'>
+                                                    4,25 (65)
+                                                </div>
+                                            </div>
+                                            <div className='text-sm font-normal text-stone-500 antialiased truncate'>
+                                                {o.rooms || o.chambers || o.spaces ?
+                                                    <div className='flex dot-separator-6'>
+                                                        {o.rooms ? <span>Pièces {o.rooms}</span> : undefined}
+                                                        {o.chambers ? <span>Chambres {o.chambers}</span> : undefined}
+                                                        {o.spaces ? <span>{o.spaces}m<sup>2</sup></span> : undefined}
+                                                    </div>
+                                                : undefined} 
+                                            </div>
+                                            <div className='flex flex-row items-center antialiased space-x-1'>
+                                                <div className='text-sm font-medium text-black '>{o.price} €</div>
+                                                <div className='text-sm font-normal text-night'>par mois</div>
+                                                <div className='text-sm font-normal text-stone-500'> · Dès maintenant</div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    {/* Right Side */}
+                    <div className={'col-span-8'}>   
+                        <div className={'border-r w-full h-full overflow-y-auto'}>
+                            <div className={'h-full w-full'}>
+                                <Map mapboxAccessToken="pk.eyJ1IjoicXVlbnRpbnQiLCJhIjoiY2w4dGM5a3UwMDYwbTNvcXRsbWQyZXRtMSJ9.2IieorABrDO3bK9baO6vvg" initialViewState={defaultProps} mapStyle="mapbox://styles/quentint/cl8tcc2h2007o14qgzjwt7f1q">
+                                    <div className='absolute z-10 w-full p-6'>
+                                        <div className='flex flex-row space-x-3'>
+                                            <div className='cursor-pointer flex items-center justify-center rounded-xl bg-white hover:bg-gray-50 h-10 w-10 shadow-dropdown'>
+                                                <IoChevronBack className='mr-0.5' size={20} />
+                                            </div>
+                                            <div className='cursor-pointer flex items-center justify-center rounded-xl bg-white hover:bg-gray-50 h-10 w-fit px-4 shadow-dropdown'>
+                                                    Rechercher
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {home.map(o => 
+                                        <Marker className={'bg-red-500'} longitude={o.localisation[0]} latitude={o.localisation[1]} anchor="top">
+                                            <div className={`flex flex-col items-center justify-center ${showPopup == o.id ? 'z-50' : 'z-10'}`}>
+                                                <button onClick={()=> setShowPopup(o.id)} className={`${showPopup == o.id ? 'bg-black text-white' : 'bg-white text-black'} text-sm font-semibold antialiased transform-gpu rounded-xl h-fit w-fit shadow transition duration-300 scale-100 hover:scale-110`}>
+                                                    <div className={'px-2 py-1'}>{o.price} €</div>
+                                                </button>
+                                                {showPopup == o.id && (
+                                                    <div onClick={() => navigate('../homes/'+o.id)}  className={`${showPopup == o.id ? 'z-10' : 'z-50'} mt-6 rounded-xl bg-white overflow-hidden shadow-dropdown`}>
+                                                        <div className='h-44 w-80 bg-cover' style={{backgroundImage: `url(${o.pic1})`}} />
+                                                        <div className='p-4 w-80 flex flex-col space-y-0.25'>
+                                                            <div className='flex flex-row items-center justify-between antialiased truncate'>
+                                                                <div className='text-base font-medium text-black antialiased truncate mr-2'>
+                                                                    {o.name}
+                                                                </div>
+                                                                <div className='text-base font-normal text-black antialiased'>
+                                                                    4,25 (65)
+                                                                </div>
+                                                            </div>
+                                                            <div className='text-base font-normal text-stone-500 antialiased truncate'>
+                                                                {o.rooms || o.chambers || o.spaces ?
+                                                                    <div className='flex dot-separator-6'>
+                                                                        {o.rooms ? <span>Pièces {o.rooms}</span> : undefined}
+                                                                        {o.chambers ? <span>Chambres {o.chambers}</span> : undefined}
+                                                                        {o.spaces ? <span>{o.spaces}m<sup>2</sup></span> : undefined}
+                                                                    </div>
+                                                                : undefined} 
+                                                            </div>
+                                                            <div className='flex flex-row items-center antialiased space-x-1'>
+                                                                <div className='text-base font-medium text-black '>{o.price} €</div>
+                                                                <div className='text-base font-normal text-night'>par mois</div>
+                                                                <div className='text-base font-normal text-stone-500'> · Dès maintenant</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                )}
+                                            </div>      
+                                        </Marker>
+                                    )}
+                                </Map>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div className={"flex-none"}><Footer formatage={"sticky"} /></div>
+            </div>
+
+        </>
+    )
+} 
+
+{/*
+
+<div className='border-2 border-transparent hover:border-black rounded-2xl bg-stone-100 w-full h-44 grid grid-cols-2 gap-10 overflow-hidden p-4'>
                                         <div>
                                             <div className='rounded-xl h-full w-full bg-cover' style={{backgroundImage: `url(${o.pic1})`}} />
                                         </div>
@@ -97,35 +198,12 @@ export default function Page() {
                                             </div>
                                         </div>
                                     </div>
-                                )}
-                            </div>
-                        </div>
-                    </div>
-                    {/* Right Side */}
-                    <div className={'col-span-9'}>   
-                        <div className={'border-r w-full h-full overflow-y-auto'}>
-                            <div className={'h-full w-full'}>
-                                <Map mapboxAccessToken="pk.eyJ1IjoicXVlbnRpbnQiLCJhIjoiY2w4dGM5a3UwMDYwbTNvcXRsbWQyZXRtMSJ9.2IieorABrDO3bK9baO6vvg" initialViewState={defaultProps} mapStyle="mapbox://styles/quentint/cl8tcc2h2007o14qgzjwt7f1q">
-                                    <div className='absolute z-10 w-full p-4'>
-                                        <div className='flex flex-col'>
-                                            <div className='flex items-center rounded-xl bg-white h-10 w-fit p-4 shadow-2xl'>
-                                                <div className='font-semibold text-base text-night antialiased'>Rechercher</div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {home.map(o => 
-                                      
-                                            <Marker longitude={o.localisation[0]} latitude={o.localisation[1]} anchor="top">
-                                                <div className="flex flex-col items-center justify-center">
-                                                    <button onClick={()=> setShowPopup(o.id)} className={`${showPopup == o.id ? 'bg-black text-white' : 'bg-white text-black'} text-sm font-semibold antialiased transform-gpu rounded-xl h-fit w-fit shadow transition duration-300 scale-100 hover:scale-110`}>
-                                                        <div className={'px-2 py-1'}>{o.price} €</div>
-                                                    </button>
-                                                    {showPopup == o.id && (
-                                                        <div onClick={() => navigate('../homes/'+o.id)}  className={'mt-6 rounded-xl bg-white overflow-hidden shadow-dropdown'}>
+
+<div onClick={() => navigate('../homes/'+o.id)}  className={'z-50 mt-6 rounded-xl bg-white overflow-hidden shadow-dropdown'}>
                                                             <div className='h-44 w-72 bg-cover' style={{backgroundImage: `url(${o.pic1})`}} />
                                                             <div className='p-4 w-72 flex flex-col space-y-0.25'>
-                                                                <div className='flex flex-row items-center justify-between antialiased'>
-                                                                    <div className='text-sm font-medium text-black antialiased'>
+                                                                <div className='flex flex-row items-center justify-between antialiased truncate'>
+                                                                    <div className='text-sm font-medium text-black antialiased truncate mr-2'>
                                                                         {o.name}
                                                                     </div>
                                                                     <div className='text-sm font-normal text-black antialiased'>
@@ -133,7 +211,13 @@ export default function Page() {
                                                                     </div>
                                                                 </div>
                                                                 <div className='text-sm font-normal text-stone-500 antialiased truncate'>
-                                                                    {o.description}
+                                                                    {o.rooms || o.chambers || o.spaces ?
+                                                                        <div className='flex dot-separator-6'>
+                                                                            {o.rooms ? <span>Pièces {o.rooms}</span> : undefined}
+                                                                            {o.chambers ? <span>Chambres {o.chambers}</span> : undefined}
+                                                                            {o.spaces ? <span>{o.spaces}m<sup>2</sup></span> : undefined}
+                                                                        </div>
+                                                                    : undefined} 
                                                                 </div>
                                                                 <div className='flex flex-row items-center antialiased space-x-1'>
                                                                     <div className='text-sm font-medium text-black'>{o.price} €</div>
@@ -142,20 +226,5 @@ export default function Page() {
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    )}
-                                                </div>      
-                                            </Marker>
 
-                                    )}
-                                </Map>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className={"flex-none"}><Footer formatage={"sticky"} /></div>
-            </div>
-
-        </>
-    )
-} 
+*/}
