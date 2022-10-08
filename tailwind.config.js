@@ -2,6 +2,9 @@ module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
     extend: {
+      gridTemplateColumns: {
+        '16': 'repeat(16, minmax(0, 1fr))',
+      },
       height: {
         '1rem': '1rem',
         '1.5rem': '1.5rem',

@@ -18,12 +18,13 @@ import { GroupInput } from '../input/groupinput'
 import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { SignInMethod } from 'firebase/auth'
 
-export default function Component(props) { 
+  
+export default function Component() { 
     const {modalSign, setModalSign} = useContext(UserContext)
 
     return (
         <> 
-            <div className='sticky w-full z-10'>
+            <div className='sticky w-full z-50'>
                 <div className={`flex items-center justify-between border-b h-4rem bg-white`}>
                     <div className={`absolute z-10 inset-y-0 left-36 sm:left-36 md:left-36 lg:left-36 xl:left-36 2xl:left-36 flex items-center`}>
                         <a href='.'><img width={25} src={LOGOWHITE} /></a>
@@ -61,7 +62,7 @@ function GetCenter(){
         return (
             <>
                  <button className="h-full">
-                    <div className='text-night rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100'>
+                    <div className={`text-night rounded-2xl py-2 px-4 text-sm font-semibold hover:bg-gray-100`}>
                         Programme
                     </div>
                 </button> 
@@ -168,7 +169,7 @@ function GetDropdown() {
                 <li><a onClick={() => navigate("../account")} className='font-medium text-sm'>Profile</a></li> 
                 <li><a onClick={() => navigate("../account-settings")} className='font-medium text-sm'>Compte</a></li> 
                 <li><a className='font-medium text-sm'>Obtenir de l'aide</a></li> 
-                {User.power >= 1000 ? <li><a className='bg-slate-800 font-medium text-sm hover:bg-indigo-800'><span className='text-white'>Administration</span></a></li> : undefined}
+                {User.power >= 1000 && <li><a  onClick={() => navigate("../employee")} className='bg-slate-800 font-medium text-sm hover:bg-indigo-800'><span className='text-white'>Espace employé</span></a></li>}
                     <div className='py-2'><div className='border-t'></div></div>
                 <li><a className='font-normal text-sm'>Français (FR)</a></li> 
                 <li><a className='font-normal text-sm'>€ EUR</a></li> 

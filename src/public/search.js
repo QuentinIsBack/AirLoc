@@ -118,13 +118,13 @@ export default function Page() {
                                         </div>
                                     </div>
                                     {home.map(o => 
-                                        <Marker className={'bg-red-500'} longitude={o.localisation[0]} latitude={o.localisation[1]} anchor="top">
-                                            <div className={`flex flex-col items-center justify-center ${showPopup == o.id ? 'z-50' : 'z-10'}`}>
+                                        <Marker longitude={o.localisation[0]} latitude={o.localisation[1]} anchor="top">
+                                            <div className={`flex flex-col items-center justify-center`}>
                                                 <button onClick={()=> setShowPopup(o.id)} className={`${showPopup == o.id ? 'bg-black text-white' : 'bg-white text-black'} text-sm font-semibold antialiased transform-gpu rounded-xl h-fit w-fit shadow transition duration-300 scale-100 hover:scale-110`}>
                                                     <div className={'px-2 py-1'}>{o.price} €</div>
                                                 </button>
                                                 {showPopup == o.id && (
-                                                    <div onClick={() => navigate('../homes/'+o.id)}  className={`${showPopup == o.id ? 'z-10' : 'z-50'} mt-6 rounded-xl bg-white overflow-hidden shadow-dropdown`}>
+                                                    <div onClick={() => navigate('../homes/'+o.id)}  className={`${showPopup == o.id ? 'z-50' : undefined} mt-6 rounded-xl bg-white overflow-hidden shadow-dropdown`}>
                                                         <div className='h-44 w-80 bg-cover' style={{backgroundImage: `url(${o.pic1})`}} />
                                                         <div className='p-4 w-80 flex flex-col space-y-0.25'>
                                                             <div className='flex flex-row items-center justify-between antialiased truncate'>
