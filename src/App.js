@@ -18,8 +18,11 @@ import AccountSettingsPersonnalInformations from './public/account-settings/pers
 import AccountSettingsInvite from './public/account-settings/invite';
 
 import HomeEmployee from './employee/today';
-import HouseEmployee from './employee/house';
+import HomesEmployee from './employee/homes';
 import HousingEmployee from './employee/housing';
+
+import AdminUserEmployee from './employee/admin/users';
+import AdminRankEmployee from './employee/admin/ranks';
 
 function App() {
   return (
@@ -44,8 +47,11 @@ function App() {
           {/* User Employee */}
           <Route element={<EmployeeRoute />}>
             <Route exact path="/employee/today" element={<HomeEmployee />} />
-            <Route exact path="/employee/house" element={<HouseEmployee />} />
+            <Route exact path="/employee/homes/:id" element={<HomesEmployee />} />
             <Route exact path="/employee/housing" element={<HousingEmployee />} />
+            
+            <Route exact path="/employee/admin/users" element={<AdminUserEmployee />} />
+            <Route exact path="/employee/admin/ranks" element={<AdminRankEmployee />} />
           </Route>
           
         </Route>

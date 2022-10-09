@@ -46,7 +46,7 @@ export default function Page() {
                   <div className='border-b my-5' />
 
                   <EditSettings
-                    name={"Addresse email"} 
+                    name={"Adresse email"} 
                     message={User.email ? User.email+" " : " "}
                     description={"C'est le nom qui figure sur votre document d'identité, à savoir votre permis ou votre passeport, par exemple."}
                     theme={'cyan'}

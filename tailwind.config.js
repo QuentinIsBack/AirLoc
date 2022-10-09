@@ -5,6 +5,9 @@ module.exports = {
       gridTemplateColumns: {
         '16': 'repeat(16, minmax(0, 1fr))',
       },
+      gridColumn: {
+        'span-13': 'span 13 / span 13',
+      },
       height: {
         '1rem': '1rem',
         '1.5rem': '1.5rem',
@@ -27,6 +30,9 @@ module.exports = {
         '45rem': '45rem',
         '50rem': '50rem',
         '55rem': '55rem',
+      },
+      maxHeight: {
+        '5.5rem': '5.5rem',
       },
       width: {
         '1rem': '1rem',

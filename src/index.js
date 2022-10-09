@@ -5,11 +5,14 @@ import { UserContextProvider } from "./context/UserContext";
 
 import './index.css';
 import App from './App';
+import { RankContextProvider } from './context/RankContext';
 
 ReactDOM.render(
   <BrowserRouter>
       <UserContextProvider>
-        <App />
+        <RankContextProvider>
+          <App />
+        </RankContextProvider>
       </UserContextProvider>
   </BrowserRouter>,
   document.getElementById('root')
