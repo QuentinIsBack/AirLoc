@@ -3,5 +3,6 @@ export const Badge = ({color, children}) => {
 }
 
 export const BadgeRank = ({rank}) => {
-    return <div className={`text-xs text-white font-semibold px-3 py-0.5 rounded-full w-fit ${rank.color ? rank.color : 'bg-gray-500'}`}>{rank.name}</div>;
+
+    return <div className={`text-xs text-white font-semibold px-3 py-0.5 rounded-full w-fit`} style={{backgroundColor: rank.color ? rank.color : '#6b7280'}}>{rank.name}</div>;
 }
