@@ -17,6 +17,7 @@ export const InputFloating = ({
     type,
     name,
     placeholder,
+    defaultValue,
     theme,
     color,
     onChange,
@@ -39,6 +40,7 @@ export const InputFloating = ({
                 <input 
                     id={id}
                     type={type}
+                    defaultValue={defaultValue}
                     onChange={(e) => handleChange(e)} 
                     className={`w-full absolute mt-5 ml-3 bg-transparent outline-none transition duration-600 ${value.length == 0 ? "group-hover:visible invisible" : "visible"} text-base font-normal text-black`} 
                     placeholder={placeholder} />

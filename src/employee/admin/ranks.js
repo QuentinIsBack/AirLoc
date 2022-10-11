@@ -12,23 +12,27 @@ import { UserContext } from '../../context/UserContext';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { Button } from '../../components/button/button';
 
+
 import { Disclosure, Menu } from '@headlessui/react'
 import { BadgeRank } from '../../components/badge/Badge';
-import { GetRankByPower, RankContext, DeleteRank, CreateRank } from '../../context/RankContext';
+import { GetRankByPower, RankContext, DeleteRank, CreateRank, UpdateRank } from '../../context/RankContext';
 import { SubMenu } from './submenu';
 import { ModalTest } from '../../components/modal/ModalTest';
 import { InputFloating } from '../../components/input/inputfloating';
+import { EditSettings } from '../../components/modal/EditSetting';
+import useRank from '../../hooks/useRank';
 
 export default function Page() {
-    const { Rank, setRank } = useContext(RankContext)
+    const { Rank, setRank } = useRank();
 
     const [selectRank, setSelectRank] = useState();
     const [modalCreate, setModalCreate] = useState(false);
-
+    const [modalDelete, setModalDelete] = useState(false);
 
     return (
         <>  
             <ModalRank show={modalCreate} close={()=>setModalCreate(false)} Rank={Rank} setRank={setRank} />
+            <ModalDeleteRank show={modalDelete} close={()=>setModalDelete(false)} Rank={Rank} setRank={setRank} selectRank={selectRank} setSelectRank={setSelectRank}  />
             
             <div className='h-screen flex flex-col'>
                 <NavBar />
@@ -106,53 +110,7 @@ export default function Page() {
                         </div>
                     </div>
                     <div className='col-span-3 bg-white border-l h-full'>
-                        <div className='flex flex-col h-full'>
-                            <div className='border-b h-5rem flex items-center justify-start'>
-                                <div className='px-5 text-xl font-bold text-night'>Détails</div>
-                            </div>
-                            <div className='pt-6 flex-grow'>
-                                {selectRank && 
-                                    <>
-                                    <div className='w-full flex flex-col p-6'>
-                                        <div className='text-xl font-semibold text-black'>Informations</div>
-
-                                        <div className='pt-2 flex flex-row items-center justify-between'>
-                                            <div className='flex flex-col'>
-                                                <div className='text-md text-stone-900 font-semibold'>Nom</div>
-                                                <div className='text-sm text-stone-700 font-normal'>{(selectRank.name)}</div>
-                                            </div>
-                                            <div className='text-sm text-cyan-600 font-bold hover:underline'>Modifier</div>
-                                        </div>
-
-                                        <div className='border-b my-3' />
-
-                                        <div className='pt-2 flex flex-row items-center justify-between'>
-                                            <div className='flex flex-col'>
-                                                <div className='text-md text-stone-900 font-semibold'>Badge</div>
-                                                <BadgeRank rank={selectRank} />
-                                            </div>
-                                            <div className='text-sm text-cyan-600 font-bold hover:underline'>Modifier</div>
-                                        </div>
-
-                                        <div className='border-b my-3' />
-
-                                        <div className='pt-2 flex flex-row items-center justify-between'>
-                                            <div className='flex flex-col'>
-                                                <div className='text-md text-stone-900 font-semibold'>Puissance</div>
-                                                <div className='text-sm text-stone-700 font-normal'>{(selectRank.power)}</div>
-                                            </div>
-                                            <div className='text-sm text-cyan-600 font-bold hover:underline'>Modifier</div>
-                                        </div>
-
-                                    </div>
-                                </>
-                                }
-                            </div>
-                            <div className='p-4 flex flex-row space-x-4'>
-                                <Button onClick={()=>DeleteRank({Rank, setRank}, selectRank)} theme={'red'} size='full'>Supprimer</Button>
-                                <Button theme={'cyan'} size='full'>Sauvegarder</Button>
-                            </div>
-                        </div>
+                        {SideDetails({selectRank, modalDelete, setModalDelete, Rank, setRank})}
                     </div>
                 </div>
 
@@ -162,6 +120,70 @@ export default function Page() {
     )
 } 
 
+const SideDetails = ({selectRank, modalDelete, setModalDelete, Rank, setRank}) => {
+
+    const [testname, setTestname] = useState();
+
+
+    return (
+            <>
+                {selectRank &&
+                    <div className='flex flex-col h-full'>
+                        <div className='border-b h-5rem flex items-center justify-start'>
+                            <div className='px-5 text-xl font-bold text-night'>Détails</div>
+                        </div>
+                        <div className='flex-grow'>
+                            <div className='w-full flex flex-col p-6'>
+                                <div className='pb-4 text-xl font-semibold text-black'>Informations</div>
+
+                                <EditSettings
+                                    name={"Nom"} 
+                                    message={selectRank.name}
+                                    onClick={()=>UpdateRank({Rank, setRank}, selectRank, "name", testname)}
+                                    description={"C'est le nom qui figure sur votre document d'identité, à savoir votre permis ou votre passeport, par exemple."}
+                                    theme={'cyan'}
+                                >
+                                    <div className='flex space-x-5'>
+                                        <InputFloating defaultValue={selectRank.name} onChange={(e)=>setTestname(e.target.value)} id={'name'} type={'text'} name={'Nom'} de placeholder={selectRank.name} />
+                                    </div>
+                                </EditSettings>
+
+                                <div className='border-b my-3' />
+
+                                <EditSettings
+                                    name={"Couleur"} 
+                                    message={<BadgeRank rank={selectRank} />}
+                                    description={"C'est le nom qui figure sur votre document d'identité, à savoir votre permis ou votre passeport, par exemple."}
+                                    theme={'cyan'}
+                                >
+                                    <div className='flex space-x-5'>
+                                        <InputFloating id={'firstname'} type={'text'} name={'Nom'} placeholder={'Nom'} />
+                                    </div>
+                                </EditSettings>
+
+                                <div className='border-b my-3' />
+
+                                <EditSettings
+                                    name={"Puissance"} 
+                                    message={selectRank.power}
+                                    description={"C'est le nom qui figure sur votre document d'identité, à savoir votre permis ou votre passeport, par exemple."}
+                                    theme={'cyan'}
+                                >
+                                    <div className='flex space-x-5'>
+                                        <InputFloating id={'power'} type={'text'} name={'Puissance'} placeholder={'Puissance'} />
+                                    </div>
+                                </EditSettings>
+                            </div>
+                        </div>
+                        <div className='p-4 flex flex-row space-x-4'>
+                            <Button onClick={() => setModalDelete(true) } theme={'red'} size='full'>Supprimer</Button>
+                            <Button theme={'cyan'} size='full'>Sauvegarder</Button>
+                        </div> 
+                    </div>
+                }
+            </>
+    )
+}
  
 const ModalRank = ({show, close, Rank, setRank}) => {
 
@@ -191,6 +213,32 @@ const ModalRank = ({show, close, Rank, setRank}) => {
 
                     <div className='pt-8 flex justify-end'>
                         <Button onClick={createRank} theme={'green'}>Continuer</Button>
+                    </div>
+                </div>
+            </ModalTest>
+        </>
+    )
+}
+
+const ModalDeleteRank = ({show, close, Rank, setRank, selectRank, setSelectRank}) => {
+
+    const deleteRank = () => {
+        DeleteRank({Rank, setRank}, selectRank); 
+        setSelectRank();
+        close()
+    }
+
+    return (
+        <>
+            <ModalTest show={show} close={close}>
+                <div className='h-10rem bg-cover' style={{backgroundImage: `url("https://mir-s3-cdn-cf.behance.net/project_modules/fs/35098564507519.5ad4edb4b9537.jpg")`}} />
+                    <div className='border-b' />
+                <div className="p-5">
+                    <div className='text-3xl font-semibold text-night text-left'>Êtes-vous sur ?</div>
+                    <div className='pt-2 pb-6 text-md font-normal text-gray-500 text-left'>Communiquez avec vos correspondants via la plateforme afin de sécuriser et de protéger vos messages.</div>
+                    <div className='pt-8 flex justify-between'>
+                    <Button onClick={close} theme={'red'}>Annulé</Button>
+                    <Button onClick={deleteRank} theme={'green'}>Validé</Button>
                     </div>
                 </div>
             </ModalTest>

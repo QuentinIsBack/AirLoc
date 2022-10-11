@@ -2,7 +2,8 @@ import { createContext, useState, useEffect, useContext } from "react";
 
 // Import Authentificated
 import{ db } from "../firebase.config"
-import { doc, getDocs, collection, deleteDoc, addDoc } from "firebase/firestore";
+import { doc, getDocs, collection, deleteDoc, addDoc, updateDoc } from "firebase/firestore";
+import useRank from "../hooks/useRank";
 
 export const RankContext = createContext()
 
@@ -16,7 +17,11 @@ export const GetRankByPower = (user) => {
      return data[0]
 }
 
-export const DeleteRank = ({Rank, setRank},rankId) => {
+export const DeleteRank = (rankId) => {
+
+  const { Rank, setRank } = useRank();
+
+
   if(rankId.deletable != false){
       const newFruits = Rank.filter( (rank) => rank.id !== rankId.id );
       setRank(newFruits);
@@ -39,7 +44,16 @@ export const CreateRank = ({Rank, setRank}, nameI, deletableI, colorI, powerI) =
     .then( 
       setRank(test) 
     );
-     
+}
+
+
+export const UpdateRank = ({Rank, setRank}, rankId, field, value) => {
+  const updateRank = doc(db, "ranks", rankId.id);
+  updateDoc(updateRank, {
+    [field]: value
+  }).then(function() {
+      
+  });
 }
 
 
@@ -80,3 +94,7 @@ export function RankContextProvider(props){
         </RankContext.Provider>
     )
 }
+
+export const RankConsumer = RankContext.Consumer;
+
+export default RankContext;
