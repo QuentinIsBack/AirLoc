@@ -154,7 +154,7 @@ export default function Page() {
                                             </div>
 
                                         </div>
-                                    </div> 
+                                    </div>  
                                     {home.map(o => 
                                         <Marker longitude={o.localisation[0]} latitude={o.localisation[1]} anchor="top">
                                             <div className={`flex flex-col items-center justify-center`}>
