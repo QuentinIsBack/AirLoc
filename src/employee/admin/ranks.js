@@ -21,9 +21,11 @@ import { ModalTest } from '../../components/modal/ModalTest';
 import { InputFloating } from '../../components/input/inputfloating';
 import { EditSettings } from '../../components/modal/EditSetting';
 import useRank from '../../hooks/useRank';
-
+import { Table } from '../../components/Table/Table';
+import { TableItem } from '../../components/Table/TableItem';
+import { TableHead } from '../../components/Table/TableHead';
+ 
 export default function Page() {
-    const { Rank, setRank } = useRank();
 
     const [selectRank, setSelectRank] = useState();
     const [modalCreate, setModalCreate] = useState(false);
@@ -31,8 +33,8 @@ export default function Page() {
 
     return (
         <>  
-            <ModalRank show={modalCreate} close={()=>setModalCreate(false)} Rank={Rank} setRank={setRank} />
-            <ModalDeleteRank show={modalDelete} close={()=>setModalDelete(false)} Rank={Rank} setRank={setRank} selectRank={selectRank} setSelectRank={setSelectRank}  />
+            <ModalRank show={modalCreate} close={()=>setModalCreate(false)}  />
+            <ModalDeleteRank show={modalDelete} close={()=>setModalDelete(false)} selectRank={selectRank} setSelectRank={setSelectRank}  />
             
             <div className='h-screen flex flex-col'>
                 <NavBar />
@@ -60,57 +62,11 @@ export default function Page() {
                             </div>
                         </div>
                         <div className='px-8 w-full'>
-                            <table className='w-full'>
-                                <tr className='h-8 uppercase text-xs font-bold text-gray-500'>
-                                    <td>
-                                        <input type="checkbox" className="checkbox checkbox-xs" />
-                                    </td>
-                                    <td>
-                                        Nom
-                                    </td>
-                                    <td>
-                                        Badge
-                                    </td>
-                                    <td>
-                                        Power
-                                    </td>
-                                    <td>
-                                        Supprimable
-                                    </td>
-                                    <td>
-                                        Action
-                                    </td>
-                                </tr>
-                                {Rank && Rank.map(u =>
-                                    <tr className='h-16 border-t'>
-                                        <td>
-                                            <input type="checkbox" className="checkbox checkbox-xs" />
-                                        </td>
-                                        <td className='text-sm text-night font-semibold'>
-                                            {u.name ? u.name : ""}
-                                        </td>
-                                        <td className='text-sm text-night font-semibold'>
-                                            <BadgeRank rank={u} />
-                                        </td>
-                                        <td className='text-sm text-night font-semibold'>
-                                            {u.power ? u.power : ""}
-                                        </td>
-                                        <td className='text-sm text-night font-semibold'>
-                                            {!u.deletable ? u.deletable+"" : "true"}
-                                        </td>
-                                        <td>
-                                            <button onClick={()=>setSelectRank(u)} className='w-fit px-4 py-1 rounded-lg border border-black text-black text-sm font-medium hover:bg-gray-100/80'> 
-                                                Modifier
-                                            </button>
-                                        </td>
-                                    </tr>
-                                )}
-                                
-                            </table>
+                            {ListSearch({setSelectRank})}
                         </div>
                     </div>
                     <div className='col-span-3 bg-white border-l h-full'>
-                        {SideDetails({selectRank, modalDelete, setModalDelete, Rank, setRank})}
+                        {SideDetails({selectRank, modalDelete, setModalDelete})}
                     </div>
                 </div>
 
@@ -120,7 +76,51 @@ export default function Page() {
     )
 } 
 
-const SideDetails = ({selectRank, modalDelete, setModalDelete, Rank, setRank}) => {
+const ListSearch = ({setSelectRank}) => {
+    const { Rank, setRank } = useRank();
+
+    return (
+        <>
+            <Table>
+                <TableHead>
+                    <th><input type="checkbox" className="checkbox checkbox-xs" /></th>
+                    <th>Nom</th>
+                    <th>Badge</th>
+                    <th>Power</th>
+                    <th>Supprimable</th>
+                    <th>Action</th>
+                </TableHead>
+                {Rank && Rank.map(u =>
+                    <TableItem>
+                        <td>
+                            <input type="checkbox" className="checkbox checkbox-xs" />
+                        </td>
+                        <td className='text-sm text-night font-semibold'>
+                            {u.name ? u.name : ""}
+                        </td>
+                        <td className='text-sm text-night font-semibold'>
+                            <BadgeRank rank={u} />
+                        </td>
+                        <td className='text-sm text-night font-semibold'>
+                            {u.power ? u.power : ""}
+                        </td>
+                        <td className='text-sm text-night font-semibold'>
+                            {!u.deletable ? u.deletable+"" : "true"}
+                        </td>
+                        <td>
+                            <button onClick={()=>setSelectRank(u)} className='w-fit px-4 py-1 rounded-lg border border-black text-black text-sm font-medium hover:bg-gray-100/80'> 
+                                Modifier
+                            </button>
+                        </td>
+                    </TableItem>
+                )}
+            </Table>
+        </>
+    )
+}
+
+const SideDetails = ({selectRank, modalDelete, setModalDelete}) => {
+    const { Rank, setRank } = useRank();
 
     const [testname, setTestname] = useState();
 
@@ -185,7 +185,8 @@ const SideDetails = ({selectRank, modalDelete, setModalDelete, Rank, setRank}) =
     )
 }
  
-const ModalRank = ({show, close, Rank, setRank}) => {
+const ModalRank = ({show, close}) => {
+    const { Rank, setRank } = useRank();
 
     const [name, setName] = useState('Sans-Titre')
     const [deletable, setDeletable] = useState(true)
@@ -220,7 +221,8 @@ const ModalRank = ({show, close, Rank, setRank}) => {
     )
 }
 
-const ModalDeleteRank = ({show, close, Rank, setRank, selectRank, setSelectRank}) => {
+const ModalDeleteRank = ({show, close, selectRank, setSelectRank}) => {
+    const { Rank, setRank } = useRank();
 
     const deleteRank = () => {
         DeleteRank({Rank, setRank}, selectRank); 

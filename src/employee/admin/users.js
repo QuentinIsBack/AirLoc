@@ -14,7 +14,7 @@ import { Button } from '../../components/button/button';
 
 import { Disclosure, Menu } from '@headlessui/react'
 import { Badge, BadgeRank } from '../../components/badge/Badge';
-import { GetRankByPower, RankContext } from '../../context/RankContext';
+import { RankContext } from '../../context/RankContext';
 import { SubMenu } from './submenu';
 
 export default function Page() {
@@ -108,7 +108,7 @@ export default function Page() {
                                             {u.phone ? u.phone : undefined}
                                         </td>
                                         <td>
-                                            <BadgeRank rank={ GetRankByPower(u) } />
+                                            
                                         </td>
                                         <td>
                                             <button onClick={()=>setSelectUser(u)} className='w-fit px-4 py-1 rounded-lg border border-black text-black text-sm font-medium hover:bg-gray-100/80'> 
@@ -141,7 +141,7 @@ export default function Page() {
                                             src={selectUser.urlprofile ? selectUser.urlprofile : "https://mir-s3-cdn-cf.behance.net/project_modules/fs/0e42df111843393.6009650446d8d.png"} />
                                     </button>
                                     <div className='pt-2 text-xl text-night font-semibold'>{selectUser.firstname && selectUser.firstname+" "}{selectUser.lastname && selectUser.lastname}</div>
-                                    <BadgeRank rank={GetRankByPower(selectUser)} />
+                                    {/**<BadgeRank rank={GetRankByPower(selectUser)} />*/}
                                 </div>
                                 <div className='w-full flex flex-col p-6'>
                                     <div className='text-xl font-semibold text-black'>Informations</div>

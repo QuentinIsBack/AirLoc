@@ -17,10 +17,7 @@ export const GetRankByPower = (user) => {
      return data[0]
 }
 
-export const DeleteRank = (rankId) => {
-
-  const { Rank, setRank } = useRank();
-
+export const DeleteRank = ({ Rank, setRank },rankId) => {
 
   if(rankId.deletable != false){
       const newFruits = Rank.filter( (rank) => rank.id !== rankId.id );
