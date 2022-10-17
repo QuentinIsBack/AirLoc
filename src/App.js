@@ -46,7 +46,7 @@ function App() {
 
           {/* User Employee */}
           <Route element={<EmployeeRoute />}>
-            <Route exact path="/employee/today" element={<HomeEmployee />} />
+            <Route exact path="/employee" element={<HomeEmployee />} />
             <Route exact path="/employee/homes/:id" element={<HomesEmployee />} />
             <Route exact path="/employee/housing" element={<HousingEmployee />} />
             

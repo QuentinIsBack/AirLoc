@@ -11,7 +11,8 @@ import { doc, getDoc, getDocs, onSnapshot, collection } from "firebase/firestore
 import { UserContext } from '../context/UserContext';
 
 // Icons
-import { IoFilter, IoChevronBack } from "react-icons/io5";
+import { IoFilter, IoChevronBack, IoMapOutline, IoHomeOutline } from "react-icons/io5";
+import { IoLogoEuro } from "react-icons/io";
 import { Button } from '../components/button/button';
 
 import Map, { GeolocateControl, Marker, Popup } from "react-map-gl";
@@ -109,12 +110,49 @@ export default function Page() {
                                 <Map mapboxAccessToken="pk.eyJ1IjoicXVlbnRpbnQiLCJhIjoiY2w4dGM5a3UwMDYwbTNvcXRsbWQyZXRtMSJ9.2IieorABrDO3bK9baO6vvg" initialViewState={defaultProps} mapStyle="mapbox://styles/quentint/cl8tcc2h2007o14qgzjwt7f1q">
                                     <div className='absolute z-10 w-full p-6'>
                                         <div className='flex flex-row space-x-3'>
-                                            <div className='cursor-pointer flex items-center justify-center rounded-xl bg-white hover:bg-gray-50 h-10 w-10 shadow-dropdown'>
+                                            <div className='cursor-pointer flex items-center justify-center rounded-xl bg-white hover:bg-gray-50 h-10 w-10 shadow'>
                                                 <IoChevronBack className='mr-0.5' size={20} />
                                             </div>
-                                            <div className='cursor-pointer flex items-center justify-center rounded-xl bg-white hover:bg-gray-50 h-10 w-fit px-4 shadow-dropdown'>
-                                                    Rechercher
+                                            <div className='flex justify-center items-center w-fit px-4 text-sm font-semibold text-night antialiased bg-white hover:bg-gray-50 rounded-xl shadow cursor-pointer '>
+                                                <IoMapOutline /><div className='ml-2 text-sm font-semibold'>Zone Géographique</div>
                                             </div>
+                                            <div className='flex justify-center items-center w-fit px-4 text-sm font-semibold text-night antialiased bg-white hover:bg-gray-50 rounded-xl shadow cursor-pointer '>
+                                                <IoLogoEuro /><div className='ml-2 text-sm font-semibold'>Loyer</div>
+                                            </div>
+                                            <div className='flex justify-center items-center w-fit px-4 text-sm font-semibold text-night antialiased bg-white hover:bg-gray-50 rounded-xl shadow cursor-pointer '>
+                                                <IoHomeOutline /><div className='ml-2 text-sm font-semibold'>Espaces</div>
+                                            </div>
+                                            <div className='flex justify-center items-center w-fit px-4 text-sm font-semibold text-night antialiased bg-white hover:bg-gray-50 rounded-xl shadow cursor-pointer '>
+                                                <IoHomeOutline /><div className='ml-2 text-sm font-semibold'>Espaces</div>
+                                            </div>
+                                                    
+                                            <div className="dropdown">
+                                                <div tabIndex="0" className='flex justify-center items-center w-fit h-full px-4 text-sm font-semibold text-night antialiased bg-white hover:bg-gray-50 rounded-xl shadow cursor-pointer '>
+                                                    <IoHomeOutline /><div className='ml-2 text-sm font-semibold'>Chambres</div>
+                                                </div>
+                                                <div tabIndex="0" className='p-4 mt-4 rounded-box w-64 h-fit menu dropdown-content bg-white shadow'>
+                                                    <div className='text-base font-semibold text-night text-start antialiased'>Nombres de chambres</div>
+                                                    <div className='text-xs font-normal text-stone-500 text-start antialiased'>Filtrer les logements par nombres de chambres</div>
+                                                    <div className='flex flex-row justify-between text-sm font-semibold pt-2'>
+                                                        <div className='py-2 px-3 border hover:border-black rounded-lg cursor-pointer'>
+                                                            1
+                                                        </div>
+                                                        <div className='py-2 px-3 border hover:border-black rounded-lg cursor-pointer'>
+                                                            2
+                                                        </div>
+                                                        <div className='py-2 px-3 border hover:border-black rounded-lg cursor-pointer'>
+                                                            3
+                                                        </div>
+                                                        <div className='py-2 px-3 border hover:border-black rounded-lg cursor-pointer'>
+                                                            4
+                                                        </div>
+                                                        <div className='py-2 px-3 border hover:border-black rounded-lg cursor-pointer'>
+                                                            5+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                     {home.map(o => 
@@ -167,6 +205,14 @@ export default function Page() {
         </>
     )
 } 
+
+const getDropdown = ({title, subtitle, children}) => {
+    return (
+        <>
+        
+        </>
+    )
+}
 
 {/*
 
