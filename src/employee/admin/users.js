@@ -14,7 +14,7 @@ import { Button } from '../../components/button/button';
 
 import { Disclosure, Menu } from '@headlessui/react'
 import { Badge, BadgeRank } from '../../components/badge/Badge';
-import { RankContext } from '../../context/RankContext';
+import { GetRankByPower, RankContext } from '../../context/RankContext';
 import { SubMenu } from './submenu';
 
 export default function Page() {
@@ -56,11 +56,6 @@ export default function Page() {
                 <div className='flex-grow grid grid-cols-16'>
                     <div className={`col-span-2 bg-gray-100 border-r flex flex-col h-full`}>
                         <SubMenu />
-                        <div className='flex justify-center'>
-                            <div className='p-4 h-full w-full'>
-                                <Button theme={'night'} size={'full'} additionnal={'h-fit flex flex-row items-center'} ><IoSettingsSharp className='mr-2' fill='white' size={20} /> Paramètres</Button>
-                            </div>
-                        </div>
                     </div>
                     <div className={`col-span-11 bg-white h-full`}>
                         <div className='p-8'>
@@ -108,7 +103,7 @@ export default function Page() {
                                             {u.phone ? u.phone : undefined}
                                         </td>
                                         <td>
-                                            
+                                            <BadgeRank rank={GetRankByPower(u)} />
                                         </td>
                                         <td>
                                             <button onClick={()=>setSelectUser(u)} className='w-fit px-4 py-1 rounded-lg border border-black text-black text-sm font-medium hover:bg-gray-100/80'> 

@@ -2,6 +2,7 @@ import React,{useState, useEffect, useContext} from 'react';
 
 import { Disclosure, Menu } from '@headlessui/react'
 import { NavLink } from 'react-router-dom';
+import { Button } from '../../components/button/button';
 
 export const SubMenu = () => {
 
@@ -12,11 +13,11 @@ export const SubMenu = () => {
 
     return (
         <>
-            <div className='flex-grow'>
+            <div className='flex-grow flex flex-col h-full'>
                 <div className='p-8'>
                     <div className='text-2xl font-semibold text-night'>Gestion</div>
                 </div>
-                <div className='p-4'>
+                <div className='flex-grow p-4 '>
                     {MenuGestion.map( ({name, items}) =>
                         <Disclosure>
                             {({ open }) => (
@@ -68,6 +69,11 @@ export const SubMenu = () => {
                         )}
                     </Disclosure>
                 </div> 
+                <div className='p-4 h-fit'>
+                    <Button size={'full'}>
+                        Paramètres
+                    </Button>
+                </div>
             </div>
         </>
     )

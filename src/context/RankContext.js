@@ -2,7 +2,7 @@ import { createContext, useState, useEffect, useContext } from "react";
 
 // Import Authentificated
 import{ db } from "../firebase.config"
-import { doc, getDocs, collection, deleteDoc, addDoc, updateDoc } from "firebase/firestore";
+import { doc, getDocs, collection, deleteDoc, addDoc, updateDoc, query, where } from "firebase/firestore";
 import useRank from "../hooks/useRank";
 
 export const RankContext = createContext()
@@ -10,7 +10,7 @@ export const RankContext = createContext()
 export const GetRankByPower = (user) => {
     const { Rank } = useContext(RankContext)
     var data = Rank.filter(function(item){
-        return item.power == (user.power ? user.power : 0);
+        return item.power == (user.power ? user.power : 1);
      }).map(function(ranks){
         return ranks;
      });
