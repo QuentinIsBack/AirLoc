@@ -4,6 +4,7 @@ module.exports = {
     extend: {
       gridTemplateColumns: {
         '16': 'repeat(16, minmax(0, 1fr))',
+        '13': 'repeat(13, minmax(0, 1fr))',
       },
       gridColumn: {
         'span-13': 'span 13 / span 13',

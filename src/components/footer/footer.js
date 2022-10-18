@@ -88,9 +88,9 @@ export default function Component(props) {
                                     </div>
                                     <div className='snap-normal snap-center flex flex-col grap-4 mr-5 text-gray-800 space-y-4'>
                                         <a className='footertitle'>Accueil de voyageurs</a>
-                                        <button className='footersub'>Devenir hôte</button>
+                                        <button className='footersub'>Devenir bailleur</button>
                                         <button className='footersub'>AirCover : protection locataire</button>
-                                        <button className='footersub'>Ressources pour les hôtes</button>
+                                        <button className='footersub'>Ressources pour les bailleur</button>
                                         <button className='footersub'>AirStudent : aide aux étudiants</button>
                                         <button className='footersub'>Forum de la communauté</button>
                                         <button className='footersub'>Accueillir de manière responsable</button>

@@ -23,6 +23,7 @@ import HousingEmployee from './employee/housing';
 
 import AdminUserEmployee from './employee/admin/users';
 import AdminRankEmployee from './employee/admin/ranks';
+import AdminMessagesEmployee from './employee/admin/messages';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
             
             <Route exact path="/employee/admin/users" element={<AdminUserEmployee />} />
             <Route exact path="/employee/admin/ranks" element={<AdminRankEmployee />} />
+            <Route exact path="/employee/admin/messages" element={<AdminMessagesEmployee />} />
           </Route>
           
         </Route>

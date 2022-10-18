@@ -5,6 +5,7 @@
   "dependencies": {
     "@fontsource/nunito-sans": "^4.5.9",
     "@headlessui/react": "^1.7.3",
+    "@heroicons/react": "^2.0.12",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
