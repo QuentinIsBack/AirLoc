@@ -8,7 +8,6 @@ import { Button } from '../../components/button/button';
 import { ModalTest } from '../../components/modal/ModalTest';
 import useRank from '../../hooks/useRank';
 import { InputFloating } from '../../components/input/inputfloating';
-import { InputFloatin } from '../../components/input/InputFloatin';
 import { CreateRank, GetUserWithRank, UpdateRank } from '../../context/RankContext';
 import { Table } from '../../components/Table/Table';
 import { TableHead } from '../../components/Table/TableHead';
@@ -230,11 +229,6 @@ const ModalCreateRank = ({show, close}) => {
                 <div className="p-5">
                     <div className='text-3xl font-semibold text-night text-left'>Créer un rôle</div>
                     <div className='pt-2 pb-6 text-md font-normal text-gray-500 text-left'>Communiquez avec vos correspondants via la plateforme afin de sécuriser et de protéger vos messages.</div>
-
-                    <div className='py-20'>
-                        <InputFloatin id={'namerank'} onChange={(e)=>setName(e.target.value)} placeholder={'Nom du rôle'} />  
-                        <InputFloatin id={'nameragfdnk'} onChange={(e)=>setName(e.target.value)} placeholder={'Nfdsom du rôle'} />  
-                    </div>
 
                     <InputFloating onChange={(e)=>setName(e.target.value)} name={'Nom du rôle'} placeholder={'Nom du rôle'} />
                     <input checked={deletable} type={'checkbox'} onChange={()=>setDeletable(!deletable)} className='checkbox checkbox-sm' />
