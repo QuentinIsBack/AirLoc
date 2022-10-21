@@ -7,7 +7,6 @@ import { Button } from '../../components/button/button';
 import { ModalTest } from '../../components/modal/ModalTest';
 import useRank from '../../hooks/useRank';
 import { InputFloating } from '../../components/input/InputFloating';
-import { Input } from '../../components/input/Input';
 import { UpdateRank } from '../../context/RankContext';
 import { Table } from '../../components/Table/Table';
 import { TableHead } from '../../components/Table/TableHead';
