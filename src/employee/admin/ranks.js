@@ -6,8 +6,8 @@ import Footer from '../../components/footer/footer'
 import { Button } from '../../components/button/button';
 import { ModalTest } from '../../components/modal/ModalTest';
 import useRank from '../../hooks/useRank';
-import { InputFloating } from '../../components/input/inputfloating';
 import { InputFloatin } from '../../components/input/InputFloatin';
+import { Input } from '../../components/input/Input';
 import { UpdateRank } from '../../context/RankContext';
 import { Table } from '../../components/Table/Table';
 import { TableHead } from '../../components/Table/TableHead';
@@ -248,11 +248,16 @@ const ModalCreateRank = ({show, close}) => {
                     <div className='text-3xl font-semibold text-night text-left'>Créer un rôle</div>
                     <div className='pt-2 pb-6 text-md font-normal text-gray-500 text-left'>Communiquez avec vos correspondants via la plateforme afin de sécuriser et de protéger vos messages.</div>
 
+                    <div className='flex flex-row justify-between space-x-5'>
+                        <Input placeholder={'test'} />
+                        <InputFloatin id={'name'} type={'text'} placeholder={'Nom du rôle'} onChange={(e)=>handleOnChange(e)}/>  
+                        <InputFloatin id={'power'} type={'text'} placeholder={'Puissance du rôle'} onChange={(e)=>handleOnChange(e)}/>  
+                    </div>
 
-                    <InputFloating id={'name'} onChange={(e)=>handleOnChange(e)} name={'Nom du rôle'} placeholder={'Nom du rôle'} />
-                    <input id={'deletable'} checked={rankUp.deletable} type={'checkbox'} onChange={(e)=>handleOnChange(e)} className='checkbox checkbox-sm' />
-                    <input id={'color'} type={'color'} onChange={(e)=>handleOnChange(e)} className='border px-2 py-1 border-black' placeholder='Color' />
-                    <InputFloating id={'power'} onChange={(e)=>handleOnChange(e)} name={'Puissance du rôle'} placeholder={'Puissance du rôle'} />
+                    <div className='pt-5 flex flex-row justify-between space-x-5'>
+                        <input id={'deletable'} checked={rankUp.deletable} type={'checkbox'} onChange={(e)=>handleOnChange(e)} className='checkbox checkbox-sm' />
+                        <input id={'color'} type={'color'} onChange={(e)=>handleOnChange(e)} className='border px-2 py-1 border-black' placeholder='Color' />          
+                    </div>
 
                     <div className='pt-8 flex justify-end'>
                         <Button onClick={createRank} theme={'green'}>Continuer</Button>

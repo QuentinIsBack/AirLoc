@@ -1,17 +1,18 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 import LOGOWHITE from '../../assets/logo.svg'
 
 import { IoChevronDown } from 'react-icons/io5'
   
 export default function Component() { 
+    const navigate = useNavigate()
     return (
         <> 
             <div className='sticky w-full z-50'>
                 <div className={`flex items-center justify-between border-b border-gray-900 h-4rem bg-gray-900`}>
                     <div className={`absolute z-10 inset-y-0 left-8 flex items-center`}>
-                        <button href='/employee'><img width={25} alt={'logo'} src={LOGOWHITE} /></button>
+                        <button onClick={()=>navigate('/employee')} href='/employee'><img width={25} alt={'logo'} src={LOGOWHITE} /></button>
                         <div className='ml-4 text-white font-semibold'>Employés</div>
                     </div> 
                     <div className="absolute inset-x-0 inset-y-0 flex justify-center items-center">
