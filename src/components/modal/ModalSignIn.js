@@ -4,8 +4,7 @@ import { UserContext } from '../../context/UserContext'
 
 import { IoPhonePortraitOutline, IoLogoGoogle } from 'react-icons/io5'
 
-import {InputFloating} from '../input/inputfloating'
-import { GroupInput } from '../input/groupinput'
+import { InputFloatin } from '../input/InputFloatin'
 
 //
 import { doc, setDoc } from "firebase/firestore";
@@ -119,11 +118,11 @@ export default function SignInModal() {
                       <div className='py-2'>
                         {status.connexionError}
                       </div>
-                      <GroupInput>
-                        <InputFloating theme='group' id={'email'} type={'email'} name={'Adresse e-mail'} onChange={(e) => setData( {...data, email: e.target.value } )} placeholder={'Adresse e-mail'} />
+
+                        <InputFloatin id={'email'} type={'email'} placeholder={'Adresse e-mail'} onChange={(e) => setData( {...data, email: e.target.value } )} />  
                         <div className='border-b border-gray-500 w-full' />
-                        <InputFloating theme='group' id={'password'} type={'password'} name={'Mot de passe'} onChange={(e) => setData( {...data, password: e.target.value } )} placeholder={'Mot de passe'} />
-                      </GroupInput>
+                        <InputFloatin id={'password'} type={'password'} placeholder={'Mot de passe'} onChange={(e) => setData( {...data, password: e.target.value } )} />  
+
 
                       </div>
 

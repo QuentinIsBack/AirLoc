@@ -11,7 +11,6 @@ import { db, auth} from "../../firebase.config"
 import { signOut } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '../button/button';
-import { InputFloating } from '../input/inputfloating';
 import { GroupInput } from '../input/groupinput'
 
 //
@@ -240,19 +239,19 @@ const ModalSignUp = ({show, close}) => {
                     <div className='pt-2 text-md font-normal text-gray-500 text-left'>Pour commencer à rechercher et candidater à des logements, dites nous en plus sur vous.</div>
                     
                     <div className='pt-6 flex flex-row space-x-5 pb-5'>
-                        <InputFloating id={'lastname'} onChange={(e) => setData( {...data, lastname: e.target.value } )} type={'text'} name={'Nom'} placeholder={'Entrez votre nom'} />
-                        <InputFloating id={'firstname'} onChange={(e) => setData( {...data, firstname: e.target.value } )} type={'text'} name={'Prénom'} placeholder={'Entrez votre Prénom'} />
+                        <InputFloatin id={'lastname'} type={'text'} placeholder={'Entrez votre nom'} onChange={(e) => setData( {...data, lastname: e.target.value } )} />  
+                        <InputFloatin id={'firstname'} type={'text'} placeholder={'Entrez votre prénom'} onChange={(e) => setData( {...data, firstname: e.target.value } )} />  
                     </div>
 
                     <div className='pb-5'>
-                        <InputFloating color={emailValid.length === 0 ? "black" : "red"} id={'email'} onChange={(e) => setData( {...data, email: e.target.value } )} type={'email'} name={'Adresse email'} placeholder={'Entrez votre adresse email'} />
+                        <InputFloatin id={'email'} type={'email'} placeholder={'Entrez votre adresse email'} onChange={(e) => setData( {...data, email: e.target.value } )}/>  
                         <div className={`${emailValid.length === 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{emailValid}</div>
                     </div>
 
                     <GroupInput color={passwordValid.length === 0 ? "black" : "red"}>
-                        <InputFloating color={passwordValid.length === 0 ? "black" : "red"} theme={'group'} id={'password'} onChange={(e) => setData( {...data, password: e.target.value } )} type={'password'} name={'Mot de passe'} placeholder={'Entrez votre mot de passe'} />
+                        <InputFloatin id={'password'} type={'password'} placeholder={'Entrez votre adresse email'}  onChange={(e) => setData( {...data, password: e.target.value } )} />  
                             <div className={`border-b ${passwordValid.length === 0 ? "border-black" : "border-red-500"} w-full`} />
-                        <InputFloating color={passwordValid.length === 0 ? "black" : "red"} theme={'group'} id={'confirmPassword'} onChange={(e) => setData( {...data, confirmPassword: e.target.value } )} type={'password'} name={'Confirmation'} placeholder={'Confirmez votre mot de passe'} />
+                        <InputFloatin id={'confirmPassword'} type={'password'} placeholder={'Entrez votre adresse email'} onChange={(e) => setData( {...data, confirmPassword: e.target.value } )} />  
                     </GroupInput>
                     <div className={`${passwordValid.length === 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{passwordValid}</div>
 
