@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';  
+import React from 'react';  
 
 // Components
 import NavBar from '../../components/navbar/navbar'
 import Footer from '../../components/footer/footer'
 
-import { FaHouseUser, FaFolder } from 'react-icons/fa';
 import {FiBook} from 'react-icons/fi'
 import {IoBriefcaseOutline, IoEyeOffOutline, IoBusinessOutline, IoPersonOutline, IoFootstepsOutline} from 'react-icons/io5'
 

@@ -1,25 +1,14 @@
-import React, { useContext } from 'react';  
-import { useNavigate } from 'react-router-dom';
+import React from 'react';  
 
 // Components
 import NavBar from '../../components/navbar/navbar'
 import Footer from '../../components/footer/footer'
 import { Button } from '../../components/button/button';
-import { EditSettings } from '../../components/modal/EditSetting';
-import { InputFloating } from '../../components/input/inputfloating';
-
-// Firebase
-import { UserContext } from '../../context/UserContext';
 
 // Icons
-import { FaRegAddressCard, FaShieldAlt, FaEuroSign, FaRegBell, FaUnlock, FaGlobeEurope, FaPlane, FaTools, FaRegCreditCard } from "react-icons/fa";
 import { FaLock, FaShoppingBag, FaEye } from "react-icons/fa";
 
 export default function Page() {
-
-    const { User } = useContext(UserContext)
-    const navigate = useNavigate();
-
     return (
         <>  
             <NavBar />

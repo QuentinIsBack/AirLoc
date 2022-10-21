@@ -1,11 +1,10 @@
-import React, { useState } from 'react';  
+import React from 'react';  
 
 // Components
 import NavBar from '../components/navbar/navbar-employee'
 import Footer from '../components/footer/footer'
 
 import { FaHouseUser, FaFolder } from 'react-icons/fa';
-import { Input } from '../components/input/Input';
 import { InputFloatin } from '../components/input/InputFloatin';
 
 export default function Page() {

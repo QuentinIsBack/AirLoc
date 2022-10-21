@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { UserContext } from '../../context/UserContext'
 import {ModalTest} from '../modal/ModalTest'
@@ -15,20 +15,18 @@ import { InputFloating } from '../input/inputfloating';
 import { GroupInput } from '../input/groupinput'
 
 //
-import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
-import { SignInMethod } from 'firebase/auth'
+import { doc, setDoc } from "firebase/firestore";
 import { InputFloatin } from '../input/InputFloatin';
 
   
 export default function Component() { 
-    const {modalSign, setModalSign} = useContext(UserContext)
 
     return (
         <> 
             <div className='sticky w-full z-50'>
                 <div className={`flex items-center justify-between border-b h-4rem bg-white`}>
                     <div className={`absolute z-10 inset-y-0 left-36 sm:left-36 md:left-36 lg:left-36 xl:left-36 2xl:left-36 flex items-center`}>
-                        <div href='.'><img width={25} src={LOGOWHITE} /></div>
+                        <div href='.'><img width={25} alt={'logo'} src={LOGOWHITE} /></div>
                     </div> 
                     <div className="absolute inset-x-0 inset-y-0 flex justify-center items-center">
                         <div className='hidden lg:block xl:block 2xl:block'>
@@ -119,13 +117,13 @@ function GetCenter(){
                         </button> 
                     </div> 
                     <ul tabIndex="0" className="p-2 mt-4 shadow-dropdown menu dropdown-content bg-base-100 rounded-box w-52 text-black">
-                        <li><a className='font-medium text-sm'>Annonces</a></li>
-                        <li><a className='font-medium text-sm'>Réservations</a></li>
-                        <li><a onClick={() => navigate('../hosting/folder')} className='font-medium text-sm'>Mon dossier locataire</a></li>
+                        <li><div className='font-medium text-sm'>Annonces</div></li>
+                        <li><div className='font-medium text-sm'>Réservations</div></li>
+                        <li><div onClick={() => navigate('../hosting/folder')} className='font-medium text-sm'>Mon dossier locataire</div></li>
                         <div className='py-2'><div className='border-t'></div></div>
-                        <li><a className='font-normal text-sm'>Guides</a></li>
-                        <li><a className='font-normal text-sm'>Historique des transactions</a></li>
-                        <li><a className='font-normal text-sm'>Forum de la communauté</a></li>
+                        <li><div className='font-normal text-sm'>Guides</div></li>
+                        <li><div className='font-normal text-sm'>Historique des transactions</div></li>
+                        <li><div className='font-normal text-sm'>Forum de la communauté</div></li>
                     </ul>
                 </div>
             </>
@@ -156,27 +154,27 @@ function GetDropdown() {
             <>
                 <ModalSignUp show={modalSignUp} close={() => setModalSignUp(false)} />
                 <ModalSignIn show={modalSignIn} close={() => setModalSignIn(false)} />
-                <li><a onClick={() => setModalSignUp(true)} className='font-medium text-sm'>Inscription</a></li>
-                <li><a onClick={() => setModalSignIn(true)} className='font-medium text-sm'>Connexion</a></li>
+                <li><div onClick={() => setModalSignUp(true)} className='font-medium text-sm'>Inscription</div></li>
+                <li><div onClick={() => setModalSignIn(true)} className='font-medium text-sm'>Connexion</div></li>
                 <div className='py-2'><div className='border-t'></div></div>
-                <li><a className='font-normal text-sm'>Louer mon logement</a></li>
-                <li><a className='font-normal text-sm'>Trouver un logement</a></li>
-                <li><a className='font-normal text-sm'>Aide</a></li>
+                <li><div className='font-normal text-sm'>Louer mon logement</div></li>
+                <li><div className='font-normal text-sm'>Trouver un logement</div></li>
+                <li><div className='font-normal text-sm'>Aide</div></li>
             </>
         )
     } else {
         return (
             <>
-                <li><a onClick={() => navigate("../account")} className='font-medium text-sm'>Profile</a></li> 
-                <li><a onClick={() => navigate("../account-settings")} className='font-medium text-sm'>Compte</a></li> 
-                <li><a className='font-medium text-sm'>Obtenir de l'aide</a></li> 
-                {User.power >= 1000 && <li><a  onClick={() => navigate("../employee")} className='bg-slate-800 font-medium text-sm hover:bg-indigo-800'><span className='text-white'>Espace employé</span></a></li>}
+                <li><div onClick={() => navigate("../account")} className='font-medium text-sm'>Profile</div></li> 
+                <li><div onClick={() => navigate("../account-settings")} className='font-medium text-sm'>Compte</div></li> 
+                <li><div className='font-medium text-sm'>Obtenir de l'aide</div></li> 
+                {User.power >= 1000 && <li><div  onClick={() => navigate("../employee")} className='bg-slate-800 font-medium text-sm hover:bg-indigo-800'><span className='text-white'>Espace employé</span></div></li>}
                     <div className='py-2'><div className='border-t'></div></div>
-                <li><a className='font-normal text-sm'>Français (FR)</a></li> 
-                <li><a className='font-normal text-sm'>€ EUR</a></li> 
+                <li><div className='font-normal text-sm'>Français (FR)</div></li> 
+                <li><div className='font-normal text-sm'>€ EUR</div></li> 
                     <div className='py-2'><div className='border-t'></div></div>
-                <li><a className='font-normal text-sm'>Parrainer un hôte</a></li>
-                <li><a onClick={logout} className='font-normal text-sm'>Déconnexion</a></li>
+                <li><div className='font-normal text-sm'>Parrainer un hôte</div></li>
+                <li><div onClick={logout} className='font-normal text-sm'>Déconnexion</div></li>
             </>
         )
     }
@@ -247,16 +245,16 @@ const ModalSignUp = ({show, close}) => {
                     </div>
 
                     <div className='pb-5'>
-                        <InputFloating color={emailValid.length == 0 ? "black" : "red"} id={'email'} onChange={(e) => setData( {...data, email: e.target.value } )} type={'email'} name={'Adresse email'} placeholder={'Entrez votre adresse email'} />
-                        <div className={`${emailValid.length == 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{emailValid}</div>
+                        <InputFloating color={emailValid.length === 0 ? "black" : "red"} id={'email'} onChange={(e) => setData( {...data, email: e.target.value } )} type={'email'} name={'Adresse email'} placeholder={'Entrez votre adresse email'} />
+                        <div className={`${emailValid.length === 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{emailValid}</div>
                     </div>
 
-                    <GroupInput color={passwordValid.length == 0 ? "black" : "red"}>
-                        <InputFloating color={passwordValid.length == 0 ? "black" : "red"} theme={'group'} id={'password'} onChange={(e) => setData( {...data, password: e.target.value } )} type={'password'} name={'Mot de passe'} placeholder={'Entrez votre mot de passe'} />
-                            <div className={`border-b ${passwordValid.length == 0 ? "border-black" : "border-red-500"} w-full`} />
-                        <InputFloating color={passwordValid.length == 0 ? "black" : "red"} theme={'group'} id={'confirmPassword'} onChange={(e) => setData( {...data, confirmPassword: e.target.value } )} type={'password'} name={'Confirmation'} placeholder={'Confirmez votre mot de passe'} />
+                    <GroupInput color={passwordValid.length === 0 ? "black" : "red"}>
+                        <InputFloating color={passwordValid.length === 0 ? "black" : "red"} theme={'group'} id={'password'} onChange={(e) => setData( {...data, password: e.target.value } )} type={'password'} name={'Mot de passe'} placeholder={'Entrez votre mot de passe'} />
+                            <div className={`border-b ${passwordValid.length === 0 ? "border-black" : "border-red-500"} w-full`} />
+                        <InputFloating color={passwordValid.length === 0 ? "black" : "red"} theme={'group'} id={'confirmPassword'} onChange={(e) => setData( {...data, confirmPassword: e.target.value } )} type={'password'} name={'Confirmation'} placeholder={'Confirmez votre mot de passe'} />
                     </GroupInput>
-                    <div className={`${passwordValid.length == 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{passwordValid}</div>
+                    <div className={`${passwordValid.length === 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{passwordValid}</div>
 
                     <div className='pt-8 flex justify-start'>
                         <Button onClick={confirmForm} theme={'black'}>Continuer</Button>
@@ -286,7 +284,7 @@ const ModalSignIn = ({show, close}) => {
             } else {
 
                 try {
-                    const cred = await signIn(
+                    await signIn(
                       data.email,
                       data.password,
                     )
@@ -310,71 +308,11 @@ const ModalSignIn = ({show, close}) => {
 
                     <div className='pt-6 pb-5'>
                         <InputFloatin id={'email'} type={'email'} placeholder={'Adresse email'}  onChange={(e) => setData( {...data, email: e.target.value } )} />  
-                        <div className={`${emailValid.length == 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{emailValid}</div>
+                        <div className={`${emailValid.length === 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{emailValid}</div>
                     </div>
 
                     <InputFloatin id={'password'} type={'password'} placeholder={'Mot de passe'} onChange={e => setData( {...data, password: e.target.value } )}/>  
-                    <div className={`${passwordValid.length == 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{passwordValid}</div>
-
-                    <div className='pt-8 flex justify-start'>
-                        <Button onClick={confirmForm} theme={'black'}>Continuer</Button>
-                    </div>
-                </div>
-            </ModalTest>
-        </>
-    )
-}
-
-const ModalSignInTEEES = ({show, close}) => {
-
-    const [emailValid, setEmailValid] = useState('');
-    const [passwordValid, setPasswordValid] = useState('');
-    const [data, setData] = useState({
-        email: "",
-        password: "",
-    });
-    const {signIn} = useContext(UserContext)
-
-    const navigate = useNavigate();
-
-    const confirmForm = async () => {
-
-            if(data.password.length < 6){
-                setPasswordValid('Le mot de passe indiqué dois faire plus de 6 characters.')
-            } else {
-
-                try {
-                    const cred = await signIn(
-                      data.email,
-                      data.password,
-                    )
-                    navigate('../hosting')
-                  } catch (err) { 
-                    setEmailValid("Le mot de passe ou l'adresse email n'est pas valide.")
-                }
-                
-            }
-
-    }
-
-    return (
-        <>
-            <ModalTest show={show} close={close}>
-                <div className='h-5rem bg-cover' style={{backgroundImage: `url("https://mir-s3-cdn-cf.behance.net/project_modules/fs/35098564507519.5ad4edb4b9537.jpg")`}} />
-                    <div className='border-b' />
-                <div className="p-5">
-                    <div className='text-3xl font-semibold text-night text-left'>Connexion au profil</div>
-                    <div className='pt-2 text-md font-normal text-gray-500 text-left'>Pour commencer à rechercher et candidater à des logements, connectez-vous.</div>
-
-                    <div className='pt-6 pb-5'>
-                        <InputFloating color={emailValid.length == 0 ? "black" : "red"} id={'email'} onChange={(e) => setData( {...data, email: e.target.value } )} type={'email'} name={'Adresse email'} placeholder={'Entrez votre adresse email'} />
-                        <div className={`${emailValid.length == 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{emailValid}</div>
-                    </div>
-
-                    <GroupInput color={passwordValid.length == 0 ? "black" : "red"}>
-                        <InputFloating color={passwordValid.length == 0 ? "black" : "red"} theme={'group'} id={'password'} onChange={(e) => setData( {...data, password: e.target.value } )} type={'password'} name={'Mot de passe'} placeholder={'Entrez votre mot de passe'} />
-                    </GroupInput>
-                    <div className={`${passwordValid.length == 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{passwordValid}</div>
+                    <div className={`${passwordValid.length === 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{passwordValid}</div>
 
                     <div className='pt-8 flex justify-start'>
                         <Button onClick={confirmForm} theme={'black'}>Continuer</Button>

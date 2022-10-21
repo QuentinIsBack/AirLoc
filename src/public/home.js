@@ -23,7 +23,7 @@ export default function Page() {
             </div>
 
             <div className={`bg-white px-10 sm:px-10 md:px-20 lg:px-20 xl:px-40 2xl:px-60`}>
-                <a className='text-5xl font-medium text-black'>Découvrez les expériences AirLoc</a>
+                <div className='text-5xl font-medium text-black'>Découvrez les expériences AirLoc</div>
                 <div className='pt-14 grid sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 2xl:grid-cols-2 gap-10 h-fit'>
                     <div className='bg-cover bg-center rounded-2xl h-full sm:h-full md:h-full lg:h-full xl:h-full 2xl:h-55rem p-20' style={{backgroundImage: `url("https://a0.muscache.com/im/pictures/c2adcb16-6c3f-4041-86a1-afa9c303c500.jpg?im_w=1200")`}}>
                         <h1 className="text-3xl sm:text-3xl md:text-5xl lg:text-5xl xl:text-6xl 2xl:text-6xl font-medium text-white pb-5">Trouvez des biens insolite pour vivre toute l'année</h1> 

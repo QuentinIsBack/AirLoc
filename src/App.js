@@ -12,7 +12,7 @@ import Hosting from './public/hosting/hosting-loc';
 import HostingMessages from './public/hosting/messages';
 import HostingAnnounces from './public/hosting/announces';
 import HostingFolder from './public/hosting/folder';
-import Account from './public/account';
+import Account from './public/account'; 
 import AccountSettings from './public/account-settings';
 import AccountSettingsPersonnalInformations from './public/account-settings/personnal-informations';
 import AccountSettingsInvite from './public/account-settings/invite';

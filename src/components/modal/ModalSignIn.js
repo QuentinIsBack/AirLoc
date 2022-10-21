@@ -8,9 +8,8 @@ import {InputFloating} from '../input/inputfloating'
 import { GroupInput } from '../input/groupinput'
 
 //
-import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
+import { doc, setDoc } from "firebase/firestore";
 import { db } from "../../firebase.config";
-import { SignInMethod } from 'firebase/auth'
 
 
 export default function SignInModal() {
@@ -23,19 +22,11 @@ export default function SignInModal() {
     function closeModal() {
       setModalSign(false)
     }
-
-    function openModal() {
-      setModalSign(true)
-    }
-
     const [data, setData] = useState({
       email: "",
       password: "",
     });
 
-    const createProfile = () => {
-
-  }
 
     const confirm = async () => {
 
@@ -66,7 +57,7 @@ export default function SignInModal() {
 
             if(err.code === "auth/email-already-in-use"){
               try {
-                const cred = await signIn(
+                await signIn(
                   email,
                   password,
                 )

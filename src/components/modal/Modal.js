@@ -1,5 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useContext, useState } from 'react'
+import { Fragment, useContext } from 'react'
 import { UserContext } from '../../context/UserContext'
 
 export default function Modal({children}) {
@@ -8,10 +8,6 @@ export default function Modal({children}) {
 
   function closeModal() {
     setModal(false)
-  }
-
-  function openModal() {
-    setModal(true)
   }
 
   return (

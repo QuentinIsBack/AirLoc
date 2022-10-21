@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';  
+import React, { useContext } from 'react';  
 
 // Components
 import NavBar from '../../components/navbar/navbar'
@@ -17,7 +17,7 @@ import { HiOutlineX } from "react-icons/hi";
 export default function Page() {
     const padding = `px-80`;
 
-    const { User, setModal } = useContext(UserContext)
+    const { setModal } = useContext(UserContext)
 
 
     const nextStepBoard = [
@@ -85,31 +85,31 @@ export default function Page() {
                 <div className='text-3xl font-semibold text-night text-left'>Bienvenue !</div>
                 <div className='text-md font-normal text-gray-500 text-left'>Vous êtes sur le point de devenir un locataire formidable. Voici comment commencer.</div>
                 <div className='pt-4 grid grid-cols-4 gap-5'>
-                    <a href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
+                    <div href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
                         <img className='h-20rem w-full object-cover object-center' src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/8771fd64507519.5ad4edb4b9968.jpg" alt="blog" />
                         <div className='p-6'>
                             <div className='text-lg font-semibold text-white'>Complétez votre dossier locataire</div>
                         </div>
-                    </a>
-                    <a href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
+                    </div>
+                    <div href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
                         <img className='h-20rem w-full object-cover object-center' src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/63719799566833.5ef568ce83b51.jpg" alt="blog" />
                         <div className='p-6'>
                             <div className='text-lg font-semibold text-white'>Candidatez à des logements en 1 clic</div>
                         </div>
-                    </a>
-                    <a href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
+                    </div>
+                    <div href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
                         <img className='h-20rem w-full object-cover object-center' src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/bf880164507519.5ad4ed2d62190.jpg" alt="blog" />
                         <div className='p-6'>
                             <div className='text-lg font-semibold text-white'>Signez votre bail numériqumnt</div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
 
             <div className={`${padding} pb-10 space-y-3`}>
                 <div className='flex justify-between items-center'>
                     <div className='text-3xl font-semibold text-night text-left'>Vos dossiers</div>
-                    <a href='#' className='text-md hover:bg-gray-100/80 rounded-lg px-4 py-2 font-semibold text-night text-left underline'>Tous mes dossiers</a>
+                    <div href='#' className='text-md hover:bg-gray-100/80 rounded-lg px-4 py-2 font-semibold text-night text-left underline'>Tous mes dossiers</div>
                 </div>
                 <div className='flex space-x-3'>
                     <button className='px-4 py-2 rounded-full border text-sm hover:border-black hover:bg-gray-100/80 text-night font-medium hover:text-black'>

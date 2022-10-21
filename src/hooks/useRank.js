@@ -2,8 +2,10 @@
 import { useContext } from "react";
 import RankContext from "../context/RankContext";
 
-export default () => {
+const RenderDetails = () => {
   const context = useContext(RankContext);
 
   return context;
 };
+
+export default RenderDetails

@@ -1,4 +1,4 @@
-import React,{useState, useEffect, useContext} from 'react';  
+import React,{useState, useEffect} from 'react';  
 
 // Components
 import NavBar from '../../components/navbar/navbar-employee'
@@ -6,19 +6,14 @@ import Footer from '../../components/footer/footer'
 
 // Firebase
 import{ db } from "../../firebase.config"
-import { doc, getDoc, getDocs, onSnapshot, collection } from "firebase/firestore";
-import { UserContext } from '../../context/UserContext';
-
-import { IoSettingsSharp } from 'react-icons/io5';
+import { getDocs, collection } from "firebase/firestore";
 import { Button } from '../../components/button/button';
 
-import { Disclosure, Menu } from '@headlessui/react'
-import { Badge, BadgeRank } from '../../components/badge/Badge';
-import { GetRankByPower, RankContext } from '../../context/RankContext';
+import { BadgeRank } from '../../components/badge/Badge';
+import { GetRankByPower } from '../../context/RankContext';
 import { SubMenu } from './submenu';
 
 export default function Page() {
-    const { Rank } = useContext(RankContext)
 
     const [users, setUsers] = useState([])
     useEffect(() => {
@@ -126,7 +121,7 @@ export default function Page() {
                             <>
                                 <div className='w-full flex flex-col items-center justify-center'>
                                     <button className='overflow-hidden'>
-                                        <img style={{
+                                        <img alt='profile' style={{
                                             width: 120,
                                             height: 120,
                                             borderRadius: '50%',

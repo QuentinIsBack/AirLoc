@@ -32,9 +32,9 @@ export const InputFloating = ({
 
     return (
         <>
-            <a className={`relative group block h-3rem w-full outline ${themes[theme]} ${colors[color]} hover:outline-2 rounded-md`}>
+            <div className={`relative group block h-3rem w-full outline ${themes[theme]} ${colors[color]} hover:outline-2 rounded-md`}>
                 <div 
-                    className={`absolute mt-3 ml-3 transition-all duration-600 ${value.length == 0 ? "group-hover:-translate-y-2 group-hover:text-sm text-base" : "-translate-y-2 text-sm"} font-normal text-gray-700`}>
+                    className={`absolute mt-3 ml-3 transition-all duration-600 ${value.length === 0 ? "group-hover:-translate-y-2 group-hover:text-sm text-base" : "-translate-y-2 text-sm"} font-normal text-gray-700`}>
                     {name}
                 </div>
                 <input 
@@ -42,9 +42,9 @@ export const InputFloating = ({
                     type={type}
                     defaultValue={defaultValue}
                     onChange={(e) => handleChange(e)} 
-                    className={`w-full absolute mt-5 ml-3 bg-transparent outline-none transition duration-600 ${value.length == 0 ? "group-hover:visible invisible" : "visible"} text-base font-normal text-black`} 
+                    className={`w-full absolute mt-5 ml-3 bg-transparent outline-none transition duration-600 ${value.length === 0 ? "group-hover:visible invisible" : "visible"} text-base font-normal text-black`} 
                     placeholder={placeholder} />
-            </a>
+            </div>
 
             
         </>

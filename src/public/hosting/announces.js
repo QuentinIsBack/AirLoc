@@ -1,11 +1,9 @@
-import React, { useContext, useState } from 'react';  
+import React, { useState } from 'react';  
 
-import {IoChevronDown, IoFilter} from 'react-icons/io5'
+import {IoFilter} from 'react-icons/io5'
 
 // Components
 import NavBar from '../../components/navbar/navbar'
-import Footer from '../../components/footer/footer'
-import Modal from '../../components/modal/Modal';
 import { Button } from '../../components/button/button';
 import { ModalTest } from '../../components/modal/ModalTest';
 

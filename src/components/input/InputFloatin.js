@@ -42,7 +42,7 @@ export const InputFloatin = ({
                 value={value}
                 defaultValue={defaultValue}
                 onChange={e=>handleChange(e)}
-                className={`peer inherit transition duration-600 placeholder-transparent decoration-none ${statut=="normal" && themes[theme].normal} ${statut=="error" && themes[theme].error} ${statut=="valid" && themes[theme].valid} ${sizes[size].normal}`}
+                className={`peer inherit transition duration-600 placeholder-transparent decoration-none ${statut==="normal" && themes[theme].normal} ${statut==="error" && themes[theme].error} ${statut==="valid" && themes[theme].valid} ${sizes[size].normal}`}
                 placeholder={placeholder} />
             <label htmlFor={id} className={`absolute z-10 top-0 left-0 ${sizes[size].floater} ${values.length > 0  && '-translate-y-1.5 text-sm'} peer-focus:-translate-y-1.5 peer-focus:text-sm unselectable  duration-300`}>{placeholder}</label>
         </div>                    

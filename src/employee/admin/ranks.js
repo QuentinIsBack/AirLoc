@@ -1,15 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';  
+import React, { useEffect, useState } from 'react';  
 
 // Components
 import NavBar from '../../components/navbar/navbar-employee'
 import Footer from '../../components/footer/footer'
-import Modal from '../../components/modal/Modal';
 import { Button } from '../../components/button/button';
 import { ModalTest } from '../../components/modal/ModalTest';
 import useRank from '../../hooks/useRank';
 import { InputFloating } from '../../components/input/inputfloating';
 import { InputFloatin } from '../../components/input/InputFloatin';
-import { CreateRank, GetUserWithRank, UpdateRank } from '../../context/RankContext';
+import { UpdateRank } from '../../context/RankContext';
 import { Table } from '../../components/Table/Table';
 import { TableHead } from '../../components/Table/TableHead';
 import { TableItem } from '../../components/Table/TableItem';
@@ -17,7 +16,6 @@ import { BadgeRank } from '../../components/badge/Badge';
 import { SubMenu } from './submenu';
 import { EditSettings } from '../../components/modal/EditSetting';
 import ListBox from '../../components/ListBox/ListBox';
-import UserDataService from '../../services/UserData.services'
 import RankDataServices from '../../services/RankData.services';
 
 export default function Page() {
@@ -143,7 +141,7 @@ const ListSearch = ({setSelectRank}) => {
 const SideDetails = ({selectRank, setModalDelete}) => {
     const { Rank, setRank } = useRank();
 
-    const [testname, setTestname] = useState();
+    const [ testname ] = useState();
 
     const list = [
         { name: 'Wade Cooper', color: "" },
@@ -220,18 +218,12 @@ const SideDetails = ({selectRank, setModalDelete}) => {
 }
 
 const ModalCreateRank = ({show, close}) => {
-    const { Rank, setRank } = useRank();
-
-    const [name, setName] = useState('Sans-Titre')
-    const [deletable, setDeletable] = useState(true)
-    const [color, setColor] = useState('#6b72800')
-    const [power, setPower] = useState(1)
 
     const [rankUp, setRankUp] = useState({
-        name: name ? name : "error",
-        deletable: deletable ? deletable : true,
-        color: color ? color : "error",
-        power: power ? power : 1,
+        name: "error",
+        deletable: true,
+        color: "error",
+        power: 1,
     })
 
     const createRank = () => {
@@ -258,7 +250,7 @@ const ModalCreateRank = ({show, close}) => {
 
 
                     <InputFloating id={'name'} onChange={(e)=>handleOnChange(e)} name={'Nom du rôle'} placeholder={'Nom du rôle'} />
-                    <input id={'deletable'} checked={deletable} type={'checkbox'} onChange={(e)=>handleOnChange(e)} className='checkbox checkbox-sm' />
+                    <input id={'deletable'} checked={rankUp.deletable} type={'checkbox'} onChange={(e)=>handleOnChange(e)} className='checkbox checkbox-sm' />
                     <input id={'color'} type={'color'} onChange={(e)=>handleOnChange(e)} className='border px-2 py-1 border-black' placeholder='Color' />
                     <InputFloating id={'power'} onChange={(e)=>handleOnChange(e)} name={'Puissance du rôle'} placeholder={'Puissance du rôle'} />
 

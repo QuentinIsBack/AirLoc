@@ -8,7 +8,7 @@ import Footer from '../components/footer/footer'
 import { UserContext } from '../context/UserContext';
 
 // Icons
-import { RiHome2Fill, RiCheckFill, RiStarLine, RiStarFill, RiShieldLine, RiShieldCheckLine, RiCloseFill } from "react-icons/ri";
+import { RiHome2Fill, RiStarLine, RiShieldLine, RiCloseFill } from "react-icons/ri";
 
 export default function Page() {
     const padding = `px-10 sm:px-10 md:px-10 lg:px-20 xl:px-80 2x:px-80`;
@@ -30,7 +30,7 @@ export default function Page() {
                                 {/* Profil */}
                                 <div className='self-center'>
                                     <button className='overflow-hidden'>
-                                        <img style={{
+                                        <img alt='profile' style={{
                                             width: 150,
                                             height: 150,
                                             borderRadius: '50%',
@@ -45,11 +45,11 @@ export default function Page() {
                                 <div className='pt-4 flex flex-col text-sm font-medium space-y-4'>
                                     <div className='flex items-center'>
                                         <RiStarLine className='mr-2' size={20}/>
-                                        <a href='#' className='hover:underline'>0 commentaires</a>
+                                        <div href='#' className='hover:underline'>0 commentaires</div>
                                     </div>
                                     <div className='flex items-center'>
                                         <RiShieldLine className='mr-2' size={20}/>
-                                        <a href='#' className='hover:underline'>Identité non vérifiée</a>
+                                        <div href='#' className='hover:underline'>Identité non vérifiée</div>
                                     </div>
                                 </div>
 
@@ -69,7 +69,7 @@ export default function Page() {
 
                                 {/* A savoir */}
                                 <div className='pt-4 text-xs font-normal'>
-                                        <a href='#' className='font-semibold underline'>En savoir plus</a> sur la manière dont la confirmation des informations des comptes contribues à garantir la securité de la commaunté AirLoc.
+                                        <div href='#' className='font-semibold underline'>En savoir plus</div> sur la manière dont la confirmation des informations des comptes contribues à garantir la securité de la commaunté AirLoc.
                                     </div>
 
                             </div>
@@ -94,7 +94,7 @@ export default function Page() {
                         {/* Habitation */}
                         <div className='pt-10 flex flex-row items-center'>
                             <RiHome2Fill className='mr-2' size={18}/>
-                            <a href='#' className='font-normal text-sm'>Habite à </a> 
+                            <div href='#' className='font-normal text-sm'>Habite à </div> 
                         </div>
 
                         <div className='border-t my-6' />
@@ -108,7 +108,7 @@ export default function Page() {
 
                         {/* Signaler */}
                         <div className='pt-6'>
-                            <a className='font-semibold text-xs underline' href='#'>Signaler ce profil</a>
+                            <div className='font-semibold text-xs underline' href='#'>Signaler ce profil</div>
                         </div>
 
                     </div>

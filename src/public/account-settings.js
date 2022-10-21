@@ -12,8 +12,6 @@ import { UserContext } from '../context/UserContext';
 import { FaRegAddressCard, FaShieldAlt, FaEuroSign, FaRegBell, FaUnlock, FaGlobeEurope, FaPlane, FaTools, FaRegCreditCard } from "react-icons/fa";
 
 export default function Page() {
-    const padding = `px-10 sm:px-10 md:px-10 lg:px-20 xl:px-80 2x:px-80`;
-
     const { User } = useContext(UserContext)
     const navigate = useNavigate();
 

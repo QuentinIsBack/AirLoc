@@ -17,7 +17,6 @@ const themes = {
 
 // Application
 export const EditSettings = ({  
-    id,
     name,
     message,
     description,

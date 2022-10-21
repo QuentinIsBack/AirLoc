@@ -9,20 +9,12 @@ import Footer from '../../components/footer/footer'
 
 // Firebase
 import{ db } from "../../firebase.config"
-import { doc, getDoc, onSnapshot } from "firebase/firestore";
+import { doc, onSnapshot } from "firebase/firestore";
 import { UserContext } from '../../context/UserContext';
 
-
-import { FaSwimmingPool, FaShower, FaCarBattery, FaFireExtinguisher } from 'react-icons/fa';
-import { MdHotTub, MdKitchen, MdLocalParking, MdSecurity, MdVerifiedUser } from 'react-icons/md';
-import { RiBilliardsLine, RiParkingLine, RiWindyFill, RiHome2Fill, RiCheckFill, RiStarLine, RiStarFill, RiShieldCheckLine } from 'react-icons/ri';
-import { BsTree, BsFillDoorClosedFill } from 'react-icons/bs';
+import { RiCheckFill} from 'react-icons/ri';
+import { BsFillDoorClosedFill } from 'react-icons/bs';
 import { GoClock } from 'react-icons/go';
-import { GrWorkshop } from 'react-icons/gr';
-import { IoIosFitness, IoIosTv } from 'react-icons/io';
-import { AiOutlineWifi, AiFillHeart, AiOutlinePartition } from 'react-icons/ai';
-import { WiSmoke } from 'react-icons/wi';
-import { GiLightningDissipation, GiBarbecue, GiFlamer, GiChimney, GiWashingMachine } from 'react-icons/gi';
 import { Button } from '../../components/button/button';
 import { EquipmentRoom } from '../../components/homes/equipments';
 import { ModalTest } from '../../components/modal/ModalTest';
@@ -43,7 +35,7 @@ export default function Page() {
             setHome(doc.data())
         });
         return unsubscribe;
-    }, [])
+    }, [id])
 
     return (
         <>  
@@ -77,13 +69,13 @@ export default function Page() {
                                 </div>
                                 <div className='flex flex-row justify-center space-x-4 h-full'>
                                     <button className='border hover:border-black h-full rounded-xl flex flex-col items-center p-3 space-y-2.5'>
-                                        <AiOutlinePartition size={30} />
+                                        <diviOutlinePartition size={30} />
                                         <div className='text-sm'>
                                             Share
                                         </div>
                                     </button>
                                     <button className='border hover:border-black h-full rounded-xl flex flex-col items-center p-3 space-y-2.5'>
-                                        <AiFillHeart size={30} />
+                                        <diviFillHeart size={30} />
                                         <div className='text-sm'>
                                             J'aime
                                         </div>
@@ -263,7 +255,7 @@ export default function Page() {
                         <div className='flex items-center pb-3 text-base font-medium leading-snug'><span className='mr-2'><RiCheckFill fill='green' size={20}/></span> Avis d'imposition 2021</div>
                         <div className='flex items-center pb-3 text-base font-medium leading-snug'><span className='mr-2'><RiCheckFill fill='green' size={20}/></span> Taux d'accaptation élevé&nbsp;<span className='text-green-700'>98%</span></div>
 
-                        <div className='pt-2 text-sm font-normal leading-snug'><a href='#' className='font-semibold underline'>En savoir plus</a> sur la manière dont la confirmation des informations des comptes contribues à garantir la securité de la commaunté AirLoc.</div>
+                        <div className='pt-2 text-sm font-normal leading-snug'><div href='#' className='font-semibold underline'>En savoir plus</div> sur la manière dont la confirmation des informations des comptes contribues à garantir la securité de la commaunté AirLoc.</div>
                     </div>
                     <div className='border-t my-4' />
                     <div className='pb-4'>
@@ -305,7 +297,7 @@ function Contener({title, children}){
 }
 
 function getAvailable(available){
-    if(available == 1){
+    if(available === 1){
         return (
             <>
                 <div className='py-8'>

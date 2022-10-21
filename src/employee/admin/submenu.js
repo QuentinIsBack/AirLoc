@@ -1,6 +1,6 @@
-import React,{useState, useEffect, useContext} from 'react';  
+import React from 'react';  
 
-import { Disclosure, Menu } from '@headlessui/react'
+import { Disclosure } from '@headlessui/react'
 import { NavLink } from 'react-router-dom';
 import { Button } from '../../components/button/button';
 

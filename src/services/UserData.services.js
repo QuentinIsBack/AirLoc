@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 import { db } from "../firebase.config";
 import {
   collection,
@@ -9,7 +7,6 @@ import {
   updateDoc,
   deleteDoc,
   doc,
-  onSnapshot,
 } from "firebase/firestore";
 
 const userCollectionRef = collection(db, "users");

@@ -1,7 +1,5 @@
 import { Dialog, Transition } from '@headlessui/react'
-import { Fragment, useContext, useState } from 'react'
-import { UserContext } from '../../context/UserContext'
-import { Button } from '../button/button'
+import { Fragment } from 'react'
 
 export const ModalTest = ({ show, close, size, children }) => {
 

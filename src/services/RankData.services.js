@@ -1,7 +1,5 @@
-import { useState } from "react";
-
 import { db } from "../firebase.config";
-import { collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc, onSnapshot } from "firebase/firestore";
+import { collection, getDocs, getDoc, addDoc, updateDoc, deleteDoc, doc } from "firebase/firestore";
 
 const rankCollectionRef = collection(db, "ranks");
 

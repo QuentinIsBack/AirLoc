@@ -1,4 +1,4 @@
-import React, { Children, useState } from "react";
+import React from "react";
 
 const colors = {
     "black": "outline-gray-500",
@@ -7,18 +7,9 @@ const colors = {
 }
 
 export const GroupInput = ({
-
-    id,
-    type,
-    name,
     color,
-    placeholder,
-    onChange,
     children,
-
 }) => {
-    const [value, setValue] = useState("");
-
     return (
         <>
             <div className={`rounded-md outline outline-1 ${colors[color]}`}>
@@ -27,7 +18,6 @@ export const GroupInput = ({
 
             
         </>
-        
     )
 }
 

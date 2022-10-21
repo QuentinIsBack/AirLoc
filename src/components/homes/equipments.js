@@ -1,15 +1,12 @@
-import React, { Component, useState, useEffect } from 'react';  
+import React from 'react';  
 
 // Import Icon
-import { FaSwimmingPool, FaShower, FaCarBattery, FaFireExtinguisher } from 'react-icons/fa';
-import { MdHotTub, MdKitchen, MdLocalParking, MdSecurity } from 'react-icons/md';
-import { RiBilliardsLine, RiParkingLine, RiWindyFill } from 'react-icons/ri';
+import { FaSwimmingPool } from 'react-icons/fa';
+import { MdHotTub } from 'react-icons/md';
+import { RiBilliardsLine } from 'react-icons/ri';
 import { BsTree } from 'react-icons/bs';
-import { GrWorkshop } from 'react-icons/gr';
-import { IoIosFitness, IoIosTv } from 'react-icons/io';
-import { AiOutlineWifi } from 'react-icons/ai';
-import { WiSmoke } from 'react-icons/wi';
-import { GiLightningDissipation, GiBarbecue, GiFlamer, GiChimney, GiWashingMachine } from 'react-icons/gi';
+import { IoIosFitness } from 'react-icons/io';
+import { GiLightningDissipation, GiBarbecue, GiFlamer, GiChimney } from 'react-icons/gi';
 
 export function Equipment(value, size) {
     switch (value) {
@@ -22,6 +19,7 @@ export function Equipment(value, size) {
         case 7: return (<GiChimney size={size} />)
         case 8: return (<BsTree size={size} />)
         case 9: return (<IoIosFitness size={size} />)
+        default: return ('')
     }
 }
 
@@ -81,5 +79,6 @@ export function EquipmentRoom(value, size) {
                 <div className='text-left text-md text-gray-800'>Appareils de fitness</div>
             </div>
         )
+        default: return ('')
     }
 }

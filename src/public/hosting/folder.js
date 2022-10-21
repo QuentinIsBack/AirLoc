@@ -5,16 +5,14 @@ import { RadioGroup } from '@headlessui/react'
 import NavBar from '../../components/navbar/navbar'
 import Footer from '../../components/footer/footer'
 
-import { FaHouseUser, FaFolder } from 'react-icons/fa';
 import {FiBook} from 'react-icons/fi'
 import {IoBriefcaseOutline, IoEyeOffOutline, IoBusinessOutline, IoPersonOutline, IoFootstepsOutline, IoAdd,IoPerson} from 'react-icons/io5'
-import { RiBilliardsLine, RiParkingLine, RiWindyFill, RiHome2Fill, RiCheckFill, RiStarLine, RiStarFill, RiShieldCheckLine } from 'react-icons/ri';
 import { ModalTest } from '../../components/modal/ModalTest';
 import { Button } from '../../components/button/button';
 
 // Firebase
 import{ db } from "../../firebase.config"
-import { doc, getDoc, onSnapshot, deleteDoc, collection, updateDoc, deleteField} from "firebase/firestore";
+import { doc, updateDoc, deleteField} from "firebase/firestore";
 import { UserContext } from '../../context/UserContext';
 import { InputFloating } from '../../components/input/inputfloating';
 
@@ -83,9 +81,6 @@ export default function Page() {
     const [modalSituation, setModalSituation] = useState(false);
     const [modalGarant, setModalGarant] = useState(false);
 
-    function openModalGarant(){
-        setModalGarant(true)
-    }
     function closeModalGarant(){
         setModalGarant(false)
     }
@@ -111,30 +106,30 @@ export default function Page() {
                 <div className='text-4xl font-semibold text-night text-left'>Mon espace locataire</div>
                 <div className='text-md font-normal text-gray-500 text-left'>Avant de pouvoir commencer à candidater, vous devez vous créer un dossier locataire.</div>
                 <div className='pt-4 grid grid-cols-4 gap-5'>
-                    <a href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
+                    <div href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
                         <img className='h-10rem w-full object-cover object-center' src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/8771fd64507519.5ad4edb4b9968.jpg" alt="blog" />
                         <div className='p-6'>
                             <div className='text-lg font-semibold text-white'>Complétez votre dossier locataire</div>
                         </div>
-                    </a> 
-                    <a href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
+                    </div> 
+                    <div href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
                         <img className='h-10rem w-full object-cover object-center' src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/63719799566833.5ef568ce83b51.jpg" alt="blog" />
                         <div className='p-6'>
                             <div className='text-lg font-semibold text-white'>Candidatez à des logements en 1 clic</div>
                         </div>
-                    </a>
-                    <a href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
+                    </div>
+                    <div href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
                         <img className='h-10rem w-full object-cover object-center' src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/bf880164507519.5ad4ed2d62190.jpg" alt="blog" />
                         <div className='p-6'>
                             <div className='text-lg font-semibold text-white'>Signez votre bail numériqumnt</div>
                         </div>
-                    </a>
-                    <a href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
+                    </div>
+                    <div href='#' className='shadow-dropdown rounded-xl bg-black overflow-hidden'>
                         <img className='h-10rem w-full object-cover object-center' src="https://mir-s3-cdn-cf.behance.net/project_modules/fs/8771fd64507519.5ad4edb4b9968.jpg" alt="blog" />
                         <div className='p-6'>
                             <div className='text-lg font-semibold text-white'>Complétez votre dossier locataire</div>
                         </div>
-                    </a>
+                    </div>
                 </div>
             </div>
 
@@ -169,7 +164,7 @@ export default function Page() {
             </div>
 
             {/* Mon emploi */}
-            {selectedSituation.name !=  "Sans emploi" ?
+            {selectedSituation.name !==  "Sans emploi" ?
                 <div className={`${padding} pt-14 pb-6 space-y-3`}>
                     <div className='text-3xl font-semibold text-night text-left'>Mon emploi</div>
                     <div className='text-md font-normal text-gray-500 text-left'>Vous êtes sur le point de devenir un locataire formidable. Voici comment commencer.</div>
@@ -194,7 +189,7 @@ export default function Page() {
                         </div>
                     </RadioGroup>
 
-                    <div className={`${selectedContrat == contratList[0] ? "visible animate-showin" : "hidden"}`}>
+                    <div className={`${selectedContrat === contratList[0] ? "visible animate-showin" : "hidden"}`}>
                         <div className='pt-6 text-xl font-semibold text-night text-left'>Type de contrat ?</div>
                         <div className='text-md font-normal text-gray-500 text-left'>Vous êtes sur le point de devenir un locataire formidable. Voici comment commencer.</div>
                         <RadioGroup value={selectedType} onChange={setSelectedType}>
@@ -217,7 +212,7 @@ export default function Page() {
                             </div>
                         </RadioGroup>
 
-                        <div className={`${selectedType == typeContratList[0] ? "visible animate-showin" : "hidden"}`}>
+                        <div className={`${selectedType === typeContratList[0] ? "visible animate-showin" : "hidden"}`}>
                             <div className='pt-6 text-xl font-semibold text-night text-left'>Êtes-vous en période d'essaie ?</div>
                             <div className='text-md font-normal text-gray-500 text-left'>Vous êtes sur le point de devenir un locataire formidable. Voici comment commencer.</div>
                             <RadioGroup value={selectedTraining} onChange={setSelectedTraining}>
@@ -240,7 +235,7 @@ export default function Page() {
                                 </div>
                             </RadioGroup>
 
-                            <div className={`${selectedTraining == trainingList[0] || selectedTraining == trainingList[1] ? "visible animate-showin" : "hidden"}`}>
+                            <div className={`${selectedTraining === trainingList[0] || selectedTraining === trainingList[1] ? "visible animate-showin" : "hidden"}`}>
                                 <div className='pt-6 text-xl font-semibold text-night text-left'>Date de début ?</div>
                                 <div className='text-md font-normal text-gray-500 text-left'>Vous êtes sur le point de devenir un locataire formidable. Voici comment commencer.</div>
                                 <div className='pt-4 w-1/4'>
@@ -356,7 +351,7 @@ const SituationModal = ({show, close}) => {
 }
 
 const GarantModal = ({show, close, garant}) => {
-    const { User, currentUser } = useContext(UserContext)
+    const { currentUser } = useContext(UserContext)
     console.log(`users/`+currentUser.uid+'/folder/cautions/'+garant)
 
     const delDoc = async () => {

@@ -1,7 +1,6 @@
 // Import
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { useNavigate } from 'react-router-dom';
 
 import { IoChevronUp, IoClose } from "react-icons/io5";
 
@@ -9,8 +8,6 @@ import './footer.css'
 
 export default function Component(props) {
     const [open, setOpen] = useState(false)
-    const navigate = useNavigate();
-
 
     return (
         <>
@@ -71,7 +68,7 @@ export default function Component(props) {
                                  
                                 <div className={`snap-y overflow-y-auto py-2 h-17rem grid grid-flow-row gap-y-20 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4 gap-5 px-20 sm:px-20 md:px-20 lg:px-20 xl:px-20 2xl:px-40`}>
                                     <div className='snap-normal snap-center flex flex-col grap-4 mr-5 text-gray-800 space-y-4'>
-                                        <a className='footertitle'>Assistance</a>
+                                        <div className='footertitle'>Assistance</div>
                                         <button className='footersub'>Centre d'aide</button>
                                         <button className='footersub'>Informations de sécurité</button>
                                         <button className='footersub'>Options d'annulation</button>
@@ -80,14 +77,14 @@ export default function Component(props) {
                                         <button className='footersub'>Signaler un problème de voisinage</button>
                                     </div>
                                     <div className='snap-normal snap-center flex flex-col grap-4 mr-5 text-gray-800 space-y-4'>
-                                        <a className='footertitle'>Communauté</a>
+                                        <div className='footertitle'>Communauté</div>
                                         <button className='footersub'>Airloc.org : réponse aux catastrophes</button>
                                         <button className='footersub'>Soutenir les réfugiés afghans</button>
                                         <button className='footersub'>La diversité et l'intégration</button>
                                         <button className='footersub'>Lutte contre la discrimination</button>
                                     </div>
                                     <div className='snap-normal snap-center flex flex-col grap-4 mr-5 text-gray-800 space-y-4'>
-                                        <a className='footertitle'>Accueil de voyageurs</a>
+                                        <div className='footertitle'>Accueil de voyageurs</div>
                                         <button className='footersub'>Devenir bailleur</button>
                                         <button className='footersub'>AirCover : protection locataire</button>
                                         <button className='footersub'>Ressources pour les bailleur</button>
@@ -96,7 +93,7 @@ export default function Component(props) {
                                         <button className='footersub'>Accueillir de manière responsable</button>
                                     </div>
                                     <div className='snap-normal snap-center flex flex-col grap-4 mr-5 text-gray-800 space-y-4'>
-                                        <a className='footertitle'>À propos</a>
+                                        <div className='footertitle'>À propos</div>
                                         <button className='footersub'>Newsroom</button>
                                         <button className='footersub'>En savoir plus sur les nouveautés</button>
                                         <button className='footersub'>Lettre de nos fondateurs</button>

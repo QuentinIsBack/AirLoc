@@ -13,13 +13,10 @@ const sizes = {
 }
 
 export const Input = ({  
-    children,
-
     id,
     type,
     defaultValue,
     onChange,
-    className,
     placeholder,
 
     theme,
@@ -32,7 +29,7 @@ export const Input = ({
             type={type}
             defaultValue={defaultValue}
             onChange={onChange}
-            className={`transition duration-600 decoration-none ${statut=="normal" && themes[theme].normal} ${statut=="error" && themes[theme].error} ${statut=="valid" && themes[theme].valid} ${sizes[size]}`}
+            className={`transition duration-600 decoration-none ${statut==="normal" && themes[theme].normal} ${statut==="error" && themes[theme].error} ${statut==="valid" && themes[theme].valid} ${sizes[size]}`}
             placeholder={placeholder} />
     )
 }
