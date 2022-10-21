@@ -15,7 +15,7 @@ import { GroupInput } from '../input/groupinput'
 
 //
 import { doc, setDoc } from "firebase/firestore";
-import { InputFloatin } from '../input/InputFloatin';
+import { InputFloating } from '../input/InputFloating';
 
   
 export default function Component() { 
@@ -239,19 +239,19 @@ const ModalSignUp = ({show, close}) => {
                     <div className='pt-2 text-md font-normal text-gray-500 text-left'>Pour commencer à rechercher et candidater à des logements, dites nous en plus sur vous.</div>
                     
                     <div className='pt-6 flex flex-row space-x-5 pb-5'>
-                        <InputFloatin id={'lastname'} type={'text'} placeholder={'Entrez votre nom'} onChange={(e) => setData( {...data, lastname: e.target.value } )} />  
-                        <InputFloatin id={'firstname'} type={'text'} placeholder={'Entrez votre prénom'} onChange={(e) => setData( {...data, firstname: e.target.value } )} />  
+                        <InputFloating id={'lastname'} type={'text'} placeholder={'Entrez votre nom'} onChange={(e) => setData( {...data, lastname: e.target.value } )} />  
+                        <InputFloating id={'firstname'} type={'text'} placeholder={'Entrez votre prénom'} onChange={(e) => setData( {...data, firstname: e.target.value } )} />  
                     </div>
 
                     <div className='pb-5'>
-                        <InputFloatin id={'email'} type={'email'} placeholder={'Entrez votre adresse email'} onChange={(e) => setData( {...data, email: e.target.value } )}/>  
+                        <InputFloating id={'email'} type={'email'} placeholder={'Entrez votre adresse email'} onChange={(e) => setData( {...data, email: e.target.value } )}/>  
                         <div className={`${emailValid.length === 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{emailValid}</div>
                     </div>
 
                     <GroupInput color={passwordValid.length === 0 ? "black" : "red"}>
-                        <InputFloatin id={'password'} type={'password'} placeholder={'Entrez votre adresse email'}  onChange={(e) => setData( {...data, password: e.target.value } )} />  
+                        <InputFloating id={'password'} type={'password'} placeholder={'Entrez votre adresse email'}  onChange={(e) => setData( {...data, password: e.target.value } )} />  
                             <div className={`border-b ${passwordValid.length === 0 ? "border-black" : "border-red-500"} w-full`} />
-                        <InputFloatin id={'confirmPassword'} type={'password'} placeholder={'Entrez votre adresse email'} onChange={(e) => setData( {...data, confirmPassword: e.target.value } )} />  
+                        <InputFloating id={'confirmPassword'} type={'password'} placeholder={'Entrez votre adresse email'} onChange={(e) => setData( {...data, confirmPassword: e.target.value } )} />  
                     </GroupInput>
                     <div className={`${passwordValid.length === 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{passwordValid}</div>
 
@@ -306,11 +306,11 @@ const ModalSignIn = ({show, close}) => {
                     <div className='pt-2 text-md font-normal text-gray-500 text-left'>Pour commencer à rechercher et candidater à des logements, connectez-vous.</div>
 
                     <div className='pt-6 pb-5'>
-                        <InputFloatin id={'email'} type={'email'} placeholder={'Adresse email'}  onChange={(e) => setData( {...data, email: e.target.value } )} />  
+                        <InputFloating id={'email'} type={'email'} placeholder={'Adresse email'}  onChange={(e) => setData( {...data, email: e.target.value } )} />  
                         <div className={`${emailValid.length === 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{emailValid}</div>
                     </div>
 
-                    <InputFloatin id={'password'} type={'password'} placeholder={'Mot de passe'} onChange={e => setData( {...data, password: e.target.value } )}/>  
+                    <InputFloating id={'password'} type={'password'} placeholder={'Mot de passe'} onChange={e => setData( {...data, password: e.target.value } )}/>  
                     <div className={`${passwordValid.length === 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{passwordValid}</div>
 
                     <div className='pt-8 flex justify-start'>

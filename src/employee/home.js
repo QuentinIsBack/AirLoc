@@ -5,7 +5,7 @@ import NavBar from '../components/navbar/navbar-employee'
 import Footer from '../components/footer/footer'
 
 import { FaHouseUser, FaFolder } from 'react-icons/fa';
-import { InputFloatin } from '../components/input/InputFloatin';
+import { InputFloating } from '../components/input/InputFloating';
 
 export default function Page() {
     const padding = `px-80`;
@@ -50,9 +50,9 @@ export default function Page() {
             </div>
 
             <div className='mt-40 flex flex-row space-x-6 p-6 bg-gray-100'>
-                <InputFloatin id={'normal'} placeholder={'Adresse email'} />  
-                <InputFloatin id={'erroh'} statut={'error'} placeholder={'Nom du rôle'} />  
-                <InputFloatin id={'valdie'} statut={'valid'} placeholder={'Nom du rôle'} />  
+                <InputFloating id={'normal'} placeholder={'Adresse email'} />  
+                <InputFloating type={'date'} id={'erroh'} statut={'error'} placeholder={'Nom du rôle'} />  
+                <InputFloating id={'valdie'} statut={'valid'} placeholder={'Nom du rôle'} />  
             </div>
 
             <Footer />

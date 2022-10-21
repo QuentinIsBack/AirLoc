@@ -6,7 +6,7 @@ import Footer from '../../components/footer/footer'
 import { Button } from '../../components/button/button';
 import { ModalTest } from '../../components/modal/ModalTest';
 import useRank from '../../hooks/useRank';
-import { InputFloatin } from '../../components/input/InputFloatin';
+import { InputFloating } from '../../components/input/InputFloating';
 import { Input } from '../../components/input/Input';
 import { UpdateRank } from '../../context/RankContext';
 import { Table } from '../../components/Table/Table';
@@ -169,7 +169,7 @@ const SideDetails = ({selectRank, setModalDelete}) => {
                                     theme={'cyan'}
                                 >
                                     <div className='flex space-x-5'>
-                                        <InputFloatin id={'rankname'} type={'text'} defaultValue={selectRank.name} placeholder={'Nom'} />  
+                                        <InputFloating id={'rankname'} type={'text'} defaultValue={selectRank.name} placeholder={'Nom'} />  
                                     </div>
                                 </EditSettings>
 
@@ -199,7 +199,7 @@ const SideDetails = ({selectRank, setModalDelete}) => {
                                     theme={'cyan'}
                                 >
                                     <div className='flex space-x-5'>
-                                        <InputFloatin id={'rankpower'} type={'text'} defaultValue={selectRank.power} placeholder={'Power'} />  
+                                        <InputFloating id={'rankpower'} type={'text'} defaultValue={selectRank.power} placeholder={'Power'} />  
                                     </div>
                                 </EditSettings>
                             </div>
@@ -249,9 +249,8 @@ const ModalCreateRank = ({show, close}) => {
                     <div className='pt-2 pb-6 text-md font-normal text-gray-500 text-left'>Communiquez avec vos correspondants via la plateforme afin de sécuriser et de protéger vos messages.</div>
 
                     <div className='flex flex-row justify-between space-x-5'>
-                        <Input placeholder={'test'} />
-                        <InputFloatin id={'name'} type={'text'} placeholder={'Nom du rôle'} onChange={(e)=>handleOnChange(e)}/>  
-                        <InputFloatin id={'power'} type={'text'} placeholder={'Puissance du rôle'} onChange={(e)=>handleOnChange(e)}/>  
+                        <InputFloating id={'name'} type={'text'} placeholder={'Nom du rôle'} onChange={(e)=>handleOnChange(e)}/>  
+                        <InputFloating id={'power'} type={'text'} placeholder={'Puissance du rôle'} onChange={(e)=>handleOnChange(e)}/>  
                     </div>
 
                     <div className='pt-5 flex flex-row justify-between space-x-5'>

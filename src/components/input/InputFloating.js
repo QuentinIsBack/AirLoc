@@ -15,7 +15,7 @@ const sizes = {
     }
 }
 
-export const InputFloatin = ({  
+export const InputFloating = ({  
     id,
     type,
     value,
@@ -34,6 +34,7 @@ export const InputFloatin = ({
         onChange(e)
     }
 
+
     return (
         <div className="relative w-full">
             <input
@@ -42,14 +43,14 @@ export const InputFloatin = ({
                 value={value}
                 defaultValue={defaultValue}
                 onChange={e=>handleChange(e)}
-                className={`peer inherit transition duration-600 placeholder-transparent decoration-none truncate  ${statut==="normal" && themes[theme].normal} ${statut==="error" && themes[theme].error} ${statut==="valid" && themes[theme].valid} ${sizes[size].normal}`}
+                className={`peer inherit transition duration-600 placeholder-transparent decoration-none truncate ${statut==="normal" && themes[theme].normal} ${statut==="error" && themes[theme].error} ${statut==="valid" && themes[theme].valid} ${sizes[size].normal}`}
                 placeholder={placeholder} />
-            <label htmlFor={id} className={`truncate absolute z-10 top-0 left-0 ${sizes[size].floater} ${values.length > 0  && '-translate-y-1.5 text-sm'} peer-focus:-translate-y-1.5 peer-focus:text-sm unselectable  duration-300 `}>{placeholder}</label>
+            <label htmlFor={id} className={`truncate absolute z-10 top-0 left-0 ${sizes[size].floater} ${values.length > 0  && '-translate-y-1.5 text-sm'} peer-focus:-translate-y-1.5 peer-focus:text-sm unselectable duration-300 `}>{placeholder}</label>
         </div>                    
     )
 }
 
-InputFloatin.defaultProps = {
+InputFloating.defaultProps = {
     theme: "default",
     size: "default",
     statut: "normal",

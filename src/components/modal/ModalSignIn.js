@@ -4,7 +4,7 @@ import { UserContext } from '../../context/UserContext'
 
 import { IoPhonePortraitOutline, IoLogoGoogle } from 'react-icons/io5'
 
-import { InputFloatin } from '../input/InputFloatin'
+import { InputFloating } from '../input/InputFloating'
 
 //
 import { doc, setDoc } from "firebase/firestore";
@@ -119,9 +119,9 @@ export default function SignInModal() {
                         {status.connexionError}
                       </div>
 
-                        <InputFloatin id={'email'} type={'email'} placeholder={'Adresse e-mail'} onChange={(e) => setData( {...data, email: e.target.value } )} />  
+                        <InputFloating id={'email'} type={'email'} placeholder={'Adresse e-mail'} onChange={(e) => setData( {...data, email: e.target.value } )} />  
                         <div className='border-b border-gray-500 w-full' />
-                        <InputFloatin id={'password'} type={'password'} placeholder={'Mot de passe'} onChange={(e) => setData( {...data, password: e.target.value } )} />  
+                        <InputFloating id={'password'} type={'password'} placeholder={'Mot de passe'} onChange={(e) => setData( {...data, password: e.target.value } )} />  
 
 
                       </div>

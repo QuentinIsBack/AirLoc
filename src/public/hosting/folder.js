@@ -14,7 +14,7 @@ import { Button } from '../../components/button/button';
 import{ db } from "../../firebase.config"
 import { doc, updateDoc, deleteField} from "firebase/firestore";
 import { UserContext } from '../../context/UserContext';
-import { InputFloatin } from '../../components/input/InputFloatin';
+import { InputFloating } from '../../components/input/InputFloating';
 
 
 
@@ -239,7 +239,7 @@ export default function Page() {
                                 <div className='pt-6 text-xl font-semibold text-night text-left'>Date de début ?</div>
                                 <div className='text-md font-normal text-gray-500 text-left'>Vous êtes sur le point de devenir un locataire formidable. Voici comment commencer.</div>
                                 <div className='pt-4 w-1/4'>
-                                    <InputFloatin id={'date'} type={'text'} placeholder={'Date de début'} />  
+                                    <InputFloating id={'date'} type={'text'} placeholder={'Date de début'} />  
                                 </div>
                             </div>
 

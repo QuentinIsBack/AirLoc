@@ -4,7 +4,7 @@ import React, { useContext } from 'react';
 import NavBar from '../../components/navbar/navbar'
 import Footer from '../../components/footer/footer'
 import { EditSettings } from '../../components/modal/EditSetting';
-import { InputFloatin } from '../../components/input/InputFloatin';
+import { InputFloating } from '../../components/input/InputFloating';
 
 // Firebase
 import { UserContext } from '../../context/UserContext';
@@ -35,8 +35,8 @@ export default function Page() {
                     theme={'cyan'}
                   >
                     <div className='flex space-x-5'>
-                      <InputFloatin id={'firstname'} type={'text'} placeholder={'Nom'} />  
-                      <InputFloatin id={'lastname'} type={'text'} placeholder={'Prénom'} />  
+                      <InputFloating id={'firstname'} type={'text'} defaultValue={User.firstname} placeholder={'Nom'} />  
+                      <InputFloating id={'lastname'} type={'text'} defaultValue={User.lastname} placeholder={'Prénom'} />  
                     </div>
                   </EditSettings>
 
@@ -49,7 +49,7 @@ export default function Page() {
                     theme={'cyan'}
                   >
                     <div className='flex space-x-5'>
-                      <InputFloatin id={'email'} type={'email'} placeholder={'Adresse email'} />  
+                      <InputFloating id={'email'} type={'email'} defaultValue={User.email} placeholder={'Adresse email'} />  
                     </div>
                   </EditSettings>
 
@@ -62,9 +62,9 @@ export default function Page() {
                     theme={'cyan'}
                     >
                     <div className='flex space-x-5'>
-                      <InputFloatin id={'day'} type={'text'} placeholder={'Jour'} />  
-                      <InputFloatin id={'month'} type={'text'} placeholder={'Mois'} />  
-                      <InputFloatin id={'year'} type={'text'} placeholder={'Année'} />  
+                      <InputFloating id={'day'} type={'text'} placeholder={'Jour'} />  
+                      <InputFloating id={'month'} type={'text'} placeholder={'Mois'} />  
+                      <InputFloating id={'year'} type={'text'} placeholder={'Année'} />  
                     </div>
                   </EditSettings>
 
