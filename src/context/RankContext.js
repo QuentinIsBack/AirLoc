@@ -70,7 +70,6 @@ export function RankContextProvider(props){
             const newUserDataArray = querySnapshot.docs
               .map((doc) => ({ ...doc.data(), id: doc.id }));
       
-              console.log(newUserDataArray)
             setRank(newUserDataArray);
             setLoadingData(false)
           })

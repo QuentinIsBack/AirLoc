@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';  
+import React, { useContext, useEffect, useState } from 'react';  
 
 // Components
 import NavBar from '../../components/navbar/navbar-employee'
@@ -17,6 +17,8 @@ import { BadgeRank } from '../../components/badge/Badge';
 import { SubMenu } from './submenu';
 import { EditSettings } from '../../components/modal/EditSetting';
 import ListBox from '../../components/ListBox/ListBox';
+import UserDataService from '../../services/UserData.services'
+import RankDataServices from '../../services/RankData.services';
 
 export default function Page() {
     return (
@@ -38,12 +40,14 @@ export default function Page() {
 
 function Body() {
     const [modalCreate, setModalCreate] = useState(false);
+    const [modalDelete, setModalDelete] = useState(false);
     const [selectRank, setSelectRank] = useState();
 
     return (
         <>  
 
             <ModalCreateRank show={modalCreate} close={()=>setModalCreate(false)}  />
+            <ModalDeleteRank show={modalDelete} close={()=>setModalDelete(false)} selectRank={selectRank} setSelectRank={setSelectRank} />
 
             <div className={`h-full`}>
 
@@ -59,7 +63,7 @@ function Body() {
                             <div className='border border-y-transparent h-full'>
                                 <div className='border-b h-4.5rem flex items-center justify-between px-5'>
                                     <div className='text-xl font-bold text-night text-left'>Liste des rôles</div>
-                                    <a onClick={()=>setModalCreate(true)} className='cursor-pointer text-md hover:bg-gray-100/80 rounded-lg px-4 py-2 font-semibold text-night text-left underline'>Ajouter un rôle</a>
+                                    <button onClick={()=>setModalCreate(true)} className='cursor-pointer text-md hover:bg-gray-100/80 rounded-lg px-4 py-2 font-semibold text-night text-left underline'>Ajouter un rôle</button>
                                 </div>
                                 <div className='flex flex-col items-center justify-center p-5'>
                                     {ListSearch({setSelectRank})}
@@ -75,7 +79,7 @@ function Body() {
                                 <div className='text-xl font-bold text-night text-left'>Détails</div>
                             </div>
                             <div className='flex-grow'>
-                                {SideDetails({selectRank})}
+                                {SideDetails({selectRank, setModalDelete})}
                             </div>
                         </div>
                     </div>
@@ -88,8 +92,14 @@ function Body() {
 } 
  
 const ListSearch = ({setSelectRank}) => {
-    const { Rank, setRank } = useRank();
- 
+    const [ Rank, setRank ] = useState()
+
+
+    useEffect(()=> {
+        RankDataServices.getAllRanks({setRank})
+    }, [])
+
+
     return (
         <div className='w-full pt-6'>
             <Table>
@@ -101,8 +111,8 @@ const ListSearch = ({setSelectRank}) => {
                     <th>Supprimable</th>
                     <th>Action</th>
                 </TableHead>
-                {Rank && Rank.map(u =>
-                    <TableItem>
+                {Rank && Rank.map((u, index) =>
+                    <TableItem key={index}>
                         <td>
                             <input type="checkbox" className="checkbox checkbox-xs" />
                         </td>
@@ -130,7 +140,7 @@ const ListSearch = ({setSelectRank}) => {
     )
 }
 
-const SideDetails = ({selectRank}) => {
+const SideDetails = ({selectRank, setModalDelete}) => {
     const { Rank, setRank } = useRank();
 
     const [testname, setTestname] = useState();
@@ -161,7 +171,7 @@ const SideDetails = ({selectRank}) => {
                                     theme={'cyan'}
                                 >
                                     <div className='flex space-x-5'>
-                                        <InputFloating defaultValue={selectRank.name} onChange={(e)=>setTestname(e.target.value)} id={'name'} type={'text'} name={'Nom'} placeholder={selectRank.name} />
+                                        <InputFloatin id={'rankname'} type={'text'} defaultValue={selectRank.name} placeholder={'Nom'} />  
                                     </div>
                                 </EditSettings>
 
@@ -191,13 +201,13 @@ const SideDetails = ({selectRank}) => {
                                     theme={'cyan'}
                                 >
                                     <div className='flex space-x-5'>
-                                        <InputFloating defaultValue={selectRank.power} id={'power'} type={'text'} name={'Power'} placeholder={selectRank.power} />
+                                        <InputFloatin id={'rankpower'} type={'text'} defaultValue={selectRank.power} placeholder={'Power'} />  
                                     </div>
                                 </EditSettings>
                             </div>
                         </div>
                         <div className='flex flex-col items-center w-full space-y-2'>
-                            <a className='text-red-500 text-xs font-medium underline'>Supprimer le rôle</a>
+                            <button onClick={()=>setModalDelete(true)} className='text-red-500 text-xs font-medium underline'>Supprimer le rôle</button>
                             <div className='flex flex-row space-x-4 '>
                                 <Button theme={'red'} size='full'>Supprimer</Button>
                                 <Button theme={'cyan'} size='full'>Sauvegarder</Button>
@@ -217,9 +227,57 @@ const ModalCreateRank = ({show, close}) => {
     const [color, setColor] = useState('#6b72800')
     const [power, setPower] = useState(1)
 
+    const [rankUp, setRankUp] = useState({
+        name: name ? name : "error",
+        deletable: deletable ? deletable : true,
+        color: color ? color : "error",
+        power: power ? power : 1,
+    })
+
     const createRank = () => {
-        CreateRank({Rank, setRank}, name, deletable, color, power);
+        
+        RankDataServices.addRank(rankUp)
+
         close()
+    }
+
+
+    const handleOnChange = (e) => {
+        const { id, value } = e.target;
+        setRankUp({...rankUp, [id]: value });
+      };
+
+    return (
+        <>
+            <ModalTest show={show} close={close}>
+                <div className='h-10rem bg-cover' style={{backgroundImage: `url("https://mir-s3-cdn-cf.behance.net/project_modules/fs/35098564507519.5ad4edb4b9537.jpg")`}} />
+                    <div className='border-b' />
+                <div className="p-5">
+                    <div className='text-3xl font-semibold text-night text-left'>Créer un rôle</div>
+                    <div className='pt-2 pb-6 text-md font-normal text-gray-500 text-left'>Communiquez avec vos correspondants via la plateforme afin de sécuriser et de protéger vos messages.</div>
+
+
+                    <InputFloating id={'name'} onChange={(e)=>handleOnChange(e)} name={'Nom du rôle'} placeholder={'Nom du rôle'} />
+                    <input id={'deletable'} checked={deletable} type={'checkbox'} onChange={(e)=>handleOnChange(e)} className='checkbox checkbox-sm' />
+                    <input id={'color'} type={'color'} onChange={(e)=>handleOnChange(e)} className='border px-2 py-1 border-black' placeholder='Color' />
+                    <InputFloating id={'power'} onChange={(e)=>handleOnChange(e)} name={'Puissance du rôle'} placeholder={'Puissance du rôle'} />
+
+                    <div className='pt-8 flex justify-end'>
+                        <Button onClick={createRank} theme={'green'}>Continuer</Button>
+                    </div>
+                </div>
+            </ModalTest>
+        </>
+    )
+}
+
+const ModalDeleteRank = ({show, close, selectRank, setSelectRank}) => {
+
+    const handleDelete = () => {
+        RankDataServices.deleteRank(selectRank.id).then(
+            setSelectRank(''),
+            close(),
+        )
     }
 
     return (
@@ -231,18 +289,9 @@ const ModalCreateRank = ({show, close}) => {
                     <div className='text-3xl font-semibold text-night text-left'>Créer un rôle</div>
                     <div className='pt-2 pb-6 text-md font-normal text-gray-500 text-left'>Communiquez avec vos correspondants via la plateforme afin de sécuriser et de protéger vos messages.</div>
 
-                    <div className='py-20'>
-                        <InputFloatin id={'namerank'} onChange={(e)=>setName(e.target.value)} placeholder={'Nom du rôle'} />  
-                        <InputFloatin id={'nameragfdnk'} onChange={(e)=>setName(e.target.value)} placeholder={'Nfdsom du rôle'} />  
-                    </div>
-
-                    <InputFloating onChange={(e)=>setName(e.target.value)} name={'Nom du rôle'} placeholder={'Nom du rôle'} />
-                    <input checked={deletable} type={'checkbox'} onChange={()=>setDeletable(!deletable)} className='checkbox checkbox-sm' />
-                    <input type={'color'} onChange={(e)=>setColor(e.target.value)} className='border px-2 py-1 border-black' placeholder='Color' />
-                    <InputFloating onChange={(e)=>setPower(e.target.value)} name={'Puissance du rôle'} placeholder={'Puissance du rôle'} />
-
-                    <div className='pt-8 flex justify-end'>
-                        <Button onClick={createRank} theme={'green'}>Continuer</Button>
+                    <div className='pt-8 flex justify-between'>
+                        <Button onClick={close} theme={'green'}>Annuler</Button>
+                        <Button onClick={handleDelete} theme={'red'}>Supprimer</Button>
                     </div>
                 </div>
             </ModalTest>

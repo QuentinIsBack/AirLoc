@@ -18,16 +18,16 @@ export const SubMenu = () => {
                     <div className='text-2xl font-semibold text-night'>Gestion</div>
                 </div>
                 <div className='flex-grow p-4 '>
-                    {MenuGestion.map( ({name, items}) =>
-                        <Disclosure>
+                    {MenuGestion.map( ({name, items}, index) =>
+                        <Disclosure key={index}>
                             {({ open }) => (
                                 <>
                                 <Disclosure.Button className={`animation duration-200 w-full rounded-lg py-2 px-2 text-left font-medium ${open ? 'bg-black/90 hover:bg-black text-white' : 'hover:bg-gray-200 text-gray-700'}`}>
                                     <div className='px-2 text-sm'>{name}</div>
                                 </Disclosure.Button>
                                 <Disclosure.Panel>                
-                                    {items && items.map(o => 
-                                        <div className='w-full flex justify-end'>
+                                    {items && items.map((o, index) => 
+                                        <div key={index}className='w-full flex justify-end'>
                                             <div className='animation duration-200 w-11/12 rounded-lg hover:bg-gray-200 py-2 px-2 text-left'>
                                                 <div className='px-2 text-sm font-medium text-gray-700'>{o}</div>
                                             </div>

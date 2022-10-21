@@ -13,6 +13,7 @@ import {
 } from "firebase/firestore";
 
 const userCollectionRef = collection(db, "users");
+
 class UserDataService {
   addUser = (newUser) => {
     return addDoc(userCollectionRef, newUser);
@@ -23,27 +24,25 @@ class UserDataService {
     return updateDoc(userDoc, updateUser);
   };
 
+  /* Supprimer le profile complet d'un utilisateur enregistré */
+  /* Utilisation: UserDataService.deleteUser(USERID) */
   deleteUser = (id) => {
     const userDoc = doc(db, "users", id);
     return deleteDoc(userDoc);
   };
 
+  /* Obtenir tous les profiles complet des utilisateurs enregistré */
+  /* Utilisation: UserDataService.getAllUsers().then((querySnapshot)=>querySnapshot.docs.map((doc)=>({ ...doc.data(), id: doc.id }))) */
   getAllUsers = () => {
-    return getDocs(userCollectionRef);
+    return getDocs(userCollectionRef)
   };
 
+  /* Obtenir le profile complet d'un utilisateur enregistré */
+  /* Utilisation: UserDataService.getUser(USERID)).data() */
   getUser = (id) => {
     const userDoc = doc(db, "users", id);
     return getDoc(userDoc);
   };
-
-  getUserTest = (id) => {
-    onSnapshot(doc(db, "users", "quentintramp"), (doc) => {
-      console.log("Current data: ", doc.data());
-      return doc.data()
-  });
-  };
-
 }
 
 export default new UserDataService();

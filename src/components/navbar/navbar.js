@@ -17,6 +17,7 @@ import { GroupInput } from '../input/groupinput'
 //
 import { getFirestore, collection, addDoc, doc, setDoc } from "firebase/firestore";
 import { SignInMethod } from 'firebase/auth'
+import { InputFloatin } from '../input/InputFloatin';
 
   
 export default function Component() { 
@@ -27,7 +28,7 @@ export default function Component() {
             <div className='sticky w-full z-50'>
                 <div className={`flex items-center justify-between border-b h-4rem bg-white`}>
                     <div className={`absolute z-10 inset-y-0 left-36 sm:left-36 md:left-36 lg:left-36 xl:left-36 2xl:left-36 flex items-center`}>
-                        <a href='.'><img width={25} src={LOGOWHITE} /></a>
+                        <div href='.'><img width={25} src={LOGOWHITE} /></div>
                     </div> 
                     <div className="absolute inset-x-0 inset-y-0 flex justify-center items-center">
                         <div className='hidden lg:block xl:block 2xl:block'>
@@ -118,7 +119,7 @@ function GetCenter(){
                         </button> 
                     </div> 
                     <ul tabIndex="0" className="p-2 mt-4 shadow-dropdown menu dropdown-content bg-base-100 rounded-box w-52 text-black">
-                        <li><Link to={"../hosting/announces"}><a className='font-medium text-sm'>Annonces</a></Link></li>
+                        <li><a className='font-medium text-sm'>Annonces</a></li>
                         <li><a className='font-medium text-sm'>Réservations</a></li>
                         <li><a onClick={() => navigate('../hosting/folder')} className='font-medium text-sm'>Mon dossier locataire</a></li>
                         <div className='py-2'><div className='border-t'></div></div>
@@ -265,7 +266,66 @@ const ModalSignUp = ({show, close}) => {
         </>
     )
 }
+
 const ModalSignIn = ({show, close}) => {
+
+    const [emailValid, setEmailValid] = useState('');
+    const [passwordValid, setPasswordValid] = useState('');
+    const [data, setData] = useState({
+        email: "",
+        password: "",
+    });
+    const {signIn} = useContext(UserContext)
+
+    const navigate = useNavigate();
+
+    const confirmForm = async () => {
+
+            if(data.password.length < 6){
+                setPasswordValid('Le mot de passe indiqué dois faire plus de 6 characters.')
+            } else {
+
+                try {
+                    const cred = await signIn(
+                      data.email,
+                      data.password,
+                    )
+                    navigate('../hosting')
+                  } catch (err) { 
+                    setEmailValid("Le mot de passe ou l'adresse email n'est pas valide.")
+                }
+                
+            }
+
+    }
+
+    return (
+        <>
+            <ModalTest show={show} close={close}>
+                <div className='h-5rem bg-cover' style={{backgroundImage: `url("https://mir-s3-cdn-cf.behance.net/project_modules/fs/35098564507519.5ad4edb4b9537.jpg")`}} />
+                    <div className='border-b' />
+                <div className="p-5">
+                    <div className='text-3xl font-semibold text-night text-left'>Connexion au profil</div>
+                    <div className='pt-2 text-md font-normal text-gray-500 text-left'>Pour commencer à rechercher et candidater à des logements, connectez-vous.</div>
+
+                    <div className='pt-6 pb-5'>
+                        <InputFloatin id={'email'} type={'email'} placeholder={'Adresse email'}  onChange={(e) => setData( {...data, email: e.target.value } )} />  
+                        <div className={`${emailValid.length == 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{emailValid}</div>
+                    </div>
+
+                    <InputFloatin id={'password'} type={'password'} placeholder={'Mot de passe'} onChange={e => setData( {...data, password: e.target.value } )}/>  
+                    <div className={`${passwordValid.length == 0 ? 'hidden' : 'visible'} pt-1.5 text-sm font-normal text-red-500 text-left`}>{passwordValid}</div>
+
+                    <div className='pt-8 flex justify-start'>
+                        <Button onClick={confirmForm} theme={'black'}>Continuer</Button>
+                    </div>
+                </div>
+            </ModalTest>
+        </>
+    )
+}
+
+const ModalSignInTEEES = ({show, close}) => {
 
     const [emailValid, setEmailValid] = useState('');
     const [passwordValid, setPasswordValid] = useState('');

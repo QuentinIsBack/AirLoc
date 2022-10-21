@@ -24,6 +24,19 @@ import AdminUserEmployee from './employee/admin/users';
 import AdminRankEmployee from './employee/admin/ranks';
 
 function App() {
+
+  console.log(`
+             _____ _____  _      ____   _____ 
+       /\\   |_   _|  __ \\| |    / __ \\ / ____|
+      /  \\    | | | |__) | |   | |  | | |     
+     / /\\ \\   | | |  _  /| |   | |  | | |     
+    / ____ \\ _| |_| | \\ \\| |___| |__| | |____ 
+   /_/    \\_\\_____|_|  \\_\\______\\____/ \\_____|
+             
+  A APPLICATION CREATE BY QUENTIN TRUFFY - 2022
+
+  `);
+
   return (
     <>
       <SignModal />

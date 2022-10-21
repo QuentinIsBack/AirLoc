@@ -27,7 +27,7 @@ export default function Component() {
             <div className='sticky w-full z-50'>
                 <div className={`flex items-center justify-between border-b border-gray-900 h-4rem bg-gray-900`}>
                     <div className={`absolute z-10 inset-y-0 left-8 flex items-center`}>
-                        <a href='/employee'><img width={25} src={LOGOWHITE} /></a>
+                        <div href='/employee'><img width={25} src={LOGOWHITE} /></div>
                         <div className='ml-4 text-white font-semibold'>Employés</div>
                     </div> 
                     <div className="absolute inset-x-0 inset-y-0 flex justify-center items-center">
@@ -95,7 +95,7 @@ function GetCenter(){
                     </button> 
                 </div> 
                 <ul tabIndex="0" className="p-2 mt-4 shadow-dropdown menu dropdown-content bg-base-100 rounded-box w-52 text-black">
-                    <li><Link to={"../hosting/announces"}><a className='font-medium text-sm'>Annonces</a></Link></li>
+                    <li><a className='font-medium text-sm'>Annonces</a></li>
                     <li><a className='font-medium text-sm'>Réservations</a></li>
                     <div className='py-2'><div className='border-t'></div></div>
                     <li><a className='font-normal text-sm'>Guides</a></li>
