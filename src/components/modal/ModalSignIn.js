@@ -48,6 +48,7 @@ export default function SignInModal() {
 
               await setDoc(doc(db, "users", cred.user.uid), {
                 email: email,
+                id: cred.user.uid
               });
 
               closeModal()

@@ -22,6 +22,9 @@ const themes = {
     cyan: {
         default: "rounded-md bg-cyan-600 hover:bg-cyan-600/90 text-white text-md",
     },
+    text: {
+        default: "rounded-md hover:bg-gray-100 text-stone-900 text-md underline",
+    },
 };
 
 const types = {

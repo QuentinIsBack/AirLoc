@@ -1,193 +1,214 @@
-import React,{useState, useEffect} from 'react';  
+import React, { useEffect, useState } from 'react';  
 
 // Components
 import NavBar from '../../components/navbar/navbar-employee'
 import Footer from '../../components/footer/footer'
-
-// Firebase
-import{ db } from "../../firebase.config"
-import { getDocs, collection } from "firebase/firestore";
 import { Button } from '../../components/button/button';
-
-import { BadgeRank } from '../../components/badge/Badge';
-import { GetRankByPower } from '../../context/RankContext';
+import { ModalTest } from '../../components/modal/ModalTest';
+import useRank from '../../hooks/useRank';
+import { InputFloating } from '../../components/input/InputFloating';
+import { GetRankByPower, UpdateRank } from '../../context/RankContext';
+import { Table } from '../../components/Table/Table';
+import { TableHead } from '../../components/Table/TableHead';
+import { TableItem } from '../../components/Table/TableItem';
+import { BadgeRank, BadgeRankUser } from '../../components/badge/Badge';
 import { SubMenu } from './submenu';
+import { EditSettings } from '../../components/modal/EditSetting';
+import ListBox from '../../components/ListBox/ListBox';
+import RankDataServices from '../../services/RankData.services';
+import UserDataServices from '../../services/UserData.services';
 
 export default function Page() {
+    return (
+        <>
+            <div className="flex flex-col h-screen">
+                <div>  
+                    <NavBar />
+                </div>
+                <div className="flex-grow">
+                    {Body()}
+                </div>
+                <div>
+                    <Footer formatage={'sticky'} /> 
+                </div>
+            </div>
+        </>
+    )
+}
 
-    const [users, setUsers] = useState([])
-    useEffect(() => {
+function Body() {
 
-        let unsubscribed = false;
-
-        getDocs(collection(db, "users"))
-          .then((querySnapshot) => {
-            if (unsubscribed) return; // unsubscribed? do nothing.
-            
-            const newUserDataArray = querySnapshot.docs
-              .map((doc) => ({ ...doc.data(), id: doc.id }));
-      
-            setUsers(newUserDataArray);
-          })
-          .catch((err) => {
-            if (unsubscribed) return; // unsubscribed? do nothing.
-      
-            // TODO: Handle errors
-            console.error("Failed to retrieve data", err);
-          });
-      
-        return () => unsubscribed  = true;
-
-    }, [])
-
-    const [selectUser, setSelectUser] = useState();
+    const [selectRank, setSelectRank] = useState();
 
     return (
         <>  
-            <div className='h-screen flex flex-col'>
-                <NavBar />
 
-                {/* Mon Espace Locataire */}
-                <div className='flex-grow grid grid-cols-16'>
-                    <div className={`col-span-2 bg-gray-100 border-r flex flex-col h-full`}>
-                        <SubMenu />
-                    </div>
-                    <div className={`col-span-11 bg-white h-full`}>
-                        <div className='p-8'>
-                            <div className='text-2xl font-semibold text-night'>Liste des utilisateurs</div>
-                            <div className='pt-6 flex flex-row space-x-2'>
-                                <div className='animation duration-200 border hover:border-black hover:bg-gray-100/90 rounded-full px-3 py-1.5 text-sm'>
-                                    Tous les utilisateurs
-                                </div>      
+            <div className={`h-full`}>
+
+                <div className='grid grid-cols-5 w-full h-full'>
+
+                    <div className='col-span-4 grid grid-cols-13'>
+
+                        <div className='col-span-2 h-full bg-gray-100'>
+                            <SubMenu /> 
+                        </div>
+
+                        <div className='col-span-11 h-full'>
+                            <div className='border border-y-transparent h-full'>
+                                <div className='border-b h-4.5rem flex items-center justify-between px-5'>
+                                    <div className='text-xl font-bold text-night text-left'>Liste des utilisateurs</div>
+                                    <button className='cursor-pointer text-md hover:bg-gray-100/80 rounded-lg px-4 py-2 font-semibold text-night text-left underline'>Ajouter un utilisateur</button>
+                                </div>
+                                <div className='flex flex-col items-center justify-center p-5'>
+                                    {ListSearch({setSelectRank})}
+                                </div>
                             </div>
                         </div>
-                        <div className='px-8 w-full'>
-                            <table className='w-full'>
-                                <tr className='h-8 uppercase text-xs font-bold text-gray-500'>
-                                    <td>
-                                        <input type="checkbox" className="checkbox checkbox-xs" />
-                                    </td>
-                                    <td>
-                                        Identité
-                                    </td>
-                                    <td>
-                                        email
-                                    </td>
-                                    <td>
-                                        téléphone
-                                    </td>
-                                    <td>
-                                        Rôles
-                                    </td>
-                                    <td>
-                                        Action
-                                    </td>
-                                </tr>
-                                {users.map(u =>
-                                    <tr className='h-16 border-t'>
-                                        <td>
-                                            <input type="checkbox" className="checkbox checkbox-xs" />
-                                        </td>
-                                        <td className='text-sm text-night font-semibold'>
-                                            {u.lastname ? u.lastname : undefined} {u.firstname ? u.firstname : undefined}
-                                        </td>
-                                        <td className='text-sm text-night font-semibold'>
-                                            {u.email ? u.email : undefined}
-                                        </td>
-                                        <td className='text-sm text-night font-semibold'>
-                                            {u.phone ? u.phone : undefined}
-                                        </td>
-                                        <td>
-                                            <BadgeRank rank={GetRankByPower(u)} />
-                                        </td>
-                                        <td>
-                                            <button onClick={()=>setSelectUser(u)} className='w-fit px-4 py-1 rounded-lg border border-black text-black text-sm font-medium hover:bg-gray-100/80'> 
-                                                Modifier
-                                            </button>
-                                        </td>
-                                    </tr>
-                                )}
-                                
-                            </table>
+
+                    </div>
+
+                    <div className='col-span-1 h-full'>
+                        <div className='border border-transparent h-full flex flex-col justify-start'>
+                            <div className='border-b h-4.5rem flex items-center justify-start px-5'>
+                                <div className='text-xl font-bold text-night text-left'>Détails</div>
+                            </div>
+                            <div className='flex-grow'>
+                                {SideDetails({selectRank})}
+                            </div>
                         </div>
                     </div>
-                    <div className='col-span-3 bg-white border-l h-full'>
-                        <div className='flex flex-col h-full'>
-                    <div className='border-b h-5rem flex items-center justify-start'>
-                        <div className='px-5 text-xl font-bold text-night'>Détails</div>
-                    </div>
-                    <div className='pt-6 flex-grow'>
-                        {selectUser && 
-                            <>
-                                <div className='w-full flex flex-col items-center justify-center'>
-                                    <button className='overflow-hidden'>
-                                        <img alt='profile' style={{
-                                            width: 120,
-                                            height: 120,
-                                            borderRadius: '50%',
-                                            overflow: 'hidden',
-                                            borderWidth: 3,
-                                            }}
-                                            src={selectUser.urlprofile ? selectUser.urlprofile : "https://mir-s3-cdn-cf.behance.net/project_modules/fs/0e42df111843393.6009650446d8d.png"} />
-                                    </button>
-                                    <div className='pt-2 text-xl text-night font-semibold'>{selectUser.firstname && selectUser.firstname+" "}{selectUser.lastname && selectUser.lastname}</div>
-                                    {/**<BadgeRank rank={GetRankByPower(selectUser)} />*/}
-                                </div>
-                                <div className='w-full flex flex-col p-6'>
-                                    <div className='text-xl font-semibold text-black'>Informations</div>
 
-                                    <div className='pt-2 flex flex-row items-center justify-between'>
-                                        <div className='flex flex-col'>
-                                            <div className='text-md text-stone-900 font-semibold'>Nom légal</div>
-                                            <div className='text-sm text-stone-700 font-normal'>{(selectUser.firstname ? selectUser.firstname+" " : " ") + (selectUser.lastname ? selectUser.lastname : "")}</div>
-                                        </div>
-                                        <div className='text-sm text-cyan-600 font-bold hover:underline'>Modifier</div>
-                                    </div>
-
-                                    <div className='border-b my-3' />
-
-                                    <div className='pt-2 flex flex-row items-center justify-between'>
-                                        <div className='flex flex-col'>
-                                            <div className='text-md text-stone-900 font-semibold'>Adresse email</div>
-                                            <div className='text-sm text-stone-700 font-normal'>{(selectUser.email ? selectUser.email: " ")}</div>
-                                        </div>
-                                        <div className='text-sm text-cyan-600 font-bold hover:underline'>Modifier</div>
-                                    </div>
-
-                                    <div className='border-b my-3' />
-
-                                    <div className='pt-2 flex flex-row items-center justify-between'>
-                                        <div className='flex flex-col'>
-                                            <div className='text-md text-stone-900 font-semibold'>Téléphone</div>
-                                            <div className='text-sm text-stone-700 font-normal'>{(selectUser.phone ? selectUser.phone: " ")}</div>
-                                        </div>
-                                        <div className='text-sm text-cyan-600 font-bold hover:underline'>Modifier</div>
-                                    </div>
-
-                                    <div className='border-b my-3' />
-
-                                    <div className='pt-2 flex flex-row items-center justify-between'>
-                                        <div className='flex flex-col'>
-                                            <div className='text-md text-stone-900 font-semibold'>Rôle</div>
-                                            <div className='text-sm text-stone-700 font-normal'> {selectUser.power}</div>
-                                        </div>
-                                        <div className='text-sm text-cyan-600 font-bold hover:underline'>Modifier</div>
-                                    </div>
-
-                                    <div className='pt-6 text-xl font-semibold text-black'>Action</div>
-                                </div>
-                            </>
-                        }
-                    </div>
-                    <div className='p-4'>
-                        <Button theme={'cyan'} size='full'>Sauvegarder</Button>
-                    </div>
-                        </div>
-                    </div>
                 </div>
 
-                <Footer formatage={'sticky'} />
             </div>
         </>
     )
 } 
+ 
+const ListSearch = ({setSelectRank}) => {
+    const [ Users, setUsers ] = useState()
+
+
+    useEffect(()=> {
+        UserDataServices.getAllUsers({setUsers})
+    }, [])
+
+
+    return (
+        <div className='w-full pt-6'>
+            <Table>
+                <TableHead>
+                    <th><input type="checkbox" className="checkbox checkbox-xs" /></th>
+                    <th>Identité</th>
+                    <th>Email</th>
+                    <th>Téléphone</th>
+                    <th>Rôles</th>
+                    <th>Action</th>
+                </TableHead>
+                {Users && Users.map((u, index) =>
+                    <TableItem key={index}>
+                        <td>
+                            <input type="checkbox" className="checkbox checkbox-xs" />
+                        </td>
+                        <td className='text-sm text-night font-semibold'>
+                            {u.lastname ? u.lastname : undefined} {u.firstname ? u.firstname : undefined}
+                        </td>
+                        <td className='text-sm text-night font-semibold'>
+                            {u.email ? u.email : undefined}
+                        </td>
+                        <td className='text-sm text-night font-semibold'>
+                            {u.phone ? u.phone : undefined}
+                        </td>
+                        <td className='text-sm text-night font-semibold'>
+                            <BadgeRankUser id={ u.rank } />
+                        </td>
+                        <td>
+                            <button className='w-fit px-4 py-1 rounded-lg border border-black text-black text-sm font-medium hover:bg-gray-100/80'> 
+                                Modifier
+                            </button>
+                        </td>
+                    </TableItem>
+                )}
+            </Table>
+        </div>
+    )
+}
+
+const SideDetails = ({selectRank, setModalDelete}) => {
+    const { Rank, setRank } = useRank();
+
+    const [ testname ] = useState();
+
+    const list = [
+        { name: 'Wade Cooper', color: "" },
+        { name: 'Arlene Mccoy', color: "" },
+        { name: 'Devon Webb', color: "" },
+        { name: 'Tom Cook', color: "" },
+        { name: 'Tanya Fox', color: "" },
+        { name: 'Hellen Schmidt', color: "" },
+      ]
+    const [selected, setSelected] = useState(list[0])
+
+    return (
+            <>
+                {selectRank &&
+                    <div className='flex flex-col items-center justify-between p-5 h-full'>
+                        <div className='flex-grow w-full '>
+                            <div className='w-full flex flex-col'>
+                                <div className='pb-4 text-xl font-semibold text-black'>Informations</div>
+
+                                <EditSettings
+                                    name={"Nom"} 
+                                    message={selectRank.name}
+                                    onClick={()=>UpdateRank({Rank, setRank}, selectRank, "name", testname)}
+                                    description={"C'est le nom qui figure sur votre document d'identité, à savoir votre permis ou votre passeport, par exemple."}
+                                    theme={'cyan'}
+                                >
+                                    <div className='flex space-x-5'>
+                                        <InputFloating id={'rankname'} type={'text'} defaultValue={selectRank.name} placeholder={'Nom'} />  
+                                    </div>
+                                </EditSettings>
+
+                                <div className='border-b my-3' />
+
+                                <EditSettings
+                                    name={"Couleur"} 
+                                    message={<BadgeRank rank={selectRank} />}
+                                    description={"C'est le nom qui figure sur votre document d'identité, à savoir votre permis ou votre passeport, par exemple."}
+                                    theme={'cyan'}
+                                >
+                                    <div className='flex space-x-5'>
+                                        <ListBox 
+                                            list={list}
+                                            selected={selected}
+                                            setSelected={setSelected}
+                                        />
+                                    </div>
+                                </EditSettings>
+
+                                <div className='border-b my-3' />
+
+                                <EditSettings
+                                    name={"Puissance"} 
+                                    message={selectRank.power}
+                                    description={"C'est le nom qui figure sur votre document d'identité, à savoir votre permis ou votre passeport, par exemple."}
+                                    theme={'cyan'}
+                                >
+                                    <div className='flex space-x-5'>
+                                        <InputFloating id={'rankpower'} type={'text'} defaultValue={selectRank.power} placeholder={'Power'} />  
+                                    </div>
+                                </EditSettings>
+                            </div>
+                        </div>
+                        <div className='flex flex-col items-center w-full space-y-2'>
+                            <button className='text-red-500 text-xs font-medium underline'>Supprimer le rôle</button>
+                            <div className='flex flex-row space-x-4 '>
+                                <Button theme={'red'} size='full'>Supprimer</Button>
+                                <Button theme={'cyan'} size='full'>Sauvegarder</Button>
+                            </div>
+                        </div> 
+                    </div>
+                }
+            </>
+    )
+}

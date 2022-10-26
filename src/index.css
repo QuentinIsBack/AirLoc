@@ -76,3 +76,8 @@ body {
   -ms-user-select: none;
   user-select: none;
 }
+
+.bg-color-gradient-btn {
+  background: url('https://a0.muscache.com/im/pictures/Hosting/Gradient/original/4abb91ab-2c70-46d7-80a5-9c83ef0221ef.png');
+  background-size: 200% 100% !important;
+}

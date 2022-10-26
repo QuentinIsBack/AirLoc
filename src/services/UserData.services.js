@@ -16,7 +16,8 @@ class UserDataService {
     return addDoc(userCollectionRef, newUser);
   };
 
-  updateUser = (id, updateUser) => {
+  updateUser = async (id, updateUser) => {
+    console.log(updateUser)
     const userDoc = doc(db, "users", id);
     return updateDoc(userDoc, updateUser);
   };
@@ -30,8 +31,10 @@ class UserDataService {
 
   /* Obtenir tous les profiles complet des utilisateurs enregistré */
   /* Utilisation: UserDataService.getAllUsers().then((querySnapshot)=>querySnapshot.docs.map((doc)=>({ ...doc.data(), id: doc.id }))) */
-  getAllUsers = () => {
-    return getDocs(userCollectionRef)
+  getAllUsers = async ({setUsers}) => {
+    getDocs(userCollectionRef).then((querySnapshot) => {
+      setUsers(querySnapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+    })
   };
 
   /* Obtenir le profile complet d'un utilisateur enregistré */
@@ -40,6 +43,7 @@ class UserDataService {
     const userDoc = doc(db, "users", id);
     return getDoc(userDoc);
   };
+
 }
 
 export default new UserDataService();

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';  
+import React, { useContext, useState } from 'react';  
 
 // Componeents
 import NavBar from '../../components/navbar/navbar'
@@ -11,10 +11,22 @@ import { UserContext } from '../../context/UserContext';
 
 // Icons
 import { FaLock, FaShoppingBag, FaEye } from "react-icons/fa";
+import UserDataServices from '../../services/UserData.services';
 
 export default function Page() {
 
-    const { User } = useContext(UserContext)
+    const { User, currentUser } = useContext(UserContext)
+
+    const [ useUser, setUseUser ] = useState({})
+
+    const handleOnChange = (e) => {
+      const { id, value } = e.target;
+      setUseUser({...useUser, [id]: value });
+    };
+    
+    const UpdateUser = () => {
+      UserDataServices.updateUser(currentUser.uid, useUser)
+    }
 
     return (
         <>  
@@ -25,18 +37,19 @@ export default function Page() {
             </div>
 
             <div className={`px-20 2xl:px-96 mx-10 mb-20`}>
-              <div class="grid grid-flow-row-dense grid-cols-3 gap-5">
-                <div class="col-span-2 pr-20">
+              <div className="grid grid-flow-row-dense grid-cols-3 gap-5">
+                <div className="col-span-2 pr-20">
 
                   <EditSettings
                     name={"Nom légal"} 
+                    onClick={()=>UpdateUser()}
                     message={(User.firstname ? User.firstname+" " : " ") + (User.lastname ? User.lastname : "")}
                     description={"C'est le nom qui figure sur votre document d'identité, à savoir votre permis ou votre passeport, par exemple."}
                     theme={'cyan'}
                   >
                     <div className='flex space-x-5'>
-                      <InputFloating id={'firstname'} type={'text'} defaultValue={User.firstname} placeholder={'Nom'} />  
-                      <InputFloating id={'lastname'} type={'text'} defaultValue={User.lastname} placeholder={'Prénom'} />  
+                      <InputFloating onChange={(e)=>handleOnChange(e)} id={'firstname'} type={'text'} defaultValue={User.firstname} placeholder={'Nom'} />  
+                      <InputFloating onChange={(e)=>handleOnChange(e)} id={'lastname'} type={'text'} defaultValue={User.lastname} placeholder={'Prénom'} />  
                     </div>
                   </EditSettings>
 
@@ -69,7 +82,7 @@ export default function Page() {
                   </EditSettings>
 
                 </div>
-                <div class="col-span-1">
+                <div className="col-span-1">
                   <div className='h-fit border rounded-xl p-5'>
                     <div>
                       <FaLock className='fill-cyan-600' size={25}/>

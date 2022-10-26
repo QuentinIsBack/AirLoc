@@ -13,6 +13,7 @@ export const GetRankByPower = (user) => {
      }).map(function(ranks){
         return ranks;
      });
+     console.log(data[0])
      return data[0]
 }
 

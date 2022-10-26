@@ -17,6 +17,13 @@ import AccountSettings from './public/account-settings';
 import AccountSettingsPersonnalInformations from './public/account-settings/personnal-informations';
 import AccountSettingsInvite from './public/account-settings/invite';
 
+import NewHome from './public/begin/new-home';
+import BeginIntro from './public/begin/intro';
+import BeginGroupType from './public/begin/property-type-group';
+import BeginPropertyType from './public/begin/property-type';
+import BeginPrivacyType from './public/begin/privacy-type';
+import BeginFloorPlan from './public/begin/floor-plan';
+
 import HomeEmployee from './employee/home';
 import SettingsEmployee from './employee/settings';
 
@@ -55,6 +62,13 @@ function App() {
           <Route exact path="/account-settings" element={<AccountSettings />} />
           <Route exact path="/account-settings/personnal-informations" element={<AccountSettingsPersonnalInformations />} />
           <Route exact path="/account-settings/invite" element={<AccountSettingsInvite />} />
+
+          <Route exact path="/new-home" element={<NewHome />} />
+          <Route exact path="/begin/intro" element={<BeginIntro />} />
+          <Route exact path="/begin/property-type-group" element={<BeginGroupType />} />
+          <Route exact path="/begin/property-type" element={<BeginPropertyType />} />
+          <Route exact path="/begin/privacy-type" element={<BeginPrivacyType />} />
+          <Route exact path="/begin/floor-plan"  element={<BeginFloorPlan />} />
 
           {/* User Employee */}
           <Route element={<EmployeeRoute />}>

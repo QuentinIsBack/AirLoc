@@ -118,6 +118,7 @@ function GetCenter(){
                     <ul tabIndex="0" className="p-2 mt-4 shadow-dropdown menu dropdown-content bg-base-100 rounded-box w-52 text-black">
                         <li><div className='font-medium text-sm'>Annonces</div></li>
                         <li><div className='font-medium text-sm'>Réservations</div></li>
+                        <li><div className='font-medium text-sm'>Créer une annonces</div></li>
                         <li><div onClick={() => navigate('../hosting/folder')} className='font-medium text-sm'>Mon dossier locataire</div></li>
                         <div className='py-2'><div className='border-t'></div></div>
                         <li><div className='font-normal text-sm'>Guides</div></li>
@@ -211,6 +212,7 @@ const ModalSignUp = ({show, close}) => {
                         firstname: data.firstname,
                         lastname: data.lastname,
                         email: data.email,
+                        id: cred.user.uid
                     });
       
                     navigate('../hosting')

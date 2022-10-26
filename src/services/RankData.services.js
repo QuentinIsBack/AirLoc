@@ -33,9 +33,8 @@ class RankDataService {
 
   /* Obtenir le role complet */
   /* Utilisation: RankDataService.getRank(RANKID)).data() */
-  getRank = (id) => {
-    const rankDoc = doc(db, "ranks", id);
-    return getDoc(rankDoc);
+  getRank = async (id, {setRank}) => {
+    getDoc(doc(db, "ranks", id)).then((data)=>setRank(data.data()));
   };
 
 }

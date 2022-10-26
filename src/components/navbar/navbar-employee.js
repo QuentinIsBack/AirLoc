@@ -100,7 +100,7 @@ function GetDropdown() {
             <li><div className='font-normal text-sm'>Français (FR)</div></li> 
             <li><div className='font-normal text-sm'>€ EUR</div></li> 
                 <div className='py-2'><div className='border-t'></div></div>
-            <li><div className='font-normal text-sm'>Parrainer un hôte</div></li>
+            <li><div className='font-normal text-sm'>Déconnexion</div></li>
         </>
     )
 }
