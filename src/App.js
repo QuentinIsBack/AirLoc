@@ -23,6 +23,10 @@ import BeginGroupType from './public/begin/property-type-group';
 import BeginPropertyType from './public/begin/property-type';
 import BeginPrivacyType from './public/begin/privacy-type';
 import BeginFloorPlan from './public/begin/floor-plan';
+import BeginAmenities from './public/begin/amenities';
+import BeginTitle from './public/begin/title';
+import BeginDescription from './public/begin/description';
+import BeginPrice from './public/begin/price';
 
 import HomeEmployee from './employee/home';
 import SettingsEmployee from './employee/settings';
@@ -69,6 +73,10 @@ function App() {
           <Route exact path="/begin/property-type" element={<BeginPropertyType />} />
           <Route exact path="/begin/privacy-type" element={<BeginPrivacyType />} />
           <Route exact path="/begin/floor-plan"  element={<BeginFloorPlan />} />
+          <Route exact path="/begin/amenities"  element={<BeginAmenities />} />
+          <Route exact path="/begin/title"  element={<BeginTitle />} />
+          <Route exact path="/begin/description"  element={<BeginDescription />} />
+          <Route exact path="/begin/price"  element={<BeginPrice />} />
 
           {/* User Employee */}
           <Route element={<EmployeeRoute />}>

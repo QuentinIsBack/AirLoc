@@ -22,7 +22,7 @@ export default function Page() {
             <Begin title={"Créer un logemfrgsent"} onPrev={onPrev} topBar={true} bottomBar={false} progressPercentage={(step / maxStep)*100}>
                 
 
-                <div className='flex flex-col justify-between pt-10 pb-20 px-44 h-full animate-showin'>
+                <div className='flex flex-col justify-between pt-10 pb-20 px-44 animate-showin h-full overflow-y-auto'>
                     <div>
                         <div>
                             <div className="text-gray-gray-plus text-normaly font-medium text-2xl pb-4">Créez une nouvelle annonce</div>

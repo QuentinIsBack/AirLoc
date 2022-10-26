@@ -30,7 +30,7 @@ export default function Application(){
             <Page title={'trest'}>
                 <Begin title={"Parmi les propositions suivantes, laquelle décrit le mieux votre logement ?"} onNext={()=>navigate('/begin/privacy-type')} onPrev={()=>navigate(-1)} topBar={true} bottomBar={true} progressPercentage={(step / maxStep)*100}>
                     
-                    <div className='flex flex-col items-center py-10 px-64 h-full animate-showin'>
+                    <div className='flex flex-col items-center justify-start py-10 px-64 animate-showin h-full overflow-y-auto'>
                         <div className="grid grid-flow-row gap-3 w-full">
 
                             <RadioGroup value={selected} onChange={setSelected}>

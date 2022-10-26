@@ -34,7 +34,7 @@ export default function Page() {
             <Begin title={"Quel type de logement sera à la disposition des locataires ?"} onNext={()=>navigate('/begin/floor-plan', {state:{select: selected}})}  onPrev={()=>navigate(-1)} topBar={true} bottomBar={true} progressPercentage={(step / maxStep)*100}>
                 
 
-                <div className='flex flex-col justify-center items-center py-10 px-64 h-full animate-showin'>
+                <div className='flex flex-col justify-center items-center py-10 px-64 animate-showin h-full overflow-y-auto'>
                     <div className="grid grid-flow-row gap-3 w-full">
 
                         <RadioGroup value={selected} onChange={setSelected}>

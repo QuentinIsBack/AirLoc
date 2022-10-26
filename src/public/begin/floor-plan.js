@@ -9,7 +9,7 @@ import useDocumentTitle from '../../services/TabTitle';
 
 export default function Application(){
 
-    useDocumentTitle('Home title 👻')
+    useDocumentTitle('Saissisez des informations sur le logement - Airloc')
 
     const navigate = useNavigate()
     const location = useLocation();
@@ -27,9 +27,9 @@ export default function Application(){
 
     return(
         <>
-                <Begin title={"Quelques détails essentiel sur votre logement ?"} onNext={onNext} onPrev={()=>navigate(-1)} topBar={true} bottomBar={true} progressPercentage={(step / maxStep)*100}>
+                <Begin title={"Quelques détails essentiel sur votre logement ?"} onNext={()=>navigate('/begin/amenities')} onPrev={()=>navigate(-1)} topBar={true} bottomBar={true} progressPercentage={(step / maxStep)*100}>
                     
-                    <div className='flex flex-col items-center justify-center py-10 px-64 h-full animate-showin'>
+                    <div className='flex flex-col items-center justify-center py-10 px-64 animate-showin h-full overflow-y-auto'>
 
                         <div className='w-full space-y-10'>
 
