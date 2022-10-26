@@ -1,20 +1,20 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { Begin } from '../../components/card/begin'
 import { FiChevronRight } from 'react-icons/fi'
 import { useState } from 'react';
 import { RadioGroup } from '@headlessui/react'
 import { TabTitle } from '../../services/TabTitle';
+import HostDataServices from '../../services/HostData.services';
 
 export default function Page() {
     const navigate = useNavigate()
+    const location = useLocation();
+    const { id } = useParams();
 
 
     const step = 3
-    const maxStep = 7
+    const maxStep = location.state.maxStep
 
-    const onNext = () => {
-
-    }
 
     const onPrev = () => {
         
@@ -28,10 +28,14 @@ export default function Page() {
 
     const [selected, setSelected] = useState(listType[0])
 
+    const onNext = () => {
+        HostDataServices.update(id, {'privacy': selected.name});
+        navigate(`/begin/${id}/floor-plan`, {state:{select: selected, maxStep: maxStep}})
+    }
 
     return (
         <>
-            <Begin title={"Quel type de logement sera à la disposition des locataires ?"} onNext={()=>navigate('/begin/floor-plan', {state:{select: selected}})}  onPrev={()=>navigate(-1)} topBar={true} bottomBar={true} progressPercentage={(step / maxStep)*100}>
+            <Begin title={"Quel type de logement sera à la disposition des locataires ?"} onNext={onNext}  onPrev={()=>navigate(-1)} topBar={true} bottomBar={true} progressPercentage={(step / maxStep)*100}>
                 
 
                 <div className='flex flex-col justify-center items-center py-10 px-64 animate-showin h-full overflow-y-auto'>

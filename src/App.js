@@ -17,7 +17,6 @@ import AccountSettings from './public/account-settings';
 import AccountSettingsPersonnalInformations from './public/account-settings/personnal-informations';
 import AccountSettingsInvite from './public/account-settings/invite';
 
-import NewHome from './public/begin/new-home';
 import BeginIntro from './public/begin/intro';
 import BeginGroupType from './public/begin/property-type-group';
 import BeginPropertyType from './public/begin/property-type';
@@ -67,16 +66,16 @@ function App() {
           <Route exact path="/account-settings/personnal-informations" element={<AccountSettingsPersonnalInformations />} />
           <Route exact path="/account-settings/invite" element={<AccountSettingsInvite />} />
 
-          <Route exact path="/new-home" element={<NewHome />} />
-          <Route exact path="/begin/intro" element={<BeginIntro />} />
-          <Route exact path="/begin/property-type-group" element={<BeginGroupType />} />
-          <Route exact path="/begin/property-type" element={<BeginPropertyType />} />
-          <Route exact path="/begin/privacy-type" element={<BeginPrivacyType />} />
-          <Route exact path="/begin/floor-plan"  element={<BeginFloorPlan />} />
-          <Route exact path="/begin/amenities"  element={<BeginAmenities />} />
-          <Route exact path="/begin/title"  element={<BeginTitle />} />
-          <Route exact path="/begin/description"  element={<BeginDescription />} />
-          <Route exact path="/begin/price"  element={<BeginPrice />} />
+          <Route exact path="/begin" element={<BeginIntro />} />
+          <Route exact path="/begin/:id" element={<BeginIntro />} />
+          <Route exact path="/begin/:id/property-type-group" element={<BeginGroupType />} />
+          <Route exact path="/begin/:id/property-type" element={<BeginPropertyType />} />
+          <Route exact path="/begin/:id/privacy-type" element={<BeginPrivacyType />} />
+          <Route exact path="/begin/:id/floor-plan"  element={<BeginFloorPlan />} />
+          <Route exact path="/begin/:id/amenities"  element={<BeginAmenities />} />
+          <Route exact path="/begin/:id/title"  element={<BeginTitle />} />
+          <Route exact path="/begin/:id/description"  element={<BeginDescription />} />
+          <Route exact path="/begin/:id/price"  element={<BeginPrice />} />
 
           {/* User Employee */}
           <Route element={<EmployeeRoute />}>

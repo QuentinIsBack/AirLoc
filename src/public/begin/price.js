@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { Begin } from '../../components/card/begin'
 import { FaSwimmingPool } from 'react-icons/fa'
 import { MdOutlineHotTub, MdOutlineKitchen, MdBalcony } from 'react-icons/md'
@@ -12,19 +12,24 @@ import Page from '../../mockup/page';
 import { BigIncrementor, Incrementor } from '../../components/incrementor/incrementor';
 import useDocumentTitle from '../../services/TabTitle';
 import { IoRemoveOutline, IoAddOutline } from "react-icons/io5";
+import HostDataServices from '../../services/HostData.services';
 
 export default function Application(){
 
     useDocumentTitle('Fixez un prix par mois - Airloc')
 
     const navigate = useNavigate()
+    const location = useLocation();
+    const { id } = useParams();
 
-    const step = 7
-    const maxStep = 7
+    const step = 8
+    const maxStep = location.state.maxStep
 
     const onNext = () => {
-
+        HostDataServices.update(id, {price: price});
+        navigate(`/begin`)    
     }
+
     let [price, setPrice] = useState(650)
 
     const RemovePrice = () => { 

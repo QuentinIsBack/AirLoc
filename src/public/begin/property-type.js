@@ -1,34 +1,43 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { Begin } from '../../components/card/begin'
 import { FiChevronRight } from 'react-icons/fi'
 import { useState } from 'react';
 import { RadioGroup } from '@headlessui/react'
 import Page from '../../mockup/page';
+import HostDataServices from '../../services/HostData.services';
 
 
 export default function Application(){
 
     const navigate = useNavigate()
     const location = useLocation();
+    const { id } = useParams();
 
     const step = 2
-    const maxStep = 7
+    const maxStep = location.state.maxStep
 
-    console.log(location.state.select)
-
+    const host = location.state.host
     const listType = location.state.select.subType
 
+    var found = listType.find(e => e.name === host.type);
+    console.log(found);
 
-    const [selected, setSelected] = useState(listType[0])
+
+    const [selected, setSelected] = useState(host.type ? found !== 'undefined' && found : listType[0])
 
     if (selected <= 1) {
         navigate(-1)
     }
 
+    const onNext = () => {
+        HostDataServices.update(id, {'type': selected.name});
+        navigate(`/begin/${id}/privacy-type`, {state:{select: selected, maxStep: maxStep}})    
+    }
+
     return(
         <>
             <Page title={'trest'}>
-                <Begin title={"Parmi les propositions suivantes, laquelle décrit le mieux votre logement ?"} onNext={()=>navigate('/begin/privacy-type')} onPrev={()=>navigate(-1)} topBar={true} bottomBar={true} progressPercentage={(step / maxStep)*100}>
+                <Begin title={"Parmi les propositions suivantes, laquelle décrit le mieux votre logement ?"} onNext={onNext} onPrev={()=>navigate(-1)} topBar={true} bottomBar={true} progressPercentage={(step / maxStep)*100}>
                     
                     <div className='flex flex-col items-center justify-start py-10 px-64 animate-showin h-full overflow-y-auto'>
                         <div className="grid grid-flow-row gap-3 w-full">

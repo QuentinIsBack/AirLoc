@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { Begin } from '../../components/card/begin'
 import { FaSwimmingPool } from 'react-icons/fa'
 import { MdOutlineHotTub, MdOutlineKitchen, MdBalcony } from 'react-icons/md'
@@ -17,12 +17,15 @@ export default function Application(){
     useDocumentTitle('Séléctionnez les équipements - Airloc')
 
     const navigate = useNavigate()
+    const location = useLocation();
+    const { id } = useParams();
 
     const step = 5
-    const maxStep = 7
+    const maxStep = location.state.maxStep
 
     const onNext = () => {
-
+        //HostDataServices.update(id, floor);
+        navigate(`/begin/${id}/title`, {state:{maxStep: maxStep}})
     }
 
     const [extra, setExtra] = useState({});
@@ -55,7 +58,7 @@ export default function Application(){
 
     return(
         <>
-                <Begin title={"Indiquez aux voyageurs quels sont les équipements de votre logement"} onNext={()=>navigate('/begin/title')} onPrev={()=>navigate(-1)} topBar={true} bottomBar={true} progressPercentage={(step / maxStep)*100}>
+                <Begin title={"Indiquez aux voyageurs quels sont les équipements de votre logement"} onNext={onNext} onPrev={()=>navigate(-1)} topBar={true} bottomBar={true} progressPercentage={(step / maxStep)*100}>
                     <div className='flex flex-col items-center justify-start px-40 py-10 animate-showin h-full overflow-y-auto'>
 
                         <div className='w-full flex flex-col space-y-10'>

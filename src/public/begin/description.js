@@ -1,4 +1,4 @@
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { Begin } from '../../components/card/begin'
 import { FaSwimmingPool } from 'react-icons/fa'
 import { MdOutlineHotTub, MdOutlineKitchen, MdBalcony } from 'react-icons/md'
@@ -11,18 +11,22 @@ import { RadioGroup } from '@headlessui/react'
 import Page from '../../mockup/page';
 import { Incrementor } from '../../components/incrementor/incrementor';
 import useDocumentTitle from '../../services/TabTitle';
+import HostDataServices from '../../services/HostData.services';
 
 export default function Application(){
 
     useDocumentTitle('Rediger une description à votre logement - Airloc')
 
     const navigate = useNavigate()
+    const location = useLocation();
+    const { id } = useParams();
 
     const step = 7
-    const maxStep = 7
+    const maxStep = location.state.maxStep
 
     const onNext = () => {
-
+        HostDataServices.update(id, {description: description});
+        navigate(`/begin/${id}/price`, {state:{maxStep: maxStep}})    
     }
 
     let [description, setDescription] = useState('')
@@ -36,13 +40,13 @@ export default function Application(){
 
     return(
         <>
-                <Begin title={"Passons maintenant à la description de votre logement"} onNext={()=>navigate('/begin/price')} onPrev={()=>navigate(-1)} topBar={true} bottomBar={true} progressPercentage={(step / maxStep)*100}>
+                <Begin title={"Passons maintenant à la description de votre logement"} onNext={onNext} onPrev={()=>navigate(-1)} topBar={true} bottomBar={true} progressPercentage={(step / maxStep)*100}>
                     <div className='flex flex-col justify-center px-44 py-10 animate-showin w-full h-full overflow-y-auto'>
 
                         <div className="font-semibold text-2xl pb-1">Créez votre description</div>
                         <div className="text-base font-light text-gray-600 pb-6">La description de votre annonce doit mettre en valeur ce qui fait la particularité de votre logement.</div>
                         <div>
-                            <textarea onChange={handleChange} className="animation duration-200 px-5 py-4 border-none rounded-xl focus:outline-none ring-gray-400 ring-1 focus:ring-2 focus:ring-black focus:outline-transparent w-full font-medium text-3xl text-gray-800 h-40" value={description}></textarea>
+                            <textarea onChange={handleChange} className="animation duration-200 p-4 border-none rounded-xl focus:outline-none ring-gray-400 ring-1 focus:ring-2 focus:ring-black focus:outline-transparent w-full font-medium text-3xl text-gray-800 h-40" value={description}></textarea>
                             <div className="pt-2 text-sm text-gray-500 font-bold">{description.length}/500</div>
                         </div>
 
