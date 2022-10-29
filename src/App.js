@@ -26,6 +26,7 @@ import BeginAmenities from './public/begin/amenities';
 import BeginTitle from './public/begin/title';
 import BeginDescription from './public/begin/description';
 import BeginPrice from './public/begin/price';
+import BeginLocation from './public/begin/location';
 
 import HomeEmployee from './employee/home';
 import SettingsEmployee from './employee/settings';
@@ -76,6 +77,7 @@ function App() {
           <Route exact path="/begin/:id/title"  element={<BeginTitle />} />
           <Route exact path="/begin/:id/description"  element={<BeginDescription />} />
           <Route exact path="/begin/:id/price"  element={<BeginPrice />} />
+          <Route exact path="/begin/:id/location"  element={<BeginLocation />} />
 
           {/* User Employee */}
           <Route element={<EmployeeRoute />}>

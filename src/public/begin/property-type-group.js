@@ -60,16 +60,10 @@ export default function Page() {
     const location = useLocation();
     const { id } = useParams();
     const [ host, setHost ] = useState()
-    const [selected, setSelected] = useState()
+    const [selected, setSelected] = useState(listType[0])
 
     const step = 1
     const maxStep = 10
-
-
-    useEffect(()=> {
-        HostDataServices.get(id, {setHost})
-    }, [])
-
 
     const onNext = () => {
         HostDataServices.update(id, {'group': selected.name});
@@ -79,9 +73,6 @@ export default function Page() {
     const onPrev = () => {
         
     }
-
-
-
 
     return (
         <>

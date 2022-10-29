@@ -27,7 +27,7 @@ export default function Application(){
 
     const onNext = () => {
         HostDataServices.update(id, {price: price});
-        navigate(`/begin`)    
+        navigate(`/begin/${id}/location`, {state:{maxStep: maxStep}})
     }
 
     let [price, setPrice] = useState(650)

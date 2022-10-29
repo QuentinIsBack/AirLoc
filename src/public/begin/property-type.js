@@ -19,11 +19,7 @@ export default function Application(){
     const host = location.state.host
     const listType = location.state.select.subType
 
-    var found = listType.find(e => e.name === host.type);
-    console.log(found);
-
-
-    const [selected, setSelected] = useState(host.type ? found !== 'undefined' && found : listType[0])
+    const [selected, setSelected] = useState(listType[0])
 
     if (selected <= 1) {
         navigate(-1)
